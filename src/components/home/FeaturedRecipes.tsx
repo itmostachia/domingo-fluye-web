@@ -1,11 +1,26 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import ScrollReveal from "@/components/ScrollReveal";
 import RecetaCard from "@/components/recetas/RecetaCard";
 import { Button } from "@/components/ui/button";
-import { recetas } from "@/components/recetas/recetasData";
+import { recetas, type Receta } from "@/components/recetas/recetasData";
+import FreeRecipeDialog from "@/components/recetas/FreeRecipeDialog";
+import PremiumPaywallDialog from "@/components/recetas/PremiumPaywallDialog";
 
 const FeaturedRecipes = () => {
   const featured = recetas.slice(0, 4);
+  const [selectedReceta, setSelectedReceta] = useState<Receta | null>(null);
+  const [freeOpen, setFreeOpen] = useState(false);
+  const [premiumOpen, setPremiumOpen] = useState(false);
+
+  const handleCardClick = (receta: Receta) => {
+    setSelectedReceta(receta);
+    if (receta.isPremium) {
+      setPremiumOpen(true);
+    } else {
+      setFreeOpen(true);
+    }
+  };
 
   return (
     <section className="section-padding relative">
@@ -22,7 +37,7 @@ const FeaturedRecipes = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
           {featured.map((r, i) => (
             <ScrollReveal key={r.title} delay={i * 0.08}>
-              <RecetaCard receta={r} onClick={() => {}} />
+              <RecetaCard receta={r} onClick={() => handleCardClick(r)} />
             </ScrollReveal>
           ))}
         </div>
@@ -35,6 +50,13 @@ const FeaturedRecipes = () => {
           </div>
         </ScrollReveal>
       </div>
+
+      <FreeRecipeDialog open={freeOpen} onOpenChange={setFreeOpen} receta={selectedReceta} />
+      <PremiumPaywallDialog
+        open={premiumOpen}
+        onOpenChange={setPremiumOpen}
+        recetaTitle={selectedReceta?.title ?? ""}
+      />
     </section>
   );
 };

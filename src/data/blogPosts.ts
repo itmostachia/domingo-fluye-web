@@ -100,7 +100,7 @@ export const blogPosts: BlogPost[] = [
     excerpt: "No es solo cocinar. Es dejar de pensar en qué cocinar. Te contamos cómo lograrlo.",
     date: "20 de enero, 2026",
     tag: "Bienestar",
-    coverImage: "https://images.unsplash.com/photo-1498837167922-41c46b21c620?w=1200&q=80",
+    coverImage: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&q=80",
     content: `
       <p>La carga mental de la cocina no empieza cuando prendés la hornalla. <strong>Empieza cuando abrís los ojos a la mañana y ya estás pensando "¿qué hago de comer hoy?"</strong>. Y esa pregunta se repite 3, 4, 5 veces al día, todos los días.</p>
 
