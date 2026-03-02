@@ -131,7 +131,7 @@ const ClubDashboard = () => {
 };
 
 const MiClub = () => {
-  const { user, isLoading } = useAuth();
+  const { user, isLoading, hasAccess } = useAuth();
 
   if (isLoading) {
     return (
@@ -143,7 +143,7 @@ const MiClub = () => {
     );
   }
 
-  if (!user) {
+  if (!user || !hasAccess) {
     return (
       <Layout>
         <SEOHead title="Club de los Domingos | Cocina en Flor" description="Accedé al Club para descargar tu manual mensual y desbloquear todas las recetas premium." />
