@@ -1,0 +1,201 @@
+export type Categoria = "Todas" | "Pollo" | "Carne" | "Vegano" | "Express" | "Pastas" | "Dulce";
+
+export interface Receta {
+  title: string;
+  time: string;
+  servings: string;
+  freezable: boolean;
+  tag: Categoria;
+  image: string;
+  isPremium: boolean;
+  ingredients?: string[];
+  steps?: string[];
+}
+
+export const recetas: Receta[] = [
+  {
+    title: "Milanesas de pollo con puré",
+    time: "40 min",
+    servings: "4",
+    freezable: true,
+    tag: "Pollo",
+    image: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600&q=80",
+    isPremium: false,
+    ingredients: [
+      "4 pechugas de pollo finas",
+      "2 huevos",
+      "Pan rallado c/n",
+      "Sal y pimienta a gusto",
+      "6 papas medianas",
+      "50g manteca",
+      "Leche c/n",
+    ],
+    steps: [
+      "Salpimentá las pechugas. Pasalas por huevo batido y luego por pan rallado.",
+      "Cociná en horno a 200°C por 20 minutos, dando vuelta a mitad de cocción.",
+      "Mientras, herví las papas peladas hasta que estén tiernas (20 min aprox).",
+      "Pisá las papas, agregá manteca y leche caliente. Mezclá hasta lograr un puré cremoso.",
+      "Serví las milanesas doradas acompañadas del puré calentito.",
+    ],
+  },
+  {
+    title: "Tarta de zapallitos y queso",
+    time: "35 min",
+    servings: "6",
+    freezable: true,
+    tag: "Vegano",
+    image: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=600&q=80",
+    isPremium: false,
+    ingredients: [
+      "2 tapas de tarta",
+      "3 zapallitos rallados",
+      "200g queso cremoso",
+      "3 huevos",
+      "Sal, pimienta, nuez moscada",
+      "1 cebolla picada",
+    ],
+    steps: [
+      "Saltéa la cebolla en una sartén hasta que esté transparente.",
+      "Agregá los zapallitos rallados y cociná 5 minutos. Dejá enfriar.",
+      "Mezclá con los huevos, el queso y los condimentos.",
+      "Forráuna tartera con una tapa, volcá el relleno y cubrí con la otra tapa.",
+      "Horneá a 180°C por 25-30 minutos hasta que esté dorada.",
+    ],
+  },
+  {
+    title: "Pollo al horno con papas",
+    time: "55 min",
+    servings: "4",
+    freezable: false,
+    tag: "Pollo",
+    image: "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=600&q=80",
+    isPremium: true,
+  },
+  {
+    title: "Nuggets caseros de pollo",
+    time: "30 min",
+    servings: "6",
+    freezable: true,
+    tag: "Pollo",
+    image: "https://images.unsplash.com/photo-1562967914-608f82629710?w=600&q=80",
+    isPremium: true,
+  },
+  {
+    title: "Estofado de carne con verduras",
+    time: "60 min",
+    servings: "5",
+    freezable: true,
+    tag: "Carne",
+    image: "https://images.unsplash.com/photo-1534939561126-855b8675edd7?w=600&q=80",
+    isPremium: true,
+  },
+  {
+    title: "Empanadas de carne al horno",
+    time: "60 min",
+    servings: "12",
+    freezable: true,
+    tag: "Carne",
+    image: "https://images.unsplash.com/photo-1609525313344-a56f7b0aadbc?w=600&q=80",
+    isPremium: true,
+  },
+  {
+    title: "Hamburguesas caseras completas",
+    time: "35 min",
+    servings: "4",
+    freezable: true,
+    tag: "Carne",
+    image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80",
+    isPremium: true,
+  },
+  {
+    title: "Estofado de lentejas",
+    time: "50 min",
+    servings: "6",
+    freezable: true,
+    tag: "Vegano",
+    image: "https://images.unsplash.com/photo-1547592166-23ac45744aec?w=600&q=80",
+    isPremium: true,
+  },
+  {
+    title: "Tortilla de papas al horno",
+    time: "35 min",
+    servings: "4",
+    freezable: false,
+    tag: "Vegano",
+    image: "https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?w=600&q=80",
+    isPremium: true,
+  },
+  {
+    title: "Pasta con salsa bolognesa",
+    time: "45 min",
+    servings: "4",
+    freezable: true,
+    tag: "Pastas",
+    image: "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600&q=80",
+    isPremium: true,
+  },
+  {
+    title: "Ñoquis de papa caseros",
+    time: "50 min",
+    servings: "4",
+    freezable: true,
+    tag: "Pastas",
+    image: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=600&q=80",
+    isPremium: true,
+  },
+  {
+    title: "Wrap de pollo express",
+    time: "15 min",
+    servings: "2",
+    freezable: false,
+    tag: "Express",
+    image: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=600&q=80",
+    isPremium: true,
+  },
+  {
+    title: "Quesadillas rápidas",
+    time: "10 min",
+    servings: "2",
+    freezable: false,
+    tag: "Express",
+    image: "https://images.unsplash.com/photo-1618040996337-56904b7850b9?w=600&q=80",
+    isPremium: true,
+  },
+  {
+    title: "Tostadas con huevo y palta",
+    time: "10 min",
+    servings: "2",
+    freezable: false,
+    tag: "Express",
+    image: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&q=80",
+    isPremium: true,
+  },
+  {
+    title: "Budín de pan casero",
+    time: "30 min",
+    servings: "8",
+    freezable: false,
+    tag: "Dulce",
+    image: "https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=600&q=80",
+    isPremium: true,
+  },
+  {
+    title: "Galletitas de avena y banana",
+    time: "25 min",
+    servings: "20",
+    freezable: true,
+    tag: "Dulce",
+    image: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=600&q=80",
+    isPremium: true,
+  },
+];
+
+export const categorias: { label: Categoria; icon: string }[] = [
+  { label: "Todas", icon: "UtensilsCrossed" },
+  { label: "Pollo", icon: "Drumstick" },
+  { label: "Carne", icon: "Beef" },
+  { label: "Vegano", icon: "Salad" },
+  { label: "Express", icon: "Zap" },
+  { label: "Pastas", icon: "UtensilsCrossed" },
+  { label: "Dulce", icon: "CakeSlice" },
+];
