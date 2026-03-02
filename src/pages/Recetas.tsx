@@ -10,8 +10,8 @@ const Recetas = () => {
       <SEOHead
         title="Recetas — Cocina en Flor"
         description="Recetas prácticas para familias. Comida real, simple y riquísima."
-        path="/recetas"
-      />
+        path="/recetas" />
+      
       <section className="py-16 px-4 md:px-8 pt-24 md:pt-32 relative">
         <div className="max-w-7xl mx-auto">
           <div className="relative">
@@ -21,8 +21,8 @@ const Recetas = () => {
             <img
               src={florDeTip}
               alt="Flor de Tip"
-              className="absolute -top-4 -right-4 md:right-[15%] w-20 md:w-24 h-auto opacity-80 pointer-events-none rotate-6"
-            />
+              className="absolute -top-4 -right-4 md:right-[15%] w-20 md:w-24 h-auto opacity-80 pointer-events-none rotate-6" />
+            
           </div>
           <p className="text-muted-foreground text-center text-lg mb-8 max-w-xl mx-auto">
             Una muestra de lo que encontrás cada mes. Comida real para familias reales.
@@ -33,7 +33,7 @@ const Recetas = () => {
             {/* 1. Milanesas de pollo con puré - GRATIS */}
             <div className="bg-card rounded-2xl shadow-card overflow-hidden h-full flex flex-col w-full text-left border border-border">
               <div className="relative w-full aspect-[4/3] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600&q=80" alt="Milanesas de pollo con puré" className="w-full h-full object-cover" />
+                <img alt="Milanesas de pollo con puré" className="w-full h-full object-cover" src="/lovable-uploads/b8e7d2b8-bc86-42e1-9376-9a1fc4a5975c.jpg" />
                 <Badge className="absolute top-3 right-3 bg-primary/90 backdrop-blur-sm text-primary-foreground border-0 text-xs">🔓 Gratis</Badge>
               </div>
               <div className="p-4 flex flex-col flex-1">
@@ -50,7 +50,7 @@ const Recetas = () => {
             {/* 2. Tarta de zapallitos y queso - GRATIS */}
             <div className="bg-card rounded-2xl shadow-card overflow-hidden h-full flex flex-col w-full text-left border border-border">
               <div className="relative w-full aspect-[4/3] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?w=600&q=80" alt="Tarta de zapallitos y queso" className="w-full h-full object-cover" />
+                <img alt="Tarta de zapallitos y queso" className="w-full h-full object-cover" src="/lovable-uploads/70e36c43-1f69-4b2b-bfa4-09cb3ad01683.jpg" />
                 <Badge className="absolute top-3 right-3 bg-primary/90 backdrop-blur-sm text-primary-foreground border-0 text-xs">🔓 Gratis</Badge>
               </div>
               <div className="p-4 flex flex-col flex-1">
@@ -67,7 +67,7 @@ const Recetas = () => {
             {/* 3. Pollo al horno con papas - GRATIS */}
             <div className="bg-card rounded-2xl shadow-card overflow-hidden h-full flex flex-col w-full text-left border border-border">
               <div className="relative w-full aspect-[4/3] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=600&q=80" alt="Pollo al horno con papas" className="w-full h-full object-cover" />
+                <img alt="Pollo al horno con papas" className="w-full h-full object-cover" src="/lovable-uploads/f5ae0c21-f49f-41da-8851-58a8fa69a3d0.jpg" />
                 <Badge className="absolute top-3 right-3 bg-primary/90 backdrop-blur-sm text-primary-foreground border-0 text-xs">🔓 Gratis</Badge>
               </div>
               <div className="p-4 flex flex-col flex-1">
@@ -100,7 +100,7 @@ const Recetas = () => {
             {/* 5. Estofado de carne con verduras - GRATIS */}
             <div className="bg-card rounded-2xl shadow-card overflow-hidden h-full flex flex-col w-full text-left border border-border">
               <div className="relative w-full aspect-[4/3] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80" alt="Estofado de carne con verduras" className="w-full h-full object-cover" />
+                <img alt="Estofado de carne con verduras" className="w-full h-full object-cover" src="/lovable-uploads/1e4c3d8b-3d64-451d-829c-1f0931a6621f.webp" />
                 <Badge className="absolute top-3 right-3 bg-primary/90 backdrop-blur-sm text-primary-foreground border-0 text-xs">🔓 Gratis</Badge>
               </div>
               <div className="p-4 flex flex-col flex-1">
@@ -117,7 +117,7 @@ const Recetas = () => {
             {/* 6. Empanadas de carne al horno - PREMIUM */}
             <div className="bg-card rounded-2xl shadow-card overflow-hidden h-full flex flex-col w-full text-left border border-border">
               <div className="relative w-full aspect-[4/3] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1509722747041-616f39b57569?w=600&q=80" alt="Empanadas de carne al horno" className="w-full h-full object-cover" />
+                <img alt="Empanadas de carne al horno" className="w-full h-full object-cover" src="/lovable-uploads/5dbc90f3-f440-4a7a-93d2-59a2ea076f58.png" />
                 <div className="absolute top-3 right-3 bg-background/80 backdrop-blur-sm rounded-full p-1.5"><Lock size={14} className="text-muted-foreground" /></div>
               </div>
               <div className="p-4 flex flex-col flex-1">
@@ -151,7 +151,7 @@ const Recetas = () => {
             {/* 8. Estofado de lentejas - PREMIUM */}
             <div className="bg-card rounded-2xl shadow-card overflow-hidden h-full flex flex-col w-full text-left border border-border">
               <div className="relative w-full aspect-[4/3] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?w=600&q=80" alt="Estofado de lentejas" className="w-full h-full object-cover" />
+                <img alt="Estofado de lentejas" className="w-full h-full object-cover" src="/lovable-uploads/cb281a92-5748-459e-8e6a-9f40ce63f22c.jpg" />
                 <div className="absolute top-3 right-3 bg-background/80 backdrop-blur-sm rounded-full p-1.5"><Lock size={14} className="text-muted-foreground" /></div>
               </div>
               <div className="p-4 flex flex-col flex-1">
@@ -168,7 +168,7 @@ const Recetas = () => {
             {/* 9. Tortilla de papas al horno - GRATIS */}
             <div className="bg-card rounded-2xl shadow-card overflow-hidden h-full flex flex-col w-full text-left border border-border">
               <div className="relative w-full aspect-[4/3] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=600&q=80" alt="Tortilla de papas al horno" className="w-full h-full object-cover" />
+                <img alt="Tortilla de papas al horno" className="w-full h-full object-cover" src="/lovable-uploads/666d6fdb-2c46-4abb-be1e-2ece81e48a06.jpg" />
                 <Badge className="absolute top-3 right-3 bg-primary/90 backdrop-blur-sm text-primary-foreground border-0 text-xs">🔓 Gratis</Badge>
               </div>
               <div className="p-4 flex flex-col flex-1">
@@ -201,7 +201,7 @@ const Recetas = () => {
             {/* 11. Ñoquis de papa caseros - GRATIS */}
             <div className="bg-card rounded-2xl shadow-card overflow-hidden h-full flex flex-col w-full text-left border border-border">
               <div className="relative w-full aspect-[4/3] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1621510456681-2330135e5871?w=600&q=80" alt="Ñoquis de papa caseros" className="w-full h-full object-cover" />
+                <img alt="Ñoquis de papa caseros" className="w-full h-full object-cover" src="/lovable-uploads/c489ce18-16b7-4b89-9ad0-3b924a7adf22.webp" />
                 <Badge className="absolute top-3 right-3 bg-primary/90 backdrop-blur-sm text-primary-foreground border-0 text-xs">🔓 Gratis</Badge>
               </div>
               <div className="p-4 flex flex-col flex-1">
@@ -218,7 +218,7 @@ const Recetas = () => {
             {/* 12. Wrap de pollo express - PREMIUM */}
             <div className="bg-card rounded-2xl shadow-card overflow-hidden h-full flex flex-col w-full text-left border border-border">
               <div className="relative w-full aspect-[4/3] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=600&q=80" alt="Wrap de pollo express" className="w-full h-full object-cover" />
+                <img alt="Wrap de pollo express" className="w-full h-full object-cover" src="/lovable-uploads/4bea847a-a4c2-4e33-8955-3512cc3df4f9.jpg" />
                 <div className="absolute top-3 right-3 bg-background/80 backdrop-blur-sm rounded-full p-1.5"><Lock size={14} className="text-muted-foreground" /></div>
               </div>
               <div className="p-4 flex flex-col flex-1">
@@ -234,7 +234,7 @@ const Recetas = () => {
             {/* 13. Quesadillas rápidas - PREMIUM */}
             <div className="bg-card rounded-2xl shadow-card overflow-hidden h-full flex flex-col w-full text-left border border-border">
               <div className="relative w-full aspect-[4/3] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=600&q=80" alt="Quesadillas rápidas" className="w-full h-full object-cover" />
+                <img alt="Quesadillas rápidas" className="w-full h-full object-cover" src="/lovable-uploads/bbd10e5a-f7eb-4603-8ef3-ee7c81666b3d.jpg" />
                 <div className="absolute top-3 right-3 bg-background/80 backdrop-blur-sm rounded-full p-1.5"><Lock size={14} className="text-muted-foreground" /></div>
               </div>
               <div className="p-4 flex flex-col flex-1">
@@ -250,7 +250,7 @@ const Recetas = () => {
             {/* 14. Tostadas con huevo y palta - PREMIUM */}
             <div className="bg-card rounded-2xl shadow-card overflow-hidden h-full flex flex-col w-full text-left border border-border">
               <div className="relative w-full aspect-[4/3] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=600&q=80" alt="Tostadas con huevo y palta" className="w-full h-full object-cover" />
+                <img alt="Tostadas con huevo y palta" className="w-full h-full object-cover" src="/lovable-uploads/4535cfa5-605f-4a25-9ef6-3803419aca0f.webp" />
                 <div className="absolute top-3 right-3 bg-background/80 backdrop-blur-sm rounded-full p-1.5"><Lock size={14} className="text-muted-foreground" /></div>
               </div>
               <div className="p-4 flex flex-col flex-1">
@@ -266,7 +266,7 @@ const Recetas = () => {
             {/* 15. Budín de pan casero - PREMIUM */}
             <div className="bg-card rounded-2xl shadow-card overflow-hidden h-full flex flex-col w-full text-left border border-border">
               <div className="relative w-full aspect-[4/3] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=600&q=80" alt="Budín de pan casero" className="w-full h-full object-cover" />
+                <img alt="Budín de pan casero" className="w-full h-full object-cover" src="/lovable-uploads/8b1153a5-b702-4d7c-9ac1-ff9c93d9c4a1.webp" />
                 <div className="absolute top-3 right-3 bg-background/80 backdrop-blur-sm rounded-full p-1.5"><Lock size={14} className="text-muted-foreground" /></div>
               </div>
               <div className="p-4 flex flex-col flex-1">
@@ -282,7 +282,7 @@ const Recetas = () => {
             {/* 16. Galletitas de avena y banana - PREMIUM */}
             <div className="bg-card rounded-2xl shadow-card overflow-hidden h-full flex flex-col w-full text-left border border-border">
               <div className="relative w-full aspect-[4/3] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?w=600&q=80" alt="Galletitas de avena y banana" className="w-full h-full object-cover" />
+                <img alt="Galletitas de avena y banana" className="w-full h-full object-cover" src="/lovable-uploads/e9035ab4-cc26-4711-b767-9750ea572112.webp" />
                 <div className="absolute top-3 right-3 bg-background/80 backdrop-blur-sm rounded-full p-1.5"><Lock size={14} className="text-muted-foreground" /></div>
               </div>
               <div className="p-4 flex flex-col flex-1">
@@ -303,8 +303,8 @@ const Recetas = () => {
           </p>
         </div>
       </section>
-    </Layout>
-  );
+    </Layout>);
+
 };
 
 export default Recetas;
