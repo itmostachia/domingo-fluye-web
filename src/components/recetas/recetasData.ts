@@ -19,7 +19,7 @@ export const recetas: Receta[] = [
     servings: "4",
     freezable: true,
     tag: "Pollo",
-    image: "https://images.unsplash.com/photo-1585325701165-351af679e400?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1632778149955-e80f8ceca2e8?w=600&q=80",
     isPremium: false,
     ingredients: [
       "4 pechugas de pollo finas",
@@ -100,7 +100,7 @@ export const recetas: Receta[] = [
     servings: "5",
     freezable: true,
     tag: "Carne",
-    image: "https://images.unsplash.com/photo-1603105037880-880cd4f6be65?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1534939561126-855b8675edd7?w=600&q=80",
     isPremium: false,
     ingredients: [
       "500g carne para estofado (roast beef)",
@@ -124,7 +124,7 @@ export const recetas: Receta[] = [
     servings: "12",
     freezable: true,
     tag: "Carne",
-    image: "https://images.unsplash.com/photo-1604467707321-70d009801bf4?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1607013251379-e6eecfffe234?w=600&q=80",
     isPremium: true,
   },
   {
@@ -142,7 +142,7 @@ export const recetas: Receta[] = [
     servings: "6",
     freezable: true,
     tag: "Vegano",
-    image: "https://images.unsplash.com/photo-1546549032-9571cd6b27df?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=600&q=80",
     isPremium: true,
   },
   {
@@ -151,7 +151,7 @@ export const recetas: Receta[] = [
     servings: "4",
     freezable: false,
     tag: "Vegano",
-    image: "https://images.unsplash.com/photo-1598214886806-c87b84b7078b?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80",
     isPremium: false,
     ingredients: [
       "4 papas medianas",
@@ -183,7 +183,7 @@ export const recetas: Receta[] = [
     servings: "4",
     freezable: true,
     tag: "Pastas",
-    image: "https://images.unsplash.com/photo-1548869206-93b036288d7e?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=600&q=80",
     isPremium: false,
     ingredients: [
       "1 kg de papas",
