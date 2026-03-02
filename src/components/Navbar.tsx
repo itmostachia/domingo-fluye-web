@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight, LogIn, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logoImg from "@/assets/logo-cocina-en-flor.png";
+import { useAuth } from "@/contexts/AuthContext";
 
 const navItems = [
   { label: "Cómo funciona", href: "/como-funciona" },
@@ -17,6 +18,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const { user, isLoading } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -56,6 +58,25 @@ const Navbar = () => {
               {item.label}
             </Link>
           ))}
+          {!isLoading && (
+            user ? (
+              <Link
+                to="/mi-club"
+                className="ml-2 text-sm font-semibold px-4 py-2 rounded-lg bg-accent/80 text-accent-foreground hover:bg-accent transition-colors flex items-center gap-1.5"
+              >
+                <Sparkles size={14} />
+                Mi Club ✨
+              </Link>
+            ) : (
+              <Link
+                to="/login"
+                className="ml-2 text-sm font-medium px-3 py-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors flex items-center gap-1.5"
+              >
+                <LogIn size={14} />
+                Ingresar
+              </Link>
+            )
+          )}
           <Link
             to="/planes"
             className="group ml-3 bg-primary text-primary-foreground px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-vino transition-all duration-300 shadow-cta hover:shadow-glow flex items-center gap-1.5"
@@ -109,6 +130,29 @@ const Navbar = () => {
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navItems.length * 0.05 }}
+              >
+                {!isLoading && (
+                  user ? (
+                    <Link
+                      to="/mi-club"
+                      className="block py-2.5 px-3 rounded-lg text-base font-semibold text-accent-foreground bg-accent/60"
+                    >
+                      Mi Club ✨
+                    </Link>
+                  ) : (
+                    <Link
+                      to="/login"
+                      className="block py-2.5 px-3 rounded-lg text-base font-medium text-muted-foreground hover:text-foreground"
+                    >
+                      Ingresar
+                    </Link>
+                  )
+                )}
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: (navItems.length + 1) * 0.05 }}
               >
                 <Link
                   to="/planes"
