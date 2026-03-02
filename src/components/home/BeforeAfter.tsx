@@ -42,7 +42,7 @@ const BeforeAfter = () => {
 
         <ScrollReveal delay={0.1}>
           <div className="mb-10 rounded-2xl overflow-hidden shadow-card border border-border max-w-3xl mx-auto">
-            <img alt="Antes y después: cocina caótica vs organizada" className="w-full h-48 md:h-56 object-cover" loading="lazy" decoding="async" src="/lovable-uploads/76f52d05-8408-4a9c-9ae7-a23a4bb37168.png" />
+            <img alt="Antes y después: cocina caótica vs organizada" className="w-full h-64 md:h-80 lg:h-96 object-cover" loading="lazy" decoding="async" src="/lovable-uploads/76f52d05-8408-4a9c-9ae7-a23a4bb37168.png" />
           </div>
         </ScrollReveal>
 
