@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import logoImg from "@/assets/logo-cocina-en-flor.png";
 
 const navItems = [
   { label: "Cómo funciona", href: "/como-funciona" },
@@ -37,9 +38,7 @@ const Navbar = () => {
     >
       <nav className="container-wide flex items-center justify-between py-3.5">
         <Link to="/" className="group flex items-center gap-2">
-          <span className="font-display text-xl md:text-2xl text-foreground tracking-tight group-hover:text-primary transition-colors">
-            Cocina en Flor
-          </span>
+          <img src={logoImg} alt="Cocina en Flor" className="h-9 md:h-10 w-auto" />
         </Link>
 
         {/* Desktop nav */}

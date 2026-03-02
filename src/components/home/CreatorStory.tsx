@@ -36,12 +36,23 @@ const CreatorStory = () => {
             <h2 className="font-display text-3xl md:text-4xl text-foreground mb-4">
               Conocé a la creadora
             </h2>
-            <p className="text-muted-foreground leading-relaxed text-base">
-              Soy <strong className="text-foreground">[Tu Nombre]</strong>, mamá y creadora de Cocina en Flor.
-              Hace unos años estaba colapsada, gastando fortuna en delivery a las 9 PM porque no sabía
-              qué cocinar. Diseñé este sistema para sobrevivir al caos, y hoy ayuda a cientos de familias
-              a recuperar su paz mental y su tiempo.
-            </p>
+            <div className="text-muted-foreground leading-relaxed text-base space-y-4">
+              <p>
+                Soy <strong className="text-foreground">Flor</strong>, mamá y creadora de Cocina en Flor.
+              </p>
+              <p>
+                Durante años llegaba a la noche cansada, sin saber qué cocinar y sintiendo que la comida era una carga más en mi día. Hasta que entendí que no necesitaba más recetas, sino organización.
+              </p>
+              <p>
+                Diseñé un sistema simple para resolver las comidas en menos tiempo, con alimentos reales y sin estrés.
+              </p>
+              <p>
+                Hoy ayudo a familias a ordenar su cocina, comer mejor y recuperar algo clave: la tranquilidad.
+              </p>
+              <p className="font-medium text-foreground">
+                Porque cuando la comida deja de ser un problema, la vida se vuelve más liviana.
+              </p>
+            </div>
           </ScrollReveal>
         </div>
       </div>
