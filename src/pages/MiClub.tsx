@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Lock, Download, Sparkles } from "lucide-react";
+import { Lock, Download, Sparkles, LogOut } from "lucide-react";
 import { motion } from "framer-motion";
 import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
 import Layout from "@/components/Layout";
 import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
@@ -82,7 +83,7 @@ const ClubDashboard = () => {
               Manual de Marzo ya disponible
             </p>
             <Button size="lg" className="font-semibold shadow-cta rounded-xl" asChild>
-              <a href="#">
+              <a href="https://drive.google.com/file/d/PLACEHOLDER/view" target="_blank" rel="noopener noreferrer">
                 <Download className="w-4 h-4 mr-2" />
                 Descargar PDF
               </a>
@@ -112,6 +113,18 @@ const ClubDashboard = () => {
         </div>
 
         <FreeRecipeDialog open={dialogOpen} onOpenChange={setDialogOpen} receta={selectedReceta} />
+
+        {/* Logout */}
+        <div className="mt-16 text-center">
+          <Button
+            variant="ghost"
+            className="text-muted-foreground hover:text-foreground"
+            onClick={() => supabase.auth.signOut()}
+          >
+            <LogOut className="w-4 h-4 mr-2" />
+            Cerrar sesión
+          </Button>
+        </div>
       </div>
     </div>
   );
