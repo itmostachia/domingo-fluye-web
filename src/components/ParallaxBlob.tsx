@@ -1,9 +1,9 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 interface ParallaxBlobProps {
   className: string;
-  speed?: number; // negative = moves up on scroll, positive = moves down
+  speed?: number;
 }
 
 const ParallaxBlob = ({ className, speed = -0.15 }: ParallaxBlobProps) => {
@@ -13,13 +13,14 @@ const ParallaxBlob = ({ className, speed = -0.15 }: ParallaxBlobProps) => {
     offset: ["start end", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [speed * -100, speed * 100]);
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  const y = useTransform(smoothProgress, [0, 1], [speed * -100, speed * 100]);
 
   return (
     <motion.div
       ref={ref}
       className={className}
-      style={{ y, willChange: "transform" }}
+      style={{ y, z: 0, willChange: "transform" }}
     />
   );
 };
