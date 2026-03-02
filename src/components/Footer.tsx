@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import logoImg from "@/assets/logo-cocina-en-flor.png";
 
 const Footer = () => {
   return (
@@ -6,7 +7,7 @@ const Footer = () => {
       <div className="container-wide py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           <div>
-            <h3 className="font-display text-xl mb-1">Cocina en Flor</h3>
+            <img src={logoImg} alt="Cocina en Flor" className="h-14 w-auto mb-3" />
             <p className="text-xs opacity-50 mb-3">El Club de los Domingos</p>
             <p className="text-sm opacity-70 leading-relaxed">
               Un sistema mensual para organizar tu cocina, reducir el estrés y recuperar tu tiempo.
