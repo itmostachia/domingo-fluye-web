@@ -1,6 +1,6 @@
-import { Camera } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxBlob from "@/components/ParallaxBlob";
+import creadoraImg from "@/assets/creadora.jpg";
 
 const CreatorStory = () => {
   return (
@@ -14,8 +14,14 @@ const CreatorStory = () => {
           {/* Photo placeholder */}
           <ScrollReveal>
             <div className="relative">
-              <div className="aspect-[4/5] rounded-2xl bg-muted border border-border flex items-center justify-center shadow-card">
-                <Camera size={48} className="text-muted-foreground/40" />
+              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-card">
+                <img
+                  src={creadoraImg}
+                  alt="Creadora de Cocina en Flor"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="absolute -bottom-3 -right-3 w-20 h-20 rounded-full bg-miel/20 blur-2xl" />
               <div className="absolute -top-3 -left-3 w-16 h-16 rounded-full bg-primary/15 blur-2xl" />
