@@ -12,22 +12,30 @@ import ScrollReveal from "@/components/ScrollReveal";
 import RecetaCard from "@/components/recetas/RecetaCard";
 import FreeRecipeDialog from "@/components/recetas/FreeRecipeDialog";
 import { recetas, type Receta } from "@/components/recetas/recetasData";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import heroImg from "@/assets/hero-kitchen.jpg";
+
+const isDev = import.meta.env.DEV;
 
 const manuales = [
   { id: 1, title: "Manual Marzo 2026", status: "available" as const, image: "https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=600&q=80" },
   { id: 2, title: "Manual Abril 2026", status: "upcoming" as const, image: "https://images.unsplash.com/photo-1498837167922-41c46b21c620?w=600&q=80" },
   { id: 3, title: "Manual Mayo 2026", status: "upcoming" as const, image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80" },
+  { id: 4, title: "Manual Junio 2026", status: "upcoming" as const, image: "https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=600&q=80" },
+  { id: 5, title: "Manual Julio 2026", status: "upcoming" as const, image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" },
+  { id: 6, title: "Manual Agosto 2026", status: "upcoming" as const, image: "https://images.unsplash.com/photo-1543362906-acfc16c67564?w=600&q=80" },
+  { id: 7, title: "Manual Septiembre 2026", status: "upcoming" as const, image: "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80" },
+  { id: 8, title: "Manual Octubre 2026", status: "upcoming" as const, image: "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=600&q=80" },
+  { id: 9, title: "Manual Noviembre 2026", status: "upcoming" as const, image: "https://images.unsplash.com/photo-1506368249639-73a05d6f6488?w=600&q=80" },
+  { id: 10, title: "Manual Diciembre 2026", status: "upcoming" as const, image: "https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=600&q=80" },
 ];
 
 const ClubTeaser = () => (
   <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
-    {/* Background image */}
     <div
       className="absolute inset-0 bg-cover bg-center"
       style={{ backgroundImage: `url(${heroImg})` }}
     />
-    {/* Blur + dark overlay */}
     <div className="absolute inset-0 backdrop-blur-md bg-black/50" />
 
     <motion.div
@@ -77,7 +85,7 @@ const ClubDashboard = () => {
           </h1>
         </ScrollReveal>
 
-        {/* Monthly download card */}
+        {/* Biblioteca de Manuales - Carousel */}
         <ScrollReveal delay={0.1}>
           <div className="flex items-center gap-2 mb-6">
             <Download className="w-5 h-5 text-primary" />
@@ -85,49 +93,57 @@ const ClubDashboard = () => {
               Biblioteca de Manuales
             </h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {manuales.map((manual) => {
-              const isAvailable = manual.status === "available";
-              return (
-                <div
-                  key={manual.id}
-                  className={`rounded-2xl border border-border bg-card overflow-hidden shadow-sm transition-all ${
-                    isAvailable
-                      ? "hover:-translate-y-1 hover:shadow-md cursor-pointer"
-                      : "opacity-70 cursor-default"
-                  }`}
-                >
-                  <div className="relative aspect-video overflow-hidden">
-                    <img
-                      src={manual.image}
-                      alt={manual.title}
-                      className={`w-full h-full object-cover ${!isAvailable ? "grayscale" : ""}`}
-                    />
-                    {!isAvailable && (
-                      <Badge className="absolute top-3 right-3 bg-muted/80 backdrop-blur text-muted-foreground border-border">
-                        <Clock className="w-3 h-3 mr-1" />
-                        Próximamente
-                      </Badge>
-                    )}
-                  </div>
-                  <div className="p-4 text-center space-y-3">
-                    <h3 className="font-display font-bold text-foreground">{manual.title}</h3>
-                    {isAvailable ? (
-                      <Button size="sm" className="font-semibold rounded-xl" asChild>
-                        <a href="https://drive.google.com/file/d/PLACEHOLDER/view" target="_blank" rel="noopener noreferrer">
-                          <Download className="w-4 h-4 mr-2" />
-                          Descargar PDF
-                        </a>
-                      </Button>
-                    ) : (
-                      <Button size="sm" variant="outline" disabled className="rounded-xl">
-                        Disponible el próximo mes
-                      </Button>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
+
+          <div className="mb-12 px-10">
+            <Carousel opts={{ align: "start", loop: false }} className="w-full">
+              <CarouselContent className="-ml-4">
+                {manuales.map((manual) => {
+                  const isAvailable = manual.status === "available";
+                  return (
+                    <CarouselItem key={manual.id} className="pl-4 basis-full md:basis-1/2 lg:basis-1/3">
+                      <div
+                        className={`rounded-2xl border border-border bg-card overflow-hidden shadow-sm transition-all ${
+                          isAvailable
+                            ? "hover:-translate-y-1 hover:shadow-md cursor-pointer"
+                            : "opacity-80 cursor-default"
+                        }`}
+                      >
+                        <div className="relative aspect-video overflow-hidden">
+                          <img
+                            src={manual.image}
+                            alt={manual.title}
+                            className={`w-full h-full object-cover ${!isAvailable ? "grayscale-[50%]" : ""}`}
+                          />
+                          {!isAvailable && (
+                            <Badge className="absolute top-3 right-3 bg-muted/80 backdrop-blur text-muted-foreground border-border">
+                              <Clock className="w-3 h-3 mr-1" />
+                              Próximamente
+                            </Badge>
+                          )}
+                        </div>
+                        <div className="p-4 text-center space-y-3">
+                          <h3 className="font-display font-bold text-foreground">{manual.title}</h3>
+                          {isAvailable ? (
+                            <Button size="sm" className="font-semibold rounded-xl" asChild>
+                              <a href="https://drive.google.com/file/d/PLACEHOLDER/view" target="_blank" rel="noopener noreferrer">
+                                <Download className="w-4 h-4 mr-2" />
+                                Descargar PDF
+                              </a>
+                            </Button>
+                          ) : (
+                            <Button size="sm" variant="outline" disabled className="rounded-xl">
+                              Disponible el próximo mes
+                            </Button>
+                          )}
+                        </div>
+                      </div>
+                    </CarouselItem>
+                  );
+                })}
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
           </div>
         </ScrollReveal>
 
@@ -166,6 +182,13 @@ const ClubDashboard = () => {
           </Button>
         </div>
       </div>
+
+      {/* Dev mode indicator */}
+      {isDev && (
+        <div className="fixed bottom-4 left-4 z-50 bg-foreground/90 text-background text-xs font-mono px-3 py-2 rounded-lg shadow-lg backdrop-blur">
+          🛠️ Modo Edición (Solo visible en Lovable)
+        </div>
+      )}
     </div>
   );
 };
@@ -173,7 +196,7 @@ const ClubDashboard = () => {
 const MiClub = () => {
   const { user, isLoading, hasAccess } = useAuth();
 
-  if (isLoading) {
+  if (isLoading && !isDev) {
     return (
       <Layout>
         <div className="min-h-screen flex items-center justify-center">
@@ -183,19 +206,20 @@ const MiClub = () => {
     );
   }
 
-  if (!user || !hasAccess) {
+  // In dev mode OR admin → always show dashboard
+  if (isDev || (user && hasAccess)) {
     return (
       <Layout>
-        <SEOHead title="Club de los Domingos | Cocina en Flor" description="Accedé al Club para descargar tu manual mensual y desbloquear todas las recetas premium." />
-        <ClubTeaser />
+        <SEOHead title="Mi Club | Cocina en Flor" description="Tu espacio exclusivo con el manual del mes y todas las recetas desbloqueadas." />
+        <ClubDashboard />
       </Layout>
     );
   }
 
   return (
     <Layout>
-      <SEOHead title="Mi Club | Cocina en Flor" description="Tu espacio exclusivo con el manual del mes y todas las recetas desbloqueadas." />
-      <ClubDashboard />
+      <SEOHead title="Club de los Domingos | Cocina en Flor" description="Accedé al Club para descargar tu manual mensual y desbloquear todas las recetas premium." />
+      <ClubTeaser />
     </Layout>
   );
 };
