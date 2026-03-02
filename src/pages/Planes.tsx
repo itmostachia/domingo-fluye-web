@@ -93,14 +93,14 @@ const Planes = () => {
 
                 <div className="flex flex-col gap-3">
                   <Button
-                    className="w-full py-6 text-base font-semibold rounded-xl shadow-cta hover:shadow-glow transition-all duration-300"
+                    className="w-full py-6 text-sm sm:text-base font-semibold rounded-xl shadow-cta hover:shadow-glow transition-all duration-300"
                     onClick={() => openCheckout("mp")}
                   >
                     Suscribirme con Mercado Pago (ARS)
                   </Button>
                   <Button
                     variant="outline"
-                    className="w-full py-6 text-base font-semibold rounded-xl border-primary/30 hover:bg-primary/5 transition-all duration-300"
+                    className="w-full py-6 text-sm sm:text-base font-semibold rounded-xl border-primary/30 hover:bg-primary/5 transition-all duration-300"
                     onClick={() => openCheckout("paypal")}
                   >
                     Suscribirme con PayPal (USD)
