@@ -6,8 +6,10 @@ import { Button } from "@/components/ui/button";
 import { recetas, type Receta } from "@/components/recetas/recetasData";
 import FreeRecipeDialog from "@/components/recetas/FreeRecipeDialog";
 import PremiumPaywallDialog from "@/components/recetas/PremiumPaywallDialog";
+import { useAuth } from "@/contexts/AuthContext";
 
 const FeaturedRecipes = () => {
+  const { hasAccess } = useAuth();
   const featured = recetas.slice(0, 4);
   const [selectedReceta, setSelectedReceta] = useState<Receta | null>(null);
   const [freeOpen, setFreeOpen] = useState(false);
@@ -15,7 +17,7 @@ const FeaturedRecipes = () => {
 
   const handleCardClick = (receta: Receta) => {
     setSelectedReceta(receta);
-    if (receta.isPremium) {
+    if (receta.isPremium && !hasAccess) {
       setPremiumOpen(true);
     } else {
       setFreeOpen(true);
