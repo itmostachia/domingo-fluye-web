@@ -3,7 +3,7 @@ import SEOHead from "@/components/SEOHead";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { blogPosts } from "@/data/blogPosts";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Sparkles, Share2, Twitter, Facebook, Instagram, Copy } from "lucide-react";
+import { ArrowLeft, Sparkles, Share2, Twitter, Facebook, Copy } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useToast } from "@/hooks/use-toast";
 
@@ -98,10 +98,19 @@ const BlogPost = () => {
         <div className="max-w-3xl mx-auto px-4 mt-12">
           <p className="text-muted-foreground text-sm mb-3 text-center">¿Te sirvió? Compartilo:</p>
           <div className="flex items-center justify-center gap-2">
-            <Button variant="outline" size="icon" asChild>
-              <a href={`https://www.instagram.com/`} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                <Instagram size={18} />
-              </a>
+            <Button
+              variant="outline"
+              size="icon"
+              aria-label="Compartir"
+              onClick={() => {
+                if (navigator.share) {
+                  navigator.share({ title: post.title, url: shareUrl });
+                } else {
+                  toast({ title: "No disponible", description: "Usá otro método para compartir.", variant: "destructive" });
+                }
+              }}
+            >
+              <Share2 size={18} />
             </Button>
             <Button variant="outline" size="icon" asChild>
               <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`} target="_blank" rel="noopener noreferrer" aria-label="Twitter">
