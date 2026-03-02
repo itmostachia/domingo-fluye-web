@@ -21,6 +21,7 @@ import CursorTrail from "./components/CursorTrail";
 
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 const Login = lazy(() => import("./pages/Login"));
+const MiClub = lazy(() => import("./pages/MiClub"));
 
 const queryClient = new QueryClient();
 
@@ -46,6 +47,7 @@ const App = () => (
               <Route path="/blog/:slug" element={<Suspense fallback={<div className="min-h-screen" />}><BlogPost /></Suspense>} />
               <Route path="/recetas" element={<Recetas />} />
               <Route path="/login" element={<Suspense fallback={<div className="min-h-screen" />}><Login /></Suspense>} />
+              <Route path="/mi-club" element={<Suspense fallback={<div className="min-h-screen" />}><MiClub /></Suspense>} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
