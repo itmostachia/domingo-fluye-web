@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ArrowRight, LogIn, Sparkles } from "lucide-react";
+import { Menu, X, ArrowRight, LogIn, LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logoImg from "@/assets/logo-cocina-en-flor.png";
 import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
 
 const navItems = [
   { label: "Cómo funciona", href: "/como-funciona" },
   { label: "Planes", href: "/planes" },
   { label: "Recetas", href: "/recetas" },
+  { label: "Mi Club ✨", href: "/mi-club" },
   { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "/faq" },
   { label: "Contacto", href: "/contacto" },
@@ -60,30 +62,32 @@ const Navbar = () => {
           ))}
           {!isLoading && (
             user ? (
-              <Link
-                to="/mi-club"
-                className="ml-2 text-sm font-semibold px-4 py-2 rounded-lg bg-accent/80 text-accent-foreground hover:bg-accent transition-colors flex items-center gap-1.5"
-              >
-                <Sparkles size={14} />
-                Mi Club ✨
-              </Link>
-            ) : (
-              <Link
-                to="/login"
+              <button
+                onClick={() => supabase.auth.signOut()}
                 className="ml-2 text-sm font-medium px-3 py-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors flex items-center gap-1.5"
               >
-                <LogIn size={14} />
-                Ingresar
-              </Link>
+                <LogOut size={14} />
+                Cerrar sesión
+              </button>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="ml-2 text-sm font-medium px-3 py-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors flex items-center gap-1.5"
+                >
+                  <LogIn size={14} />
+                  Ingresar
+                </Link>
+                <Link
+                  to="/planes"
+                  className="group ml-3 bg-primary text-primary-foreground px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-vino transition-all duration-300 shadow-cta hover:shadow-glow flex items-center gap-1.5"
+                >
+                  Quiero unirme
+                  <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+                </Link>
+              </>
             )
           )}
-          <Link
-            to="/planes"
-            className="group ml-3 bg-primary text-primary-foreground px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-vino transition-all duration-300 shadow-cta hover:shadow-glow flex items-center gap-1.5"
-          >
-            Quiero unirme
-            <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
-          </Link>
         </div>
 
         {/* Mobile toggle */}
@@ -131,36 +135,40 @@ const Navbar = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navItems.length * 0.05 }}
               >
-                {!isLoading && (
+              {!isLoading && (
                   user ? (
-                    <Link
-                      to="/mi-club"
-                      className="block py-2.5 px-3 rounded-lg text-base font-semibold text-accent-foreground bg-accent/60"
+                    <button
+                      onClick={() => supabase.auth.signOut()}
+                      className="block w-full text-left py-2.5 px-3 rounded-lg text-base font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50"
                     >
-                      Mi Club ✨
-                    </Link>
+                      Cerrar sesión
+                    </button>
                   ) : (
-                    <Link
-                      to="/login"
-                      className="block py-2.5 px-3 rounded-lg text-base font-medium text-muted-foreground hover:text-foreground"
-                    >
-                      Ingresar
-                    </Link>
+                    <>
+                      <Link
+                        to="/login"
+                        className="block py-2.5 px-3 rounded-lg text-base font-medium text-muted-foreground hover:text-foreground"
+                      >
+                        Ingresar
+                      </Link>
+                    </>
                   )
                 )}
               </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: (navItems.length + 1) * 0.05 }}
-              >
-                <Link
-                  to="/planes"
-                  className="mt-2 block bg-primary text-primary-foreground px-5 py-3.5 rounded-xl text-center font-semibold shadow-cta"
+              {!user && (
+                <motion.div
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: (navItems.length + 1) * 0.05 }}
                 >
-                  Quiero unirme
-                </Link>
-              </motion.div>
+                  <Link
+                    to="/planes"
+                    className="mt-2 block bg-primary text-primary-foreground px-5 py-3.5 rounded-xl text-center font-semibold shadow-cta"
+                  >
+                    Quiero unirme
+                  </Link>
+                </motion.div>
+              )}
             </div>
           </motion.div>
         )}
