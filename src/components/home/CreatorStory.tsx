@@ -1,6 +1,7 @@
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxBlob from "@/components/ParallaxBlob";
 import creadoraImg from "@/assets/creadora.jpg";
+import corazonMarron from "@/assets/corazon-marron.png";
 
 const CreatorStory = () => {
   return (
@@ -25,6 +26,14 @@ const CreatorStory = () => {
               </div>
               <div className="absolute -bottom-3 -right-3 w-20 h-20 rounded-full bg-miel/20 blur-2xl" />
               <div className="absolute -top-3 -left-3 w-16 h-16 rounded-full bg-primary/15 blur-2xl" />
+              {/* Brand heart accent */}
+              <img
+                src={corazonMarron}
+                alt=""
+                className="absolute -bottom-4 -right-4 w-12 h-auto opacity-60 pointer-events-none"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
           </ScrollReveal>
 

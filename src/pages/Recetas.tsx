@@ -3,6 +3,7 @@ import SEOHead from "@/components/SEOHead";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Clock, Users, Snowflake } from "lucide-react";
+import florDeTip from "@/assets/flor-de-tip.png";
 
 const recetas = [
   { title: "Milanesas de pollo con puré", time: "40 min", servings: "4", freezable: true, tag: "Clásico" },
@@ -23,12 +24,21 @@ const Recetas = () => {
         description="Recetas prácticas para familias. Comida real, simple y riquísima. Milanesas, tartas, guisos, pastas y más."
         path="/recetas"
       />
-      <section className="section-padding pt-24 md:pt-32">
+      <section className="section-padding pt-24 md:pt-32 relative">
         <div className="container-wide">
           <ScrollReveal>
-            <h1 className="font-display text-4xl md:text-5xl text-foreground text-center mb-4">
-              Recetas del Club
-            </h1>
+            <div className="relative">
+              <h1 className="font-display text-4xl md:text-5xl text-foreground text-center mb-4">
+                Recetas del Club
+              </h1>
+              <img
+                src={florDeTip}
+                alt="Flor de Tip"
+                className="absolute -top-4 -right-4 md:right-[15%] w-20 md:w-24 h-auto opacity-80 pointer-events-none rotate-6"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
             <p className="text-muted-foreground text-center text-lg mb-12 max-w-xl mx-auto">
               Una muestra de lo que encontrás cada mes. Comida real para familias reales.
             </p>

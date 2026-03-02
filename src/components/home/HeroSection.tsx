@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import heroImage from "@/assets/hero-kitchen.jpg";
 import manualImage from "@/assets/manual-mockup.jpg";
+import tresFlores from "@/assets/3-flores-logo.png";
 
 const HeroSection = () => {
   const sectionRef = useRef(null);
@@ -162,6 +163,14 @@ const HeroSection = () => {
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-64 h-64 bg-coral-light/15 rounded-full blur-3xl" />
             </div>
+            {/* Brand flowers */}
+            <motion.img
+              src={tresFlores}
+              alt=""
+              className="absolute -top-6 right-0 w-24 h-auto opacity-90 pointer-events-none"
+              animate={{ rotate: [0, 5, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            />
             <motion.img
 
               alt="Manual mensual de Cocina en Flor"

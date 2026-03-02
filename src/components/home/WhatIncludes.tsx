@@ -2,6 +2,7 @@ import { BookOpen, UtensilsCrossed, ShoppingCart, Snowflake, Repeat, CalendarDay
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxBlob from "@/components/ParallaxBlob";
+import florVerde from "@/assets/flor-verde.png";
 
 const features = [
   { icon: BookOpen, title: "Manual mensual completo", desc: "Todo organizado en un solo documento descargable.", color: "text-vino", bgColor: "bg-vino/10" },
@@ -21,6 +22,13 @@ const WhatIncludes = () => {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-miel/30 to-transparent" />
       <ParallaxBlob className="absolute top-20 right-[5%] w-64 h-64 bg-miel/18 rounded-full blur-[100px] pointer-events-none" speed={-0.18} />
       <ParallaxBlob className="absolute bottom-20 left-[5%] w-56 h-56 bg-coral/10 rounded-full blur-[80px] pointer-events-none" speed={0.15} />
+      <img
+        src={florVerde}
+        alt=""
+        className="absolute top-12 left-8 w-14 h-auto opacity-[0.08] pointer-events-none rotate-12"
+        loading="lazy"
+        decoding="async"
+      />
 
       <div className="container-wide relative">
         <ScrollReveal>
