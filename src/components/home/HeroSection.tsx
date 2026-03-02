@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Check, ArrowRight, Sparkles, Star, Lock, Zap, XCircle } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
 import heroImage from "@/assets/hero-kitchen.jpg";
 import manualImage from "@/assets/manual-mockup.jpg";
@@ -12,7 +12,8 @@ const HeroSection = () => {
     target: sectionRef,
     offset: ["start start", "end start"]
   });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  const bgY = useTransform(smoothProgress, [0, 1], ["0%", "15%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   const containerVariants = {
@@ -30,7 +31,7 @@ const HeroSection = () => {
   return (
     <section ref={sectionRef} className="relative overflow-hidden min-h-[90vh] flex items-center">
       {/* Parallax background with darker overlay */}
-      <motion.div className="absolute inset-0" style={{ y: bgY }}>
+      <motion.div className="absolute inset-0" style={{ y: bgY, z: 0, willChange: "transform" }}>
         <img
           src={heroImage}
           alt="Mesa de cocina con preparaciones del domingo organizadas en tuppers"
