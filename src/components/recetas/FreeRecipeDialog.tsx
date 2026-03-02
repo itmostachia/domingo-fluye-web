@@ -24,12 +24,13 @@ const FreeRecipeDialog = ({ open, onOpenChange, receta }: FreeRecipeDialogProps)
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto p-0">
         {/* Hero image */}
-        <div className="relative w-full aspect-video overflow-hidden rounded-t-lg">
+        <div className="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-lg flex-shrink-0">
           <img
             src={receta.image}
             alt={receta.title}
             className="w-full h-full object-cover"
           />
+          <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-background to-transparent" />
         </div>
 
         <div className="p-6 pt-4 space-y-5">
