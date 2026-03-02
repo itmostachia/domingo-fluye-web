@@ -3,37 +3,7 @@ import SEOHead from "@/components/SEOHead";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
-
-const posts = [
-  {
-    slug: "como-organizar-freezer",
-    title: "Cómo organizar tu freezer para la semana en 5 pasos",
-    excerpt: "Una guía práctica para aprovechar el espacio de tu freezer y tener comida lista todos los días.",
-    date: "5 de febrero, 2026",
-    tag: "Organización",
-  },
-  {
-    slug: "meal-prep-principiantes",
-    title: "Meal prep para principiantes: todo lo que necesitás saber",
-    excerpt: "Si nunca cocinaste todo el domingo, esta guía te va a dar la confianza para empezar.",
-    date: "28 de enero, 2026",
-    tag: "Guías",
-  },
-  {
-    slug: "reducir-carga-mental-cocina",
-    title: "3 formas de reducir la carga mental con la cocina",
-    excerpt: "No es solo cocinar. Es dejar de pensar en qué cocinar. Te contamos cómo lograrlo.",
-    date: "20 de enero, 2026",
-    tag: "Bienestar",
-  },
-  {
-    slug: "lista-compras-inteligente",
-    title: "La lista de compras inteligente que te ahorra tiempo y plata",
-    excerpt: "Comprá una vez por semana y dejá de improvisar. Así funciona nuestra lista.",
-    date: "12 de enero, 2026",
-    tag: "Tips",
-  },
-];
+import { blogPosts } from "@/data/blogPosts";
 
 const Blog = () => {
   return (
@@ -55,23 +25,30 @@ const Blog = () => {
           </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {posts.map((post, i) => (
+            {blogPosts.map((post, i) => (
               <ScrollReveal key={post.slug} delay={i * 0.1}>
-                <motion.article
-                  className="bg-card rounded-2xl p-7 shadow-card h-full flex flex-col"
-                  whileHover={{ y: -4, boxShadow: "var(--shadow-warm)" }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <span className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">{post.tag}</span>
-                  <h2 className="font-display text-xl text-foreground mb-2">{post.title}</h2>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-1">{post.excerpt}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-muted-foreground">{post.date}</span>
-                    <Link to={`/blog`} className="text-sm font-semibold text-primary hover:text-vino transition-colors">
-                      Leer más →
-                    </Link>
-                  </div>
-                </motion.article>
+                <Link to={`/blog/${post.slug}`} className="block h-full">
+                  <motion.article
+                    className="bg-card rounded-2xl overflow-hidden shadow-card h-full flex flex-col border border-border hover:border-primary/30 transition-colors"
+                    whileHover={{ y: -4, boxShadow: "var(--shadow-warm)" }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {/* Cover placeholder */}
+                    <div className={`w-full h-36 ${post.coverColor}`} />
+
+                    <div className="p-7 flex flex-col flex-1">
+                      <span className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">{post.tag}</span>
+                      <h2 className="font-display text-xl text-foreground mb-2">{post.title}</h2>
+                      <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-1">{post.excerpt}</p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-muted-foreground">{post.date}</span>
+                        <span className="text-sm font-semibold text-primary hover:text-vino transition-colors">
+                          Leer más →
+                        </span>
+                      </div>
+                    </div>
+                  </motion.article>
+                </Link>
               </ScrollReveal>
             ))}
           </div>
