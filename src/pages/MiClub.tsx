@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Lock, Download, Sparkles, LogOut, Clock } from "lucide-react";
+import { Lock, Download, Sparkles, LogOut, Clock, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
@@ -85,14 +85,16 @@ const ClubDashboard = () => {
               Biblioteca de Manuales
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {manuales.map((manual) => {
               const isAvailable = manual.status === "available";
               return (
                 <div
                   key={manual.id}
                   className={`rounded-2xl border border-border bg-card overflow-hidden shadow-sm transition-all ${
-                    !isAvailable ? "opacity-70" : ""
+                    isAvailable
+                      ? "hover:-translate-y-1 hover:shadow-md cursor-pointer"
+                      : "opacity-70 cursor-default"
                   }`}
                 >
                   <div className="relative aspect-video overflow-hidden">
@@ -102,7 +104,7 @@ const ClubDashboard = () => {
                       className={`w-full h-full object-cover ${!isAvailable ? "grayscale" : ""}`}
                     />
                     {!isAvailable && (
-                      <Badge className="absolute top-3 right-3 bg-muted text-muted-foreground border-border">
+                      <Badge className="absolute top-3 right-3 bg-muted/80 backdrop-blur text-muted-foreground border-border">
                         <Clock className="w-3 h-3 mr-1" />
                         Próximamente
                       </Badge>
@@ -175,7 +177,7 @@ const MiClub = () => {
     return (
       <Layout>
         <div className="min-h-screen flex items-center justify-center">
-          <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+          <Loader2 className="w-8 h-8 text-primary animate-spin" />
         </div>
       </Layout>
     );

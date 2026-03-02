@@ -93,7 +93,7 @@ const FreeRecipeDialog = ({ open, onOpenChange, receta, isMemberView }: FreeReci
           )}
 
           {/* CRO Upsell Banner - hidden for members */}
-          {!isMemberView && (
+          {!(isMemberView ?? false) && (
             <div className="bg-muted/50 border border-border rounded-xl p-4 text-center space-y-2 mt-4">
               <p className="text-sm text-foreground font-medium">
                 ¿Te gustó esta receta? 🌸
