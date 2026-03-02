@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+import { lazy, Suspense } from "react";
 import Index from "./pages/Index";
 import ComoFunciona from "./pages/ComoFunciona";
 import Planes from "./pages/Planes";
@@ -16,6 +17,8 @@ import Blog from "./pages/Blog";
 import Recetas from "./pages/Recetas";
 import NotFound from "./pages/NotFound";
 import CursorTrail from "./components/CursorTrail";
+
+const BlogPost = lazy(() => import("./pages/BlogPost"));
 
 const queryClient = new QueryClient();
 
@@ -37,6 +40,7 @@ const App = () => (
             <Route path="/gracias" element={<Gracias />} />
             <Route path="/legal" element={<Legal />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<Suspense fallback={<div className="min-h-screen" />}><BlogPost /></Suspense>} />
             <Route path="/recetas" element={<Recetas />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
