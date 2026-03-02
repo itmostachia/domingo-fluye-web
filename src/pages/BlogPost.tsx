@@ -34,42 +34,56 @@ const BlogPost = () => {
         path={`/blog/${post.slug}`}
       />
 
-      {/* Hero */}
-      <section className={`${post.coverColor} pt-28 md:pt-36 pb-12 md:pb-16`}>
-        <div className="container-wide max-w-3xl mx-auto px-4">
-          <Link
-            to="/blog"
-            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
-          >
-            <ArrowLeft size={14} /> Volver al Blog
-          </Link>
-          <span className="block text-xs font-bold uppercase tracking-[0.15em] text-primary mb-3">
-            {post.tag}
-          </span>
-          <h1 className="font-display text-3xl md:text-5xl text-foreground leading-tight mb-4">
-            {post.title}
-          </h1>
-          <p className="text-muted-foreground text-sm">{post.date}</p>
+      {/* Hero with full-width image */}
+      <div className="relative w-full h-[40vh] min-h-[360px] max-h-[500px] overflow-hidden">
+        <img
+          src={post.coverImage}
+          alt={post.title}
+          className="w-full h-full object-cover"
+        />
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+
+        {/* Content over image */}
+        <div className="absolute bottom-0 left-0 right-0 px-4 pb-8 md:pb-12">
+          <div className="max-w-3xl mx-auto">
+            <Link
+              to="/blog"
+              className="inline-flex items-center gap-1.5 text-sm text-foreground/70 hover:text-foreground transition-colors mb-4"
+            >
+              <ArrowLeft size={14} /> Volver al Blog
+            </Link>
+            <span className="block text-xs font-bold uppercase tracking-[0.15em] text-primary mb-3">
+              {post.tag}
+            </span>
+            <h1 className="font-display text-3xl md:text-5xl text-foreground leading-tight mb-3">
+              {post.title}
+            </h1>
+            <p className="text-muted-foreground text-sm">{post.date}</p>
+          </div>
         </div>
-      </section>
+      </div>
 
-      {/* Content */}
-      <section className="section-padding">
-        <div className="container-wide max-w-2xl mx-auto px-4">
-          <ScrollReveal>
-            <article
-              className="prose prose-neutral prose-lg max-w-none
-                prose-headings:font-display prose-headings:text-foreground prose-headings:mt-10 prose-headings:mb-4
-                prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:mb-5
-                prose-strong:text-foreground
-                prose-a:text-primary prose-a:no-underline hover:prose-a:underline"
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            />
-          </ScrollReveal>
+      {/* Article content */}
+      <section className="py-12 md:py-16">
+        <div
+          className="prose prose-lg md:prose-xl max-w-3xl mx-auto px-4
+            prose-headings:font-display prose-headings:text-foreground prose-headings:mt-10 prose-headings:mb-4
+            prose-p:text-muted-foreground prose-p:leading-relaxed
+            prose-strong:text-foreground
+            prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+            prose-blockquote:border-l-primary prose-blockquote:text-muted-foreground prose-blockquote:not-italic prose-blockquote:font-medium
+            prose-figcaption:text-center prose-figcaption:text-xs prose-figcaption:text-muted-foreground
+            prose-img:rounded-xl prose-img:shadow-card
+            prose-li:text-muted-foreground
+            prose-ol:text-muted-foreground"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
 
-          {/* CRO Upsell Banner */}
-          <ScrollReveal delay={0.2}>
-            <div className="mt-16 rounded-2xl border-2 border-primary/20 bg-primary/5 p-8 md:p-10 text-center space-y-4">
+        {/* CRO Upsell Banner */}
+        <ScrollReveal delay={0.2}>
+          <div className="max-w-3xl mx-auto px-4 mt-16">
+            <div className="rounded-2xl border-2 border-primary/20 bg-card shadow-warm-lg p-8 md:p-10 text-center space-y-4">
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-2">
                 <Sparkles size={24} className="text-primary" />
               </div>
@@ -77,7 +91,7 @@ const BlogPost = () => {
                 ¿Te sirvió este consejo?
               </h3>
               <p className="text-muted-foreground max-w-md mx-auto leading-relaxed">
-                Imaginate tener <strong className="text-foreground">toda tu semana resuelta</strong> de esta forma. Menú, recetas, lista de compras y guías de preparación, todo listo para vos.
+                Imaginate tener <strong className="text-foreground">toda tu semana resuelta</strong>. Recetas, listas de compras y guías paso a paso, listas para vos.
               </p>
               <Button
                 size="lg"
@@ -87,8 +101,8 @@ const BlogPost = () => {
                 Quiero unirme al Club 🌸
               </Button>
             </div>
-          </ScrollReveal>
-        </div>
+          </div>
+        </ScrollReveal>
       </section>
     </Layout>
   );
