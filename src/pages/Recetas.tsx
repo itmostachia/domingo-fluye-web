@@ -1,6 +1,5 @@
 import Layout from "@/components/Layout";
 import SEOHead from "@/components/SEOHead";
-import ScrollReveal from "@/components/ScrollReveal";
 import { Clock, Users, Snowflake, Lock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import florDeTip from "@/assets/flor-de-tip.png";
@@ -13,26 +12,22 @@ const Recetas = () => {
         description="Recetas prácticas para familias. Comida real, simple y riquísima."
         path="/recetas"
       />
-      <section className="section-padding pt-24 md:pt-32 relative">
-        <div className="container-wide">
-          <ScrollReveal>
-            <div className="relative">
-              <h1 className="font-display text-4xl md:text-5xl text-foreground text-center mb-4">
-                Recetas del Club
-              </h1>
-              <img
-                src={florDeTip}
-                alt="Flor de Tip"
-                className="absolute -top-4 -right-4 md:right-[15%] w-20 md:w-24 h-auto opacity-80 pointer-events-none rotate-6"
-                loading="lazy"
-              />
-            </div>
-            <p className="text-muted-foreground text-center text-lg mb-8 max-w-xl mx-auto">
-              Una muestra de lo que encontrás cada mes. Comida real para familias reales.
-            </p>
-          </ScrollReveal>
+      <section className="py-16 px-4 md:px-8 pt-24 md:pt-32 relative">
+        <div className="max-w-7xl mx-auto">
+          <div className="relative">
+            <h1 className="font-display text-4xl md:text-5xl text-foreground text-center mb-4">
+              Recetas del Club
+            </h1>
+            <img
+              src={florDeTip}
+              alt="Flor de Tip"
+              className="absolute -top-4 -right-4 md:right-[15%] w-20 md:w-24 h-auto opacity-80 pointer-events-none rotate-6"
+            />
+          </div>
+          <p className="text-muted-foreground text-center text-lg mb-8 max-w-xl mx-auto">
+            Una muestra de lo que encontrás cada mes. Comida real para familias reales.
+          </p>
 
-          {/* GRID ESTÁTICA - 16 tarjetas editables manualmente */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
 
             {/* 1. Milanesas de pollo con puré - GRATIS */}
@@ -303,11 +298,9 @@ const Recetas = () => {
 
           </div>
 
-          <ScrollReveal delay={0.3}>
-            <p className="text-center text-muted-foreground mt-12 text-sm">
-              Cada mes recibís <strong className="text-foreground">40 recetas nuevas</strong> con el Club. Estas son solo un ejemplo.
-            </p>
-          </ScrollReveal>
+          <p className="text-center text-muted-foreground mt-12 text-sm">
+            Cada mes recibís <strong className="text-foreground">40 recetas nuevas</strong> con el Club. Estas son solo un ejemplo.
+          </p>
         </div>
       </section>
     </Layout>
