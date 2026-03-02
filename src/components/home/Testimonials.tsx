@@ -2,6 +2,7 @@ import { Star, Quote } from "lucide-react";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxBlob from "@/components/ParallaxBlob";
+import corazonVerde from "@/assets/corazon-verde.png";
 
 const testimonials = [
   {
@@ -42,6 +43,13 @@ const Testimonials = () => {
       <div className="absolute top-10 left-10 opacity-[0.03] pointer-events-none">
         <Quote size={200} />
       </div>
+      <img
+        src={corazonVerde}
+        alt=""
+        className="absolute bottom-8 right-8 w-16 h-auto opacity-10 pointer-events-none"
+        loading="lazy"
+        decoding="async"
+      />
 
       <div className="container-wide relative">
         <ScrollReveal>
