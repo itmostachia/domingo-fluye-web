@@ -91,7 +91,7 @@ export const recetas: Receta[] = [
     servings: "6",
     freezable: true,
     tag: "Pollo",
-    image: "https://images.unsplash.com/photo-1585325701165-351af679e300?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1619221882220-947b3d3c8861?w=600&q=80",
     isPremium: true,
   },
   {
@@ -100,7 +100,7 @@ export const recetas: Receta[] = [
     servings: "5",
     freezable: true,
     tag: "Carne",
-    image: "https://images.unsplash.com/photo-1607116667981-ff71c3841903?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80",
     isPremium: false,
     ingredients: [
       "500g carne para estofado (roast beef)",
@@ -133,7 +133,7 @@ export const recetas: Receta[] = [
     servings: "4",
     freezable: true,
     tag: "Carne",
-    image: "https://images.unsplash.com/photo-1550317138-10000687a72b?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=600&q=80",
     isPremium: true,
   },
   {
@@ -142,7 +142,7 @@ export const recetas: Receta[] = [
     servings: "6",
     freezable: true,
     tag: "Vegano",
-    image: "https://images.unsplash.com/photo-1543339308-d595c4f5c5b0?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?w=600&q=80",
     isPremium: true,
   },
   {
