@@ -13,9 +13,10 @@ interface FreeRecipeDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   receta: Receta | null;
+  isMemberView?: boolean;
 }
 
-const FreeRecipeDialog = ({ open, onOpenChange, receta }: FreeRecipeDialogProps) => {
+const FreeRecipeDialog = ({ open, onOpenChange, receta, isMemberView }: FreeRecipeDialogProps) => {
   const navigate = useNavigate();
 
   if (!receta) return null;
@@ -91,25 +92,27 @@ const FreeRecipeDialog = ({ open, onOpenChange, receta }: FreeRecipeDialogProps)
             </div>
           )}
 
-          {/* CRO Upsell Banner */}
-          <div className="bg-muted/50 border border-border rounded-xl p-4 text-center space-y-2 mt-4">
-            <p className="text-sm text-foreground font-medium">
-              ¿Te gustó esta receta? 🌸
-            </p>
-            <p className="text-xs text-muted-foreground">
-              En el Club recibís <strong className="text-foreground">40 recetas como esta cada mes</strong>, listas para el freezer.
-            </p>
-            <Button
-              size="sm"
-              className="mt-1"
-              onClick={() => {
-                onOpenChange(false);
-                navigate("/planes");
-              }}
-            >
-              Ver Planes
-            </Button>
-          </div>
+          {/* CRO Upsell Banner - hidden for members */}
+          {!isMemberView && (
+            <div className="bg-muted/50 border border-border rounded-xl p-4 text-center space-y-2 mt-4">
+              <p className="text-sm text-foreground font-medium">
+                ¿Te gustó esta receta? 🌸
+              </p>
+              <p className="text-xs text-muted-foreground">
+                En el Club recibís <strong className="text-foreground">40 recetas como esta cada mes</strong>, listas para el freezer.
+              </p>
+              <Button
+                size="sm"
+                className="mt-1"
+                onClick={() => {
+                  onOpenChange(false);
+                  navigate("/planes");
+                }}
+              >
+                Ver Planes
+              </Button>
+            </div>
+          )}
         </div>
       </DialogContent>
     </Dialog>

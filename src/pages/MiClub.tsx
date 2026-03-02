@@ -1,17 +1,24 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Lock, Download, Sparkles, LogOut } from "lucide-react";
+import { Lock, Download, Sparkles, LogOut, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import Layout from "@/components/Layout";
 import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import ScrollReveal from "@/components/ScrollReveal";
 import RecetaCard from "@/components/recetas/RecetaCard";
 import FreeRecipeDialog from "@/components/recetas/FreeRecipeDialog";
 import { recetas, type Receta } from "@/components/recetas/recetasData";
 import heroImg from "@/assets/hero-kitchen.jpg";
+
+const manuales = [
+  { id: 1, title: "Manual Marzo 2026", status: "available" as const, image: "https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=600&q=80" },
+  { id: 2, title: "Manual Abril 2026", status: "upcoming" as const, image: "https://images.unsplash.com/photo-1498837167922-41c46b21c620?w=600&q=80" },
+  { id: 3, title: "Manual Mayo 2026", status: "upcoming" as const, image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80" },
+];
 
 const ClubTeaser = () => (
   <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -72,22 +79,53 @@ const ClubDashboard = () => {
 
         {/* Monthly download card */}
         <ScrollReveal delay={0.1}>
-          <div className="bg-primary/10 border-2 border-primary/30 rounded-2xl p-6 md:p-8 mb-12 text-center">
-            <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
-              <Download className="w-6 h-6 text-primary" />
-            </div>
-            <h2 className="text-xl md:text-2xl font-display font-bold text-foreground mb-2">
-              Descarga del Mes
+          <div className="flex items-center gap-2 mb-6">
+            <Download className="w-5 h-5 text-primary" />
+            <h2 className="text-xl md:text-2xl font-display font-bold text-foreground">
+              Biblioteca de Manuales
             </h2>
-            <p className="text-muted-foreground mb-5">
-              Manual de Marzo ya disponible
-            </p>
-            <Button size="lg" className="font-semibold shadow-cta rounded-xl" asChild>
-              <a href="https://drive.google.com/file/d/PLACEHOLDER/view" target="_blank" rel="noopener noreferrer">
-                <Download className="w-4 h-4 mr-2" />
-                Descargar PDF
-              </a>
-            </Button>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            {manuales.map((manual) => {
+              const isAvailable = manual.status === "available";
+              return (
+                <div
+                  key={manual.id}
+                  className={`rounded-2xl border border-border bg-card overflow-hidden shadow-sm transition-all ${
+                    !isAvailable ? "opacity-70" : ""
+                  }`}
+                >
+                  <div className="relative aspect-video overflow-hidden">
+                    <img
+                      src={manual.image}
+                      alt={manual.title}
+                      className={`w-full h-full object-cover ${!isAvailable ? "grayscale" : ""}`}
+                    />
+                    {!isAvailable && (
+                      <Badge className="absolute top-3 right-3 bg-muted text-muted-foreground border-border">
+                        <Clock className="w-3 h-3 mr-1" />
+                        Próximamente
+                      </Badge>
+                    )}
+                  </div>
+                  <div className="p-4 text-center space-y-3">
+                    <h3 className="font-display font-bold text-foreground">{manual.title}</h3>
+                    {isAvailable ? (
+                      <Button size="sm" className="font-semibold rounded-xl" asChild>
+                        <a href="https://drive.google.com/file/d/PLACEHOLDER/view" target="_blank" rel="noopener noreferrer">
+                          <Download className="w-4 h-4 mr-2" />
+                          Descargar PDF
+                        </a>
+                      </Button>
+                    ) : (
+                      <Button size="sm" variant="outline" disabled className="rounded-xl">
+                        Disponible el próximo mes
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </ScrollReveal>
 
@@ -112,7 +150,7 @@ const ClubDashboard = () => {
           ))}
         </div>
 
-        <FreeRecipeDialog open={dialogOpen} onOpenChange={setDialogOpen} receta={selectedReceta} />
+        <FreeRecipeDialog open={dialogOpen} onOpenChange={setDialogOpen} receta={selectedReceta} isMemberView={true} />
 
         {/* Logout */}
         <div className="mt-16 text-center">
