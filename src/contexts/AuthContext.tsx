@@ -2,12 +2,15 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import { supabase } from "@/integrations/supabase/client";
 import type { User } from "@supabase/supabase-js";
 
+const ADMIN_EMAILS = ['jcbertorello07@gmail.com', 'it@mostachia.com', 'hola@cocinaenflor.com.ar'];
+
 interface AuthContextType {
   user: User | null;
   isLoading: boolean;
+  hasAccess: boolean;
 }
 
-const AuthContext = createContext<AuthContextType>({ user: null, isLoading: true });
+const AuthContext = createContext<AuthContextType>({ user: null, isLoading: true, hasAccess: false });
 
 export const useAuth = () => useContext(AuthContext);
 
@@ -29,8 +32,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return () => subscription.unsubscribe();
   }, []);
 
+  const hasAccess = !!user?.email && ADMIN_EMAILS.includes(user.email);
+
   return (
-    <AuthContext.Provider value={{ user, isLoading }}>
+    <AuthContext.Provider value={{ user, isLoading, hasAccess }}>
       {children}
     </AuthContext.Provider>
   );

@@ -7,9 +7,11 @@ import RecetaCard from "@/components/recetas/RecetaCard";
 import FreeRecipeDialog from "@/components/recetas/FreeRecipeDialog";
 import PremiumPaywallDialog from "@/components/recetas/PremiumPaywallDialog";
 import { recetas, categorias, type Categoria, type Receta } from "@/components/recetas/recetasData";
+import { useAuth } from "@/contexts/AuthContext";
 import florDeTip from "@/assets/flor-de-tip.png";
 
 const Recetas = () => {
+  const { hasAccess } = useAuth();
   const [categoriaActiva, setCategoriaActiva] = useState<Categoria>("Todas");
   const [selectedReceta, setSelectedReceta] = useState<Receta | null>(null);
   const [showFreeDialog, setShowFreeDialog] = useState(false);
@@ -22,7 +24,7 @@ const Recetas = () => {
 
   const handleCardClick = (receta: Receta) => {
     setSelectedReceta(receta);
-    if (receta.isPremium) {
+    if (receta.isPremium && !hasAccess) {
       setShowPaywall(true);
     } else {
       setShowFreeDialog(true);
