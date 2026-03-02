@@ -98,7 +98,7 @@ const HeroSection = () => {
             <motion.ul variants={itemVariants} className="space-y-3 mb-8">
               {[
               "4 domingos planificados por mes",
-              "10 recetas prácticas por semana",
+              "+10 recetas prácticas por semana",
               "Lista inteligente + freezer sin estrés"].
               map((item, i) =>
               <motion.li
