@@ -3,7 +3,8 @@ import { UserPlus, Download, ChefHat, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxBlob from "@/components/ParallaxBlob";
-import howItWorksImg from "@/assets/how-it-works.jpg";
+
+const clubDomingosImg = "/lovable-uploads/club-domingos.png";
 
 const steps = [
   {
@@ -54,7 +55,7 @@ const HowItWorks = () => {
           </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_240px] gap-8 max-w-4xl mx-auto items-start">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-6 max-w-5xl mx-auto items-stretch">
           <div className="relative">
             {/* Connecting line */}
             <div className="hidden md:block absolute left-8 top-8 bottom-8 w-px bg-gradient-to-b from-primary/20 via-miel/20 to-secondary/20" />
@@ -82,8 +83,8 @@ const HowItWorks = () => {
           </div>
 
           <ScrollReveal delay={0.3}>
-            <div className="hidden md:block rounded-2xl overflow-hidden shadow-card border border-border sticky top-32">
-              <img src={howItWorksImg} alt="Plan de recetas organizado" className="w-full h-auto object-cover" loading="lazy" decoding="async" />
+            <div className="hidden md:block rounded-2xl overflow-hidden shadow-card border border-border h-full">
+              <img src={clubDomingosImg} alt="Club de los Domingos - Cocina en Flor" className="w-full h-full object-cover" loading="lazy" decoding="async" />
             </div>
           </ScrollReveal>
         </div>
