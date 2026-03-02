@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Clock, Users, Snowflake, Lock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import type { Receta } from "./recetasData";
+import type { Receta } from "@/components/recetas/recetasData";
 
 interface RecetaCardProps {
   receta: Receta;

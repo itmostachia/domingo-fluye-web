@@ -3,13 +3,27 @@ import SEOHead from "@/components/SEOHead";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { blogPosts } from "@/data/blogPosts";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Sparkles } from "lucide-react";
+import { ArrowLeft, Sparkles, Share2, Twitter, Facebook, Instagram, Copy } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useToast } from "@/hooks/use-toast";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
+  const { toast } = useToast();
   const post = blogPosts.find((p) => p.slug === slug);
+
+  const shareUrl = typeof window !== "undefined" ? window.location.href : "";
+  const shareText = post ? `${post.title} — Cocina en Flor` : "";
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      toast({ title: "✅ Enlace copiado", description: "Ya podés pegarlo donde quieras." });
+    } catch {
+      toast({ title: "No se pudo copiar", variant: "destructive" });
+    }
+  };
 
   if (!post) {
     return (
@@ -79,6 +93,36 @@ const BlogPost = () => {
             prose-ol:text-muted-foreground"
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
+
+        {/* Share buttons */}
+        <div className="max-w-3xl mx-auto px-4 mt-12">
+          <p className="text-muted-foreground text-sm mb-3 text-center">¿Te sirvió? Compartilo:</p>
+          <div className="flex items-center justify-center gap-2">
+            <Button variant="outline" size="icon" asChild>
+              <a href={`https://www.instagram.com/`} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <Instagram size={18} />
+              </a>
+            </Button>
+            <Button variant="outline" size="icon" asChild>
+              <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`} target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                <Twitter size={18} />
+              </a>
+            </Button>
+            <Button variant="outline" size="icon" asChild>
+              <a href={`https://wa.me/?text=${encodeURIComponent(shareText + " " + shareUrl)}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                <Share2 size={18} />
+              </a>
+            </Button>
+            <Button variant="outline" size="icon" asChild>
+              <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <Facebook size={18} />
+              </a>
+            </Button>
+            <Button variant="outline" size="icon" onClick={handleCopyLink} aria-label="Copiar enlace">
+              <Copy size={18} />
+            </Button>
+          </div>
+        </div>
 
         {/* CRO Upsell Banner */}
         <ScrollReveal delay={0.2}>
