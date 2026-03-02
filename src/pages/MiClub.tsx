@@ -14,20 +14,25 @@ import FreeRecipeDialog from "@/components/recetas/FreeRecipeDialog";
 import { recetas, type Receta } from "@/components/recetas/recetasData";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import heroImg from "@/assets/hero-kitchen.jpg";
+import manualMarzo from "@/assets/manual-marzo.png";
+import manualAbril from "@/assets/manual-abril.jpeg";
+import manualMayo from "@/assets/manual-mayo.jpg";
+import manualJunio from "@/assets/manual-junio.jpg";
+import manualJulio from "@/assets/manual-julio.jpg";
 
 const isDev = import.meta.env.DEV;
 
 const manuales = [
-  { id: 1, title: "Manual Marzo 2026", status: "available" as const, image: "https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=600&q=80" },
-  { id: 2, title: "Manual Abril 2026", status: "upcoming" as const, image: "https://images.unsplash.com/photo-1498837167922-41c46b21c620?w=600&q=80" },
-  { id: 3, title: "Manual Mayo 2026", status: "upcoming" as const, image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80" },
-  { id: 4, title: "Manual Junio 2026", status: "upcoming" as const, image: "https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=600&q=80" },
-  { id: 5, title: "Manual Julio 2026", status: "upcoming" as const, image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" },
-  { id: 6, title: "Manual Agosto 2026", status: "upcoming" as const, image: "https://images.unsplash.com/photo-1543362906-acfc16c67564?w=600&q=80" },
-  { id: 7, title: "Manual Septiembre 2026", status: "upcoming" as const, image: "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80" },
-  { id: 8, title: "Manual Octubre 2026", status: "upcoming" as const, image: "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=600&q=80" },
-  { id: 9, title: "Manual Noviembre 2026", status: "upcoming" as const, image: "https://images.unsplash.com/photo-1506368249639-73a05d6f6488?w=600&q=80" },
-  { id: 10, title: "Manual Diciembre 2026", status: "upcoming" as const, image: "https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=600&q=80" },
+  { id: 1, title: "Manual Marzo 2026", status: "available" as const, image: manualMarzo },
+  { id: 2, title: "Manual Abril 2026", status: "upcoming" as const, image: manualAbril },
+  { id: 3, title: "Manual Mayo 2026", status: "upcoming" as const, image: manualMayo },
+  { id: 4, title: "Manual Junio 2026", status: "upcoming" as const, image: manualJunio },
+  { id: 5, title: "Manual Julio 2026", status: "upcoming" as const, image: manualJulio },
+  { id: 6, title: "Manual Agosto 2026", status: "upcoming" as const, image: manualMarzo },
+  { id: 7, title: "Manual Septiembre 2026", status: "upcoming" as const, image: manualAbril },
+  { id: 8, title: "Manual Octubre 2026", status: "upcoming" as const, image: manualMayo },
+  { id: 9, title: "Manual Noviembre 2026", status: "upcoming" as const, image: manualJunio },
+  { id: 10, title: "Manual Diciembre 2026", status: "upcoming" as const, image: manualJulio },
 ];
 
 const ClubTeaser = () => (
