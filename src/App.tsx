@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { lazy, Suspense } from "react";
+import { AuthProvider } from "@/contexts/AuthContext";
 import Index from "./pages/Index";
 import ComoFunciona from "./pages/ComoFunciona";
 import Planes from "./pages/Planes";
@@ -19,33 +20,37 @@ import NotFound from "./pages/NotFound";
 import CursorTrail from "./components/CursorTrail";
 
 const BlogPost = lazy(() => import("./pages/BlogPost"));
+const Login = lazy(() => import("./pages/Login"));
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <CursorTrail />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/como-funciona" element={<ComoFunciona />} />
-            <Route path="/planes" element={<Planes />} />
-            <Route path="/muestras" element={<Muestras />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/contacto" element={<Contacto />} />
-            <Route path="/gracias" element={<Gracias />} />
-            <Route path="/legal" element={<Legal />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<Suspense fallback={<div className="min-h-screen" />}><BlogPost /></Suspense>} />
-            <Route path="/recetas" element={<Recetas />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
+      <AuthProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <CursorTrail />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/como-funciona" element={<ComoFunciona />} />
+              <Route path="/planes" element={<Planes />} />
+              <Route path="/muestras" element={<Muestras />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/contacto" element={<Contacto />} />
+              <Route path="/gracias" element={<Gracias />} />
+              <Route path="/legal" element={<Legal />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<Suspense fallback={<div className="min-h-screen" />}><BlogPost /></Suspense>} />
+              <Route path="/recetas" element={<Recetas />} />
+              <Route path="/login" element={<Suspense fallback={<div className="min-h-screen" />}><Login /></Suspense>} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </AuthProvider>
     </QueryClientProvider>
   </HelmetProvider>
 );
