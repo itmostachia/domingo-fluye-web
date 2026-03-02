@@ -10,11 +10,13 @@ const BeforeAfter = lazy(() => import("@/components/home/BeforeAfter"));
 const RitualSection = lazy(() => import("@/components/home/RitualSection"));
 const HowItWorks = lazy(() => import("@/components/home/HowItWorks"));
 const WhatIncludes = lazy(() => import("@/components/home/WhatIncludes"));
+const FeaturedRecipes = lazy(() => import("@/components/home/FeaturedRecipes"));
 const CreatorStory = lazy(() => import("@/components/home/CreatorStory"));
 const PriceContrast = lazy(() => import("@/components/home/PriceContrast"));
 const PricingSection = lazy(() => import("@/components/home/PricingSection"));
 const WhoIsItFor = lazy(() => import("@/components/home/WhoIsItFor"));
 const Testimonials = lazy(() => import("@/components/home/Testimonials"));
+const RecentPosts = lazy(() => import("@/components/home/RecentPosts"));
 const FAQSection = lazy(() => import("@/components/home/FAQSection"));
 
 const SectionFallback = () => (
@@ -38,12 +40,14 @@ const Index = () => {
         <RitualSection />
         <HowItWorks />
         <WhatIncludes />
+        <FeaturedRecipes />
         <CreatorStory />
         <PriceContrast />
         <SectionConnector variant="wave" color="terracota" />
         <PricingSection />
         <WhoIsItFor />
         <Testimonials />
+        <RecentPosts />
         <SectionConnector variant="dots" color="verde-pizarra" />
         <FAQSection />
       </Suspense>
