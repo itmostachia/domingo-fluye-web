@@ -7,55 +7,10 @@ import { supabase } from "@/lib/supabaseReal";
 import { Loader2, Gift, ShoppingCart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import ScrollReveal from "@/components/ScrollReveal";
-
-interface Recetario {
-  id: string;
-  title: string;
-  image: string;
-  type: "free" | "paid";
-  price?: string;
-  mpLink?: string;
-}
-
-const recetarios: Recetario[] = [
-  {
-    id: "snacks-saludables",
-    title: "Snacks Saludables para toda la Familia",
-    image: "/lovable-uploads/8b1153a5-b702-4d7c-9ac1-ff9c93d9c4a1.webp",
-    type: "free",
-  },
-  {
-    id: "batch-cooking-express",
-    title: "Batch Cooking Express: 20 recetas en 60 min",
-    image: "/lovable-uploads/e9035ab4-cc26-4711-b767-9750ea572112.webp",
-    type: "paid",
-    price: "$2.990",
-    mpLink: "https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=test1",
-  },
-  {
-    id: "postres-sin-horno",
-    title: "Postres Sin Horno para Principiantes",
-    image: "/lovable-uploads/c489ce18-16b7-4b89-9ad0-3b924a7adf22.webp",
-    type: "free",
-  },
-  {
-    id: "meal-prep-freezer",
-    title: "Meal Prep & Freezer: Guía Definitiva",
-    image: "/lovable-uploads/4535cfa5-605f-4a25-9ef6-3803419aca0f.webp",
-    type: "paid",
-    price: "$3.490",
-    mpLink: "https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=test2",
-  },
-  {
-    id: "viandas-escolares",
-    title: "Viandas Escolares Creativas",
-    image: "/lovable-uploads/1e4c3d8b-3d64-451d-829c-1f0931a6621f.webp",
-    type: "free",
-  },
-];
+import { recetariosData, type RecetarioItem } from "@/data/recetariosData";
 
 const RecetariosCarousel = () => {
-  const [selected, setSelected] = useState<Recetario | null>(null);
+  const [selected, setSelected] = useState<RecetarioItem | null>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -143,7 +98,7 @@ const RecetariosCarousel = () => {
           className="w-full max-w-5xl mx-auto"
         >
           <CarouselContent className="-ml-4">
-            {recetarios.map((r) => (
+            {recetariosData.map((r) => (
               <CarouselItem key={r.id} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
                 <ScrollReveal>
                   <div className="group rounded-2xl overflow-hidden bg-card border border-border/60 shadow-sm hover:shadow-warm transition-all duration-300 h-full flex flex-col">
