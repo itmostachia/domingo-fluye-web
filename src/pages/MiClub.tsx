@@ -20,6 +20,7 @@ import manualMayo from "@/assets/manual-mayo.jpg";
 import manualJunio from "@/assets/manual-junio.jpg";
 import manualJulio from "@/assets/manual-julio.jpg";
 
+// Dev indicator only for UI badge, NOT for access control
 const isDev = import.meta.env.DEV;
 
 const manuales = [
@@ -201,7 +202,7 @@ const ClubDashboard = () => {
 const MiClub = () => {
   const { user, isLoading, hasAccess } = useAuth();
 
-  if (isLoading && !isDev) {
+  if (isLoading) {
     return (
       <Layout>
         <div className="min-h-screen flex items-center justify-center">
@@ -211,8 +212,8 @@ const MiClub = () => {
     );
   }
 
-  // In dev mode OR authenticated with access → show dashboard
-  if (isDev || (user && hasAccess)) {
+  // ONLY authenticated users with verified access see the dashboard
+  if (user && hasAccess) {
     return (
       <Layout>
         <SEOHead title="Mi Club | Cocina en Flor" description="Tu espacio exclusivo con el manual del mes y todas las recetas desbloqueadas." />
