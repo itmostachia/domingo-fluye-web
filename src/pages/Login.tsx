@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "@/lib/supabaseReal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,12 +8,22 @@ import { motion } from "framer-motion";
 import { toast } from "sonner";
 import Layout from "@/components/Layout";
 import SEOHead from "@/components/SEOHead";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { user, isLoading } = useAuth();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
+
+  // Auto-redirect authenticated users to Mi Club
+  useEffect(() => {
+    if (!isLoading && user) {
+      navigate("/mi-club");
+    }
+  }, [user, isLoading, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
