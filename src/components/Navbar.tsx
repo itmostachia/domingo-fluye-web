@@ -4,7 +4,7 @@ import { Menu, X, ArrowRight, LogIn, LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logoImg from "@/assets/logo-cocina-en-flor.png";
 import { useAuth } from "@/contexts/AuthContext";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/lib/supabaseReal";
 
 const navItems = [
   { label: "Cómo funciona", href: "/como-funciona" },
