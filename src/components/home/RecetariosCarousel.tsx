@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabaseReal";
-import { Loader2, Gift, ShoppingCart } from "lucide-react";
+import { Loader2, Gift, ShoppingCart, Download, Star, Lock, Zap, Shield } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import ScrollReveal from "@/components/ScrollReveal";
 import { recetariosData, type RecetarioItem } from "@/data/recetariosData";
@@ -76,6 +76,8 @@ const RecetariosCarousel = () => {
     }
   };
 
+  const formatDownloads = (n: number) => n >= 1000 ? `+${Math.floor(n / 100) * 100}` : `+${n}`;
+
   return (
     <section id="recetarios" className="py-20 md:py-28 bg-muted/30">
       <div className="container-wide">
@@ -101,14 +103,19 @@ const RecetariosCarousel = () => {
             {recetariosData.map((r) => (
               <CarouselItem key={r.id} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
                 <ScrollReveal>
-                  <div className="group rounded-2xl overflow-hidden bg-card border border-border/60 shadow-sm hover:shadow-warm transition-all duration-300 h-full flex flex-col">
+                  <div className="group rounded-2xl overflow-hidden bg-card border border-border/60 shadow-sm hover:shadow-warm hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <img
                         src={r.image}
-                        alt={r.title}
+                        alt={`Recetario ${r.title}`}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         loading="lazy"
                       />
+                      {r.featured && (
+                        <span className="absolute top-3 left-3 text-xs font-bold px-3 py-1 rounded-full shadow-md bg-amber-500 text-white z-10">
+                          🏆 Más Popular
+                        </span>
+                      )}
                       <span
                         className={`absolute top-3 right-3 text-xs font-bold px-3 py-1 rounded-full shadow-md ${
                           r.type === "free"
@@ -120,13 +127,23 @@ const RecetariosCarousel = () => {
                       </span>
                     </div>
                     <div className="p-5 flex flex-col flex-1">
+                      <div className="flex items-center gap-3 text-xs text-muted-foreground mb-2">
+                        <span className="inline-flex items-center gap-1">
+                          <Download size={12} />
+                          {formatDownloads(r.downloads)}
+                        </span>
+                        <span className="inline-flex items-center gap-1">
+                          <Star size={12} className="fill-amber-400 text-amber-400" />
+                          {r.rating}
+                        </span>
+                      </div>
                       <h3 className="font-display text-lg text-foreground mb-4 leading-snug flex-1">
                         {r.title}
                       </h3>
                       <Button
                         onClick={() => setSelected(r)}
                         variant={r.type === "free" ? "outline" : "default"}
-                        className="w-full gap-2"
+                        className="w-full gap-2 active:scale-95 transition-all duration-200"
                       >
                         {r.type === "free" ? (
                           <>
@@ -191,7 +208,7 @@ const RecetariosCarousel = () => {
               />
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full active:scale-95 transition-all duration-200" disabled={loading}>
               {loading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -203,6 +220,21 @@ const RecetariosCarousel = () => {
                 "Continuar al pago"
               )}
             </Button>
+            {/* Trust badges */}
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-2 border-t border-border/40 mt-1">
+              <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+                <Lock size={13} className="text-green-600" />
+                Datos protegidos
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+                <Zap size={13} className="text-primary" />
+                Acceso inmediato
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+                <Shield size={13} className="text-primary" />
+                Garantía total
+              </span>
+            </div>
           </form>
         </DialogContent>
       </Dialog>

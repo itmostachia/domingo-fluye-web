@@ -7,6 +7,10 @@ export interface RecetarioItem {
   price?: string;
   mpLink?: string;
   category: "Congelados" | "Viandas" | "Dulces" | "Meal Prep" | "Express";
+  downloads: number;
+  rating: number;
+  reviews: number;
+  featured?: boolean;
 }
 
 export const recetariosCategories = ["Todos", "Congelados", "Viandas", "Dulces", "Meal Prep", "Express"] as const;
@@ -20,6 +24,9 @@ export const recetariosData: RecetarioItem[] = [
     image: "/lovable-uploads/8b1153a5-b702-4d7c-9ac1-ff9c93d9c4a1.webp",
     type: "free",
     category: "Express",
+    downloads: 1240,
+    rating: 4.8,
+    reviews: 89,
   },
   {
     id: "batch-cooking-express",
@@ -30,6 +37,10 @@ export const recetariosData: RecetarioItem[] = [
     price: "$2.990",
     mpLink: "https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=test1",
     category: "Meal Prep",
+    downloads: 870,
+    rating: 4.9,
+    reviews: 156,
+    featured: true,
   },
   {
     id: "postres-sin-horno",
@@ -38,6 +49,9 @@ export const recetariosData: RecetarioItem[] = [
     image: "/lovable-uploads/c489ce18-16b7-4b89-9ad0-3b924a7adf22.webp",
     type: "free",
     category: "Dulces",
+    downloads: 980,
+    rating: 4.7,
+    reviews: 72,
   },
   {
     id: "meal-prep-freezer",
@@ -48,6 +62,9 @@ export const recetariosData: RecetarioItem[] = [
     price: "$3.490",
     mpLink: "https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=test2",
     category: "Congelados",
+    downloads: 650,
+    rating: 4.9,
+    reviews: 134,
   },
   {
     id: "viandas-escolares",
@@ -56,6 +73,10 @@ export const recetariosData: RecetarioItem[] = [
     image: "/lovable-uploads/1e4c3d8b-3d64-451d-829c-1f0931a6621f.webp",
     type: "free",
     category: "Viandas",
+    downloads: 1580,
+    rating: 4.8,
+    reviews: 203,
+    featured: true,
   },
   {
     id: "tortas-faciles",
@@ -66,5 +87,8 @@ export const recetariosData: RecetarioItem[] = [
     price: "$1.990",
     mpLink: "https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=test3",
     category: "Dulces",
+    downloads: 420,
+    rating: 4.6,
+    reviews: 58,
   },
 ];

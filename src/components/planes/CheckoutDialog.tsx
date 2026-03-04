@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabaseReal";
-import { Loader2 } from "lucide-react";
+import { Loader2, Lock, Zap, Shield } from "lucide-react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 type PaymentMethod = "mp" | "paypal";
@@ -117,7 +117,7 @@ const CheckoutDialog = ({ open, onOpenChange, method }: CheckoutDialogProps) => 
               />
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full active:scale-95 transition-all duration-200" disabled={loading}>
               {loading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -127,6 +127,21 @@ const CheckoutDialog = ({ open, onOpenChange, method }: CheckoutDialogProps) => 
                 "Continuar al pago"
               )}
             </Button>
+            {/* Trust badges */}
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-3 border-t border-border/40">
+              <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+                <Lock size={13} className="text-green-600" />
+                Pago 100% seguro
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+                <Zap size={13} className="text-primary" />
+                Acceso inmediato
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+                <Shield size={13} className="text-primary" />
+                Garantía total
+              </span>
+            </div>
           </form>
         ) : method === "paypal" ? (
           <div className="mt-4">
