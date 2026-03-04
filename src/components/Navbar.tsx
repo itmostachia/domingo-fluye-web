@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ArrowRight, LogIn, LogOut } from "lucide-react";
+import { Menu, X, ArrowRight, LogIn, LogOut, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logoImg from "@/assets/logo-cocina-en-flor.png";
 import { useAuth } from "@/contexts/AuthContext";
@@ -72,19 +72,34 @@ const Navbar = () => {
             ) : (
               <>
                 <Link
-                  to="/login"
-                  className="ml-2 text-sm font-medium px-3 py-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors flex items-center gap-1.5"
+                  to={user ? "/mi-club" : "/login"}
+                  className={`ml-2 text-sm font-medium px-3 py-2 rounded-lg transition-colors flex items-center gap-1.5 ${
+                    user
+                      ? "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  }`}
                 >
-                  <LogIn size={14} />
-                  Ingresar
+                  {user ? (
+                    <>
+                      <Sparkles size={14} />
+                      Ir a Mi Club
+                    </>
+                  ) : (
+                    <>
+                      <LogIn size={14} />
+                      Ingresar
+                    </>
+                  )}
                 </Link>
-                <Link
-                  to="/planes"
-                  className="group ml-3 bg-primary text-primary-foreground px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-vino transition-all duration-300 shadow-cta hover:shadow-glow flex items-center gap-1.5"
-                >
-                  Quiero unirme
-                  <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
-                </Link>
+                {!user && (
+                  <Link
+                    to="/planes"
+                    className="group ml-3 bg-primary text-primary-foreground px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-vino transition-all duration-300 shadow-cta hover:shadow-glow flex items-center gap-1.5"
+                  >
+                    Quiero unirme
+                    <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+                  </Link>
+                )}
               </>
             )
           )}
@@ -130,31 +145,29 @@ const Navbar = () => {
                   </Link>
                 </motion.div>
               ))}
-              <motion.div
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: navItems.length * 0.05 }}
-              >
-              {!isLoading && (
-                  user ? (
-                    <button
-                      onClick={async () => { await supabase.auth.signOut(); window.location.href = '/'; }}
-                      className="block w-full text-left py-2.5 px-3 rounded-lg text-base font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                    >
-                      Cerrar sesión
-                    </button>
-                  ) : (
-                    <>
-                      <Link
-                        to="/login"
-                        className="block py-2.5 px-3 rounded-lg text-base font-medium text-muted-foreground hover:text-foreground"
-                      >
-                        Ingresar
-                      </Link>
-                    </>
-                  )
-                )}
-              </motion.div>
+               <motion.div
+                 initial={{ opacity: 0, x: -10 }}
+                 animate={{ opacity: 1, x: 0 }}
+                 transition={{ delay: navItems.length * 0.05 }}
+               >
+               {!isLoading && (
+                   user ? (
+                     <button
+                       onClick={async () => { await supabase.auth.signOut(); window.location.href = '/'; }}
+                       className="block w-full text-left py-2.5 px-3 rounded-lg text-base font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                     >
+                       Cerrar sesión
+                     </button>
+                   ) : (
+                     <Link
+                       to="/login"
+                       className="block py-2.5 px-3 rounded-lg text-base font-medium text-muted-foreground hover:text-foreground"
+                     >
+                       Ingresar
+                     </Link>
+                   )
+                 )}
+               </motion.div>
               {!user && (
                 <motion.div
                   initial={{ opacity: 0, x: -10 }}
