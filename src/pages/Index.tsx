@@ -14,6 +14,7 @@ const FeaturedRecipes = lazy(() => import("@/components/home/FeaturedRecipes"));
 const CreatorStory = lazy(() => import("@/components/home/CreatorStory"));
 const PriceContrast = lazy(() => import("@/components/home/PriceContrast"));
 const PricingSection = lazy(() => import("@/components/home/PricingSection"));
+const RecetariosCarousel = lazy(() => import("@/components/home/RecetariosCarousel"));
 const WhoIsItFor = lazy(() => import("@/components/home/WhoIsItFor"));
 const Testimonials = lazy(() => import("@/components/home/Testimonials"));
 const RecentPosts = lazy(() => import("@/components/home/RecentPosts"));
@@ -45,6 +46,7 @@ const Index = () => {
         <PriceContrast />
         <SectionConnector variant="wave" color="terracota" />
         <PricingSection />
+        <RecetariosCarousel />
         <WhoIsItFor />
         <Testimonials />
         <RecentPosts />
