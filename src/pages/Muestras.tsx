@@ -3,7 +3,7 @@ import { z } from "zod";
 import Layout from "@/components/Layout";
 import SEOHead from "@/components/SEOHead";
 import { Download, CheckCircle, Loader2 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/lib/supabaseReal";
 import { toast } from "sonner";
 
 const emailSchema = z.object({

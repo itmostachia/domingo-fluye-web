@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/lib/supabaseReal";
 import { Loader2 } from "lucide-react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 

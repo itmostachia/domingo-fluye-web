@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Lock, Download, Sparkles, LogOut, Clock, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useAuth } from "@/contexts/AuthContext";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/lib/supabaseReal";
 import Layout from "@/components/Layout";
 import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";

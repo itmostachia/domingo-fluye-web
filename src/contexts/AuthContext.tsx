@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/lib/supabaseReal";
 import type { User } from "@supabase/supabase-js";
 
 const ADMIN_EMAILS = ['jcbertorello07@gmail.com', 'it@mostachia.com', 'hola@cocinaenflor.com.ar'];
