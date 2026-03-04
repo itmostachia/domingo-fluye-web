@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Loader2, Mail, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 import Layout from "@/components/Layout";
 import SEOHead from "@/components/SEOHead";
 
@@ -18,17 +19,28 @@ const Login = () => {
     setError("");
     setLoading(true);
 
-    const { error: authError } = await supabase.auth.signInWithOtp({
-      email,
-      options: { emailRedirectTo: window.location.origin },
-    });
+    try {
+      const { error: authError } = await supabase.auth.signInWithOtp({
+        email,
+        options: { emailRedirectTo: window.location.origin },
+      });
 
-    setLoading(false);
+      setLoading(false);
 
-    if (authError) {
-      setError("Hubo un error al enviar el enlace. Intentá de nuevo.");
-    } else {
-      setSent(true);
+      if (authError) {
+        const msg = authError.message || "Error desconocido";
+        setError(msg);
+        toast.error(`Error de autenticación: ${msg}`);
+        console.error("Supabase OTP error:", authError);
+      } else {
+        setSent(true);
+      }
+    } catch (err: any) {
+      setLoading(false);
+      const msg = err?.message || "Error inesperado";
+      setError(msg);
+      toast.error(`Error inesperado: ${msg}`);
+      console.error("Unexpected auth error:", err);
     }
   };
 

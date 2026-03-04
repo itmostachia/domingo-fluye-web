@@ -16,6 +16,8 @@ const AuthContext = createContext<AuthContextType>({ user: null, isLoading: true
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  console.log("Supabase URL:", import.meta.env.VITE_SUPABASE_URL ? "Configurada ✅" : "⚠️ Falta configuración");
+  console.log("Supabase Key:", import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ? "Configurada ✅" : "⚠️ Falta configuración");
   const [user, setUser] = useState<User | null>(null);
   const [status, setStatus] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
