@@ -49,9 +49,13 @@ const SEOHead = ({ title, description, path = "" }: SEOHeadProps) => {
       <meta property="og:description" content={description} />
       <meta property="og:type" content="website" />
       <meta property="og:url" content={fullUrl} />
+      <meta property="og:image" content={`${siteUrl}/lovable-uploads/76f52d05-8408-4a9c-9ae7-a23a4bb37168.png`} />
+      <meta property="og:locale" content="es_AR" />
+      <meta property="og:site_name" content="Cocina en Flor" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={`${siteUrl}/lovable-uploads/76f52d05-8408-4a9c-9ae7-a23a4bb37168.png`} />
       <script type="application/ld+json">{JSON.stringify(organizationSchema)}</script>
       {path === "" && (
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>

@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/lib/supabaseReal";
-import { Loader2, Gift, ShoppingCart, BookOpen } from "lucide-react";
+import { Loader2, Gift, ShoppingCart, BookOpen, Download, Star, Shield, Zap, Lock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { recetariosData, recetariosCategories, type RecetarioItem, type RecetarioCategory } from "@/data/recetariosData";
 
@@ -69,11 +69,13 @@ const Recetarios = () => {
 
   const typeFilters: TypeFilter[] = ["Todos", "Gratuitos", "Premium"];
 
+  const formatDownloads = (n: number) => n >= 1000 ? `+${Math.floor(n / 100) * 100}` : `+${n}`;
+
   return (
     <Layout>
       <SEOHead
-        title="Recetarios Especiales — Cocina en Flor"
-        description="Descargá recetarios gratuitos o accedé a ediciones premium. Congelados, viandas, dulces y más."
+        title="Recetarios Especiales | Cocina en Flor"
+        description="Descargá recetarios gratuitos y premium para viandas, congelados, dulces y más. Transformá tu cocina con colecciones temáticas."
         path="/recetarios"
       />
 
@@ -96,16 +98,17 @@ const Recetarios = () => {
       </section>
 
       {/* Filters */}
-      <section className="pb-6 px-4">
+      <section className="pb-6 px-4" aria-label="Filtros de recetarios">
         <div className="max-w-5xl mx-auto space-y-4">
           <ScrollReveal delay={0.1}>
-            {/* Type filter */}
-            <div className="flex flex-wrap justify-center gap-2">
+            <div className="flex flex-wrap justify-center gap-2" role="tablist" aria-label="Filtrar por tipo">
               {typeFilters.map((t) => (
                 <button
                   key={t}
+                  role="tab"
+                  aria-selected={typeFilter === t}
                   onClick={() => setTypeFilter(t)}
-                  className={`px-5 py-2 rounded-full text-sm font-semibold transition-all border ${
+                  className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 border active:scale-95 ${
                     typeFilter === t
                       ? "bg-primary text-primary-foreground border-primary shadow-sm"
                       : "bg-card text-muted-foreground border-border hover:border-primary/40 hover:text-foreground"
@@ -115,13 +118,14 @@ const Recetarios = () => {
                 </button>
               ))}
             </div>
-            {/* Category filter */}
-            <div className="flex flex-wrap justify-center gap-2">
+            <div className="flex flex-wrap justify-center gap-2" role="tablist" aria-label="Filtrar por categoría">
               {recetariosCategories.map((c) => (
                 <button
                   key={c}
+                  role="tab"
+                  aria-selected={catFilter === c}
                   onClick={() => setCatFilter(c)}
-                  className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all border ${
+                  className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 border active:scale-95 ${
                     catFilter === c
                       ? "bg-accent text-accent-foreground border-accent"
                       : "bg-transparent text-muted-foreground border-border/60 hover:border-accent/50"
@@ -136,7 +140,7 @@ const Recetarios = () => {
       </section>
 
       {/* Grid */}
-      <section className="pb-20 px-4">
+      <section className="pb-20 px-4" aria-label="Listado de recetarios">
         <div className="max-w-6xl mx-auto">
           <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <AnimatePresence mode="popLayout">
@@ -149,14 +153,25 @@ const Recetarios = () => {
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.25 }}
                 >
-                  <div className="group rounded-2xl overflow-hidden bg-card border border-border/60 shadow-sm hover:shadow-warm transition-all duration-300 h-full flex flex-col">
+                  <article className="group rounded-2xl overflow-hidden bg-card border border-border/60 shadow-sm hover:shadow-warm hover:-translate-y-1 transition-all duration-300 h-full flex flex-col cursor-pointer">
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <img
                         src={r.image}
-                        alt={r.title}
+                        alt={`Recetario ${r.title} — ${r.description}`}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         loading="lazy"
                       />
+                      {/* Featured badge */}
+                      {r.featured && (
+                        <Badge className="absolute top-3 left-3 bg-amber-500 text-white hover:bg-amber-500 text-xs font-bold shadow-md gap-1 z-10">
+                          🏆 Más Popular
+                        </Badge>
+                      )}
+                      {!r.featured && (
+                        <Badge variant="secondary" className="absolute top-3 left-3 text-xs">
+                          {r.category}
+                        </Badge>
+                      )}
                       <Badge
                         className={`absolute top-3 right-3 text-xs font-bold shadow-md ${
                           r.type === "free"
@@ -166,11 +181,24 @@ const Recetarios = () => {
                       >
                         {r.type === "free" ? "Gratis" : r.price}
                       </Badge>
-                      <Badge variant="secondary" className="absolute top-3 left-3 text-xs">
-                        {r.category}
-                      </Badge>
                     </div>
                     <div className="p-5 flex flex-col flex-1">
+                      {/* Social proof row */}
+                      <div className="flex items-center gap-3 text-xs text-muted-foreground mb-2">
+                        <span className="inline-flex items-center gap-1">
+                          <Download size={12} />
+                          {formatDownloads(r.downloads)} descargas
+                        </span>
+                        <span className="inline-flex items-center gap-1">
+                          <Star size={12} className="fill-amber-400 text-amber-400" />
+                          {r.rating} ({r.reviews})
+                        </span>
+                      </div>
+                      {r.featured && (
+                        <Badge variant="secondary" className="text-xs w-fit mb-2">
+                          {r.category}
+                        </Badge>
+                      )}
                       <h3 className="font-display text-lg text-foreground mb-1.5 leading-snug">
                         {r.title}
                       </h3>
@@ -180,7 +208,7 @@ const Recetarios = () => {
                       <Button
                         onClick={() => setSelected(r)}
                         variant={r.type === "free" ? "outline" : "default"}
-                        className="w-full gap-2"
+                        className="w-full gap-2 active:scale-95 transition-all duration-200"
                       >
                         {r.type === "free" ? (
                           <><Gift size={16} /> Descargar gratis</>
@@ -189,7 +217,7 @@ const Recetarios = () => {
                         )}
                       </Button>
                     </div>
-                  </div>
+                  </article>
                 </motion.div>
               ))}
             </AnimatePresence>
@@ -224,12 +252,27 @@ const Recetarios = () => {
               <Input id="rec-email" type="email" placeholder="tu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} disabled={loading} maxLength={255} />
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full active:scale-95 transition-all duration-200" disabled={loading}>
               {loading ? (
                 <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Guardando...</>
               ) : selected?.type === "free" ? "Descargar Gratis" : "Continuar al pago"}
             </Button>
           </form>
+          {/* Trust badges */}
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-2 border-t border-border/40 mt-2">
+            <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+              <Lock size={13} className="text-green-600" />
+              {selected?.type === "paid" ? "Pago 100% seguro" : "Datos protegidos"}
+            </span>
+            <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+              <Zap size={13} className="text-primary" />
+              Acceso inmediato
+            </span>
+            <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+              <Shield size={13} className="text-primary" />
+              Garantía total
+            </span>
+          </div>
         </DialogContent>
       </Dialog>
     </Layout>

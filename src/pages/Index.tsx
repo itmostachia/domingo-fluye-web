@@ -28,8 +28,8 @@ const Index = () => {
   return (
     <Layout>
       <SEOHead
-        title="Cocina en Flor — Organizá tu semana cocinando en 90 minutos"
-        description="Sistema mensual de planificación de comidas para familias. 40 recetas, listas de compras inteligentes, sistema freezer. Cocinás el domingo, resolvés la semana."
+        title="Cocina en Flor | El Club de los Domingos - Resolvé tu semana en 90 min"
+        description="Un sistema mensual para cocinar en 90 minutos y olvidarte del caos de la semana. +40 recetas por mes, lista de compras y soporte."
       />
       <HeroSection />
       <Marquee />
