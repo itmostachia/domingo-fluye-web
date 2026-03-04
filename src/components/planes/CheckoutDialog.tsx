@@ -55,7 +55,7 @@ const CheckoutDialog = ({ open, onOpenChange, method }: CheckoutDialogProps) => 
     const { error: dbError } = await supabase.from("email_leads").insert({
       name: name.trim(),
       email: email.trim(),
-      source: "checkout",
+      source: "checkout_iniciado",
     });
 
     if (dbError) {

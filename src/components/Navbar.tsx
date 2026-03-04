@@ -9,6 +9,7 @@ import { supabase } from "@/lib/supabaseReal";
 const navItems = [
   { label: "Cómo funciona", href: "/como-funciona" },
   { label: "Planes", href: "/planes" },
+  { label: "Recetarios", href: "/#recetarios" },
   { label: "Recetas", href: "/recetas" },
   { label: "Mi Club ✨", href: "/mi-club" },
   { label: "Blog", href: "/blog" },
