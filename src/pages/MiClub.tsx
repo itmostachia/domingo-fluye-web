@@ -180,7 +180,7 @@ const ClubDashboard = () => {
           <Button
             variant="ghost"
             className="text-muted-foreground hover:text-foreground"
-            onClick={() => supabase.auth.signOut()}
+            onClick={async () => { await supabase.auth.signOut(); window.location.href = '/'; }}
           >
             <LogOut className="w-4 h-4 mr-2" />
             Cerrar sesión
@@ -211,7 +211,7 @@ const MiClub = () => {
     );
   }
 
-  // In dev mode OR admin → always show dashboard
+  // In dev mode OR authenticated with access → show dashboard
   if (isDev || (user && hasAccess)) {
     return (
       <Layout>
@@ -221,6 +221,7 @@ const MiClub = () => {
     );
   }
 
+  // Not logged in OR logged in without active subscription → teaser
   return (
     <Layout>
       <SEOHead title="Club de los Domingos | Cocina en Flor" description="Accedé al Club para descargar tu manual mensual y desbloquear todas las recetas premium." />

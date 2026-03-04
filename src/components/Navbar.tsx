@@ -63,7 +63,7 @@ const Navbar = () => {
           {!isLoading && (
             user ? (
               <button
-                onClick={() => supabase.auth.signOut()}
+                onClick={async () => { await supabase.auth.signOut(); window.location.href = '/'; }}
                 className="ml-2 text-sm font-medium px-3 py-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors flex items-center gap-1.5"
               >
                 <LogOut size={14} />
@@ -138,7 +138,7 @@ const Navbar = () => {
               {!isLoading && (
                   user ? (
                     <button
-                      onClick={() => supabase.auth.signOut()}
+                      onClick={async () => { await supabase.auth.signOut(); window.location.href = '/'; }}
                       className="block w-full text-left py-2.5 px-3 rounded-lg text-base font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50"
                     >
                       Cerrar sesión
