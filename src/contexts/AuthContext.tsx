@@ -8,34 +8,56 @@ interface AuthContextType {
   user: User | null;
   isLoading: boolean;
   hasAccess: boolean;
+  status: string | null;
 }
 
-const AuthContext = createContext<AuthContextType>({ user: null, isLoading: true, hasAccess: false });
+const AuthContext = createContext<AuthContextType>({ user: null, isLoading: true, hasAccess: false, status: null });
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [status, setStatus] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const fetchProfile = async (userId: string) => {
+    const { data } = await supabase
+      .from("profiles")
+      .select("status")
+      .eq("id", userId)
+      .maybeSingle();
+    setStatus(data?.status ?? null);
+  };
+
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      const currentUser = session?.user ?? null;
+      setUser(currentUser);
+      if (currentUser) {
+        await fetchProfile(currentUser.id);
+      } else {
+        setStatus(null);
+      }
       setIsLoading(false);
     });
 
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
+      const currentUser = session?.user ?? null;
+      setUser(currentUser);
+      if (currentUser) {
+        await fetchProfile(currentUser.id);
+      }
       setIsLoading(false);
     });
 
     return () => subscription.unsubscribe();
   }, []);
 
-  const hasAccess = !!user?.email && ADMIN_EMAILS.includes(user.email);
+  const isAdmin = !!user?.email && ADMIN_EMAILS.includes(user.email);
+  const hasAccess = !!user && (status === 'active' || isAdmin);
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, hasAccess }}>
+    <AuthContext.Provider value={{ user, isLoading, hasAccess, status }}>
       {children}
     </AuthContext.Provider>
   );
