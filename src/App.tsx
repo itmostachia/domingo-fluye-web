@@ -16,6 +16,7 @@ import Gracias from "./pages/Gracias";
 import Legal from "./pages/Legal";
 import Blog from "./pages/Blog";
 import Recetas from "./pages/Recetas";
+import Recetarios from "./pages/Recetarios";
 import NotFound from "./pages/NotFound";
 import CursorTrail from "./components/CursorTrail";
 
@@ -46,6 +47,7 @@ const App = () => (
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<Suspense fallback={<div className="min-h-screen" />}><BlogPost /></Suspense>} />
               <Route path="/recetas" element={<Recetas />} />
+              <Route path="/recetarios" element={<Recetarios />} />
               <Route path="/login" element={<Suspense fallback={<div className="min-h-screen" />}><Login /></Suspense>} />
               <Route path="/mi-club" element={<Suspense fallback={<div className="min-h-screen" />}><MiClub /></Suspense>} />
               <Route path="*" element={<NotFound />} />
