@@ -6,89 +6,64 @@ export interface RecetarioItem {
   type: "free" | "paid";
   price?: string;
   mpLink?: string;
-  category: "Congelados" | "Viandas" | "Dulces" | "Meal Prep" | "Express";
+  category: RecetarioCategory;
   downloads: number;
   rating: number;
   reviews: number;
   featured?: boolean;
 }
 
-export const recetariosCategories = ["Todos", "Congelados", "Viandas", "Dulces", "Meal Prep", "Express"] as const;
-export type RecetarioCategory = (typeof recetariosCategories)[number];
+export const recetariosCategories = ["Todos", "Congelados", "Estacional"] as const;
+export type RecetarioCategory = (typeof recetariosCategories)[number] | "Todos";
 
 export const recetariosData: RecetarioItem[] = [
   {
-    id: "snacks-saludables",
-    title: "Snacks Saludables para toda la Familia",
-    description: "20 ideas rápidas y nutritivas para la merienda y el cole. Sin azúcar agregada.",
+    id: "recetariootonio",
+    title: "Recetario Otoño Invierno",
+    description: "Recetas reconfortantes y nutritivas para los meses fríos. Guisos, sopas y platos de cuchara.",
     image: "/lovable-uploads/8b1153a5-b702-4d7c-9ac1-ff9c93d9c4a1.webp",
-    type: "free",
-    category: "Express",
-    downloads: 1240,
-    rating: 4.8,
-    reviews: 89,
-  },
-  {
-    id: "batch-cooking-express",
-    title: "Batch Cooking Express: 20 recetas en 60 min",
-    description: "Organizá toda la semana cocinando solo 1 hora el domingo. Incluye lista de compras.",
-    image: "/lovable-uploads/e9035ab4-cc26-4711-b767-9750ea572112.webp",
     type: "paid",
-    price: "$2.990",
-    mpLink: "https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=test1",
-    category: "Meal Prep",
+    price: "$4.990 ARS",
+    mpLink: "https://mpago.la/1ZdRRdf",
+    category: "Estacional",
     downloads: 870,
     rating: 4.9,
     reviews: 156,
     featured: true,
   },
   {
-    id: "postres-sin-horno",
-    title: "Postres Sin Horno para Principiantes",
-    description: "15 recetas dulces fáciles que no necesitan horno. Perfectas para hacer con chicos.",
-    image: "/lovable-uploads/c489ce18-16b7-4b89-9ad0-3b924a7adf22.webp",
-    type: "free",
-    category: "Dulces",
-    downloads: 980,
-    rating: 4.7,
-    reviews: 72,
-  },
-  {
-    id: "meal-prep-freezer",
-    title: "Meal Prep & Freezer: Guía Definitiva",
+    id: "recetariocongelados",
+    title: "Recetario Congelado",
     description: "Todo lo que necesitás saber para congelar comida casera. 25 recetas aptas freezer.",
     image: "/lovable-uploads/4535cfa5-605f-4a25-9ef6-3803419aca0f.webp",
     type: "paid",
-    price: "$3.490",
-    mpLink: "https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=test2",
+    price: "$8.550 ARS",
+    mpLink: "https://mpago.la/2HA1tUR",
     category: "Congelados",
     downloads: 650,
     rating: 4.9,
     reviews: 134,
   },
   {
-    id: "viandas-escolares",
-    title: "Viandas Escolares Creativas",
-    description: "30 ideas de viandas equilibradas que los chicos realmente comen. Con tips de conservación.",
-    image: "/lovable-uploads/1e4c3d8b-3d64-451d-829c-1f0931a6621f.webp",
+    id: "recetarioprimavera",
+    title: "Recetario Primavera",
+    description: "Recetas frescas y ligeras para disfrutar de la nueva estación. Ensaladas, wraps y más.",
+    image: "/lovable-uploads/e9035ab4-cc26-4711-b767-9750ea572112.webp",
     type: "free",
-    category: "Viandas",
+    category: "Estacional",
     downloads: 1580,
     rating: 4.8,
     reviews: 203,
-    featured: true,
   },
   {
-    id: "tortas-faciles",
-    title: "Tortas Fáciles para Cumpleaños",
-    description: "10 tortas espectaculares que cualquiera puede hacer. Paso a paso con fotos.",
-    image: "/lovable-uploads/bbd10e5a-f7eb-4603-8ef3-ee7c81666b3d.jpg",
-    type: "paid",
-    price: "$1.990",
-    mpLink: "https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=test3",
-    category: "Dulces",
-    downloads: 420,
-    rating: 4.6,
-    reviews: 58,
+    id: "recetarioverano",
+    title: "Recetario Verano",
+    description: "Sabores vibrantes y refrescantes para los días de sol. Sin horno, sin complicaciones.",
+    image: "/lovable-uploads/c489ce18-16b7-4b89-9ad0-3b924a7adf22.webp",
+    type: "free",
+    category: "Estacional",
+    downloads: 1240,
+    rating: 4.8,
+    reviews: 89,
   },
 ];
