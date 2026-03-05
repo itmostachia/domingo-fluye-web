@@ -50,20 +50,31 @@ const Recetarios = () => {
       ? `recetario_gratis_${selected.id}`
       : `checkout_recetario_${selected.id}`;
 
-    const { error: dbError } = await supabase.from("email_leads").insert({
-      name: name.trim(),
-      email: email.trim(),
-      source,
-    });
+    try {
+      const { error: dbError } = await supabase.from("email_leads").insert({
+        name: name.trim(),
+        email: email.trim(),
+        source,
+      });
 
-    if (dbError) { setError("Hubo un error, intentá de nuevo."); setLoading(false); return; }
+      if (dbError) {
+        setError("Hubo un error, intentá de nuevo.");
+        setLoading(false);
+        return;
+      }
 
-    if (selected.type === "free") {
-      toast({ title: "¡Enviado!", description: "Revisá tu correo para descargar tu recetario." });
-      setSelected(null);
-      resetForm();
-    } else if (selected.mpLink) {
-      window.location.href = selected.mpLink;
+      if (selected.type === "free") {
+        toast({ title: "¡Enviado!", description: "Revisá tu correo para descargar tu recetario." });
+        setSelected(null);
+        resetForm();
+      } else if (selected.mpLink) {
+        window.location.href = selected.mpLink;
+      }
+    } catch (err) {
+      console.error("Checkout error:", err);
+      setError("Ocurrió un error inesperado. Intentá de nuevo.");
+    } finally {
+      setLoading(false);
     }
   };
 
