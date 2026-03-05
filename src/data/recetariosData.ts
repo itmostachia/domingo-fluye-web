@@ -11,6 +11,7 @@ export interface RecetarioItem {
   rating: number;
   reviews: number;
   featured?: boolean;
+  sourceId: string;
 }
 
 export const recetariosCategories = ["Todos", "Congelados", "Estacional"] as const;
@@ -30,6 +31,7 @@ export const recetariosData: RecetarioItem[] = [
     rating: 4.9,
     reviews: 156,
     featured: true,
+    sourceId: "recetariootonio",
   },
   {
     id: "recetariocongelados",
@@ -43,6 +45,7 @@ export const recetariosData: RecetarioItem[] = [
     downloads: 650,
     rating: 4.9,
     reviews: 134,
+    sourceId: "recetariocongelados",
   },
   {
     id: "recetarioprimavera",
@@ -54,6 +57,7 @@ export const recetariosData: RecetarioItem[] = [
     downloads: 1580,
     rating: 4.8,
     reviews: 203,
+    sourceId: "recetario_gratis_primavera",
   },
   {
     id: "recetarioverano",
@@ -65,5 +69,6 @@ export const recetariosData: RecetarioItem[] = [
     downloads: 1240,
     rating: 4.8,
     reviews: 89,
+    sourceId: "recetario_gratis_verano",
   },
 ];

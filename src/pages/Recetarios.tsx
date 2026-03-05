@@ -46,15 +46,11 @@ const Recetarios = () => {
     setLoading(true);
     setError("");
 
-    const source = selected.type === "free"
-      ? `recetario_gratis_${selected.id}`
-      : `checkout_recetario_${selected.id}`;
-
     try {
       const { error: dbError } = await supabase.from("email_leads").insert({
         name: name.trim(),
         email: email.trim(),
-        source,
+        source: selected.sourceId,
       });
 
       if (dbError) {
@@ -64,6 +60,22 @@ const Recetarios = () => {
       }
 
       if (selected.type === "free") {
+        // Llamada silenciosa al webhook de n8n para recetarios gratuitos
+        try {
+          await fetch('https://n8n.srv945661.hstgr.cloud/webhook/recetario-gratis', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: email.trim(),
+              name: name.trim() || 'Amiga',
+              source: selected.sourceId,
+              recetario_id: selected.sourceId.replace('recetario_gratis_', '')
+            })
+          });
+        } catch (webhookErr) {
+          console.log('Webhook notificación no bloqueante:', webhookErr);
+        }
+
         toast({ title: "¡Enviado!", description: "Revisá tu correo para descargar tu recetario." });
         setSelected(null);
         resetForm();
