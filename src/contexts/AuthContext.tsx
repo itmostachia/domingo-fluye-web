@@ -43,14 +43,27 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setIsLoading(false);
     });
 
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
-      const currentUser = session?.user ?? null;
-      setUser(currentUser);
-      if (currentUser) {
-        await fetchProfile(currentUser.id);
+    const checkSession = async () => {
+      try {
+        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+        if (sessionError) throw sessionError;
+
+        const currentUser = session?.user ?? null;
+        setUser(currentUser);
+        if (currentUser) {
+          await fetchProfile(currentUser.id);
+        }
+      } catch (err) {
+        console.error("Sesión corrupta o expirada, limpiando:", err);
+        await supabase.auth.signOut().catch(() => {});
+        setUser(null);
+        setStatus(null);
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
-    });
+    };
+
+    checkSession();
 
     return () => subscription.unsubscribe();
   }, []);
