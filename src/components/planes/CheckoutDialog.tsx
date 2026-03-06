@@ -16,7 +16,7 @@ interface CheckoutDialogProps {
 
 const PAYPAL_CLIENT_ID = "Aeqs0puS0M6b2Y3PUDMZ5O9Zacdn1vaxhKkJwVjgLA48uiX-1GyASC2ty1ieJEhK_npsACSzq_gfqluC";
 const PAYPAL_PLAN_ID = "P-2BM83687D51615206NGO6R2A";
-const MP_URL = "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=7c3bf9efeb3640049ee127b2a006353a";
+const MP_URL = "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=8c232e3dac5546d6bd460a6637d08d00";
 
 const CheckoutDialog = ({ open, onOpenChange, method }: CheckoutDialogProps) => {
   const [name, setName] = useState("");
