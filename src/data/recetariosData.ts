@@ -63,7 +63,7 @@ export const recetariosData: RecetarioItem[] = [
     id: "recetarioverano",
     title: "Recetario Verano",
     description: "Sabores vibrantes y refrescantes para los días de sol. Sin horno, sin complicaciones.",
-    image: "/lovable-uploads/c489ce18-16b7-4b89-9ad0-3b924a7adf22.webp",
+    image: "/lovable-uploads/f9b92b86-7c53-4cef-84c6-37a438766e1e.png",
     type: "free",
     category: "Estacional",
     downloads: 1240,
