@@ -37,7 +37,7 @@ export const recetariosData: RecetarioItem[] = [
     id: "recetariocongelados",
     title: "Recetario Congelado",
     description: "Todo lo que necesitás saber para congelar comida casera. 25 recetas aptas freezer.",
-    image: "/lovable-uploads/4535cfa5-605f-4a25-9ef6-3803419aca0f.webp",
+    image: "/lovable-uploads/a43b67f7-7dbd-43ad-b4f1-087a22f01dd2.jpg",
     type: "paid",
     price: "$8.550 ARS",
     mpLink: "https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=272475647-fd6d480e-9abb-4983-8954-ceb5ff740a9b",
