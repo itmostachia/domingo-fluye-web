@@ -51,7 +51,7 @@ export const recetariosData: RecetarioItem[] = [
     id: "recetarioprimavera",
     title: "Recetario Primavera",
     description: "Recetas frescas y ligeras para disfrutar de la nueva estación. Ensaladas, wraps y más.",
-    image: "/lovable-uploads/e9035ab4-cc26-4711-b767-9750ea572112.webp",
+    image: "/lovable-uploads/9b02575c-3f9c-4302-8b67-0a31d2122224.jpg",
     type: "free",
     category: "Estacional",
     downloads: 1580,
