@@ -22,7 +22,7 @@ export const recetariosData: RecetarioItem[] = [
     id: "recetariootonio",
     title: "Recetario Otoño Invierno",
     description: "Recetas reconfortantes y nutritivas para los meses fríos. Guisos, sopas y platos de cuchara.",
-    image: "/lovable-uploads/8b1153a5-b702-4d7c-9ac1-ff9c93d9c4a1.webp",
+    image: "/lovable-uploads/ba8654ab-7fd7-43a3-b07f-29a9fe1d0dca.jpg",
     type: "paid",
     price: "$4.990 ARS",
     mpLink: "https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=272475647-15924c6b-a845-467b-8227-9c17ff041350",
