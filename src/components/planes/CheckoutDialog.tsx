@@ -53,9 +53,13 @@ const CheckoutDialog = ({ open, onOpenChange, method }: CheckoutDialogProps) => 
     setLoading(true);
     setError("");
 
+    const trimmedEmail = email.trim();
+    const trimmedName = name.trim();
+
+    // 1. Save to email_leads (unchanged)
     const { error: dbError } = await supabase.from("email_leads").insert({
-      name: name.trim(),
-      email: email.trim(),
+      name: trimmedName,
+      email: trimmedEmail,
       source: "checkout_iniciado",
     });
 
@@ -65,13 +69,51 @@ const CheckoutDialog = ({ open, onOpenChange, method }: CheckoutDialogProps) => 
       return;
     }
 
+    // 2. Upsert into profiles (insert only if email doesn't exist)
+    const { data: existing } = await supabase
+      .from("profiles")
+      .select("id")
+      .eq("email", trimmedEmail)
+      .maybeSingle();
+
+    if (!existing) {
+      const { error: profileError } = await supabase
+        .from("profiles")
+        .insert([{ email: trimmedEmail, status: "lead" }]);
+
+      if (profileError) {
+        console.error("Profile insert error:", profileError);
+        // Non-blocking: continue even if profile insert fails
+      }
+    }
+
+    // 3. For MP: call n8n webhook to get personalized link
+    if (method === "mp") {
+      try {
+        const response = await fetch(N8N_WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: trimmedEmail, name: trimmedName }),
+        });
+
+        const data = await response.json();
+
+        if (data.success && data.init_point) {
+          window.location.href = data.init_point;
+        } else {
+          toast.error("No pudimos generar tu link de pago. Intentá de nuevo.");
+          setLoading(false);
+        }
+      } catch {
+        toast.error("Error de conexión. Intentá de nuevo en unos segundos.");
+        setLoading(false);
+      }
+      return;
+    }
+
+    // 4. For PayPal: show PayPal button
     setLeadSaved(true);
     setLoading(false);
-
-    if (method === "mp") {
-      window.location.href = MP_URL;
-    }
-    // If paypal, stay open to show PayPal button
   };
 
   return (
