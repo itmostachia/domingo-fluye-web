@@ -49,7 +49,7 @@ export type Database = {
         Insert: {
           created_at?: string
           email?: string | null
-          id: string
+          id?: string
           status?: string
           updated_at?: string
         }
