@@ -56,13 +56,14 @@ const CheckoutDialog = ({ open, onOpenChange, method }: CheckoutDialogProps) => 
     const trimmedEmail = email.trim();
     const trimmedName = name.trim();
 
-    // 1. Upsert en profiles como lead (Solo Suscripción al Club)
-    const { error: profileError } = await supabase
-      .from("profiles")
-      .upsert([{ email: trimmedEmail, status: "lead" }], { onConflict: "email" });
+    // 1. Registrar como lead en email_leads (Solo Suscripción al Club)
+    // Usamos upsert con onConflict en email. Si falla, lo ignoramos silenciosamente para no trabar el flujo de pago.
+    const { error: leadError } = await supabase
+      .from("email_leads")
+      .upsert([{ email: trimmedEmail, name: trimmedName, source: "lead" }], { onConflict: "email" });
 
-    if (profileError) {
-      console.error("Profile upsert error:", profileError);
+    if (leadError) {
+      console.error("Lead upsert error:", leadError);
       // Error registrado pero NO bloqueamos el flujo de pago
     }
 
