@@ -60,7 +60,7 @@ const CheckoutDialog = ({ open, onOpenChange, method }: CheckoutDialogProps) => 
     // Usamos upsert con onConflict en email. Si falla, lo ignoramos silenciosamente para no trabar el flujo de pago.
     const { error: leadError } = await supabase
       .from("email_leads")
-      .upsert([{ email: trimmedEmail, name: trimmedName, source: "lead" }], { onConflict: "email" });
+      .upsert([{ email: trimmedEmail, name: trimmedName, status: "lead" }], { onConflict: "email" });
 
     if (leadError) {
       console.error("Lead upsert error:", leadError);
