@@ -47,20 +47,18 @@ const Recetarios = () => {
     setError("");
 
     try {
-      const { error: dbError } = await supabase.from("email_leads").insert({
-        name: name.trim(),
-        email: email.trim(),
-        source: selected.sourceId,
-      });
-
-      if (dbError) {
-        setError("Hubo un error, intentá de nuevo.");
-        setLoading(false);
-        return;
+      // Silent lead capture — never blocks the flow
+      try {
+        const { error: leadError } = await supabase
+          .from("email_leads")
+          .upsert([{ email: email.trim(), name: name.trim(), source: selected.sourceId, status: "lead" }], { onConflict: "email" });
+        if (leadError) console.error("Recetario lead upsert error:", leadError);
+      } catch (upsertErr) {
+        console.error("Unexpected lead upsert error:", upsertErr);
       }
 
       if (selected.type === "free") {
-        // Llamada silenciosa al webhook de n8n para recetarios gratuitos
+        // Non-blocking webhook call
         try {
           await fetch('https://n8n.srv945661.hstgr.cloud/webhook/recetario-gratis', {
             method: 'POST',
@@ -73,7 +71,7 @@ const Recetarios = () => {
             })
           });
         } catch (webhookErr) {
-          console.log('Webhook notificación no bloqueante:', webhookErr);
+          console.error('Webhook notificación no bloqueante:', webhookErr);
         }
 
         toast({ title: "¡Enviado!", description: "Revisá tu correo para descargar tu recetario." });
@@ -83,8 +81,8 @@ const Recetarios = () => {
         window.location.href = selected.mpLink;
       }
     } catch (err) {
-      console.error("Checkout error:", err);
-      setError("Ocurrió un error inesperado. Intentá de nuevo.");
+      console.error("Recetario checkout error:", err);
+      toast({ title: "Error", description: "Ocurrió un error inesperado. Intentá de nuevo.", variant: "destructive" });
     } finally {
       setLoading(false);
     }
