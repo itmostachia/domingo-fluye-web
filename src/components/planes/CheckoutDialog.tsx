@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabaseReal";
 import { Loader2, Lock, Zap, Shield } from "lucide-react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { toast } from "sonner";
 
 type PaymentMethod = "mp" | "paypal";
 
@@ -16,7 +17,7 @@ interface CheckoutDialogProps {
 
 const PAYPAL_CLIENT_ID = "Aeqs0puS0M6b2Y3PUDMZ5O9Zacdn1vaxhKkJwVjgLA48uiX-1GyASC2ty1ieJEhK_npsACSzq_gfqluC";
 const PAYPAL_PLAN_ID = "P-2BM83687D51615206NGO6R2A";
-const MP_URL = "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=066b0b058cb84983a0c9de3ab56fb376";
+const N8N_WEBHOOK_URL = "https://n8n.srv945661.hstgr.cloud/webhook/crear-suscripcion";
 
 const CheckoutDialog = ({ open, onOpenChange, method }: CheckoutDialogProps) => {
   const [name, setName] = useState("");
@@ -52,9 +53,13 @@ const CheckoutDialog = ({ open, onOpenChange, method }: CheckoutDialogProps) => 
     setLoading(true);
     setError("");
 
+    const trimmedEmail = email.trim();
+    const trimmedName = name.trim();
+
+    // 1. Save to email_leads (unchanged)
     const { error: dbError } = await supabase.from("email_leads").insert({
-      name: name.trim(),
-      email: email.trim(),
+      name: trimmedName,
+      email: trimmedEmail,
       source: "checkout_iniciado",
     });
 
@@ -64,13 +69,51 @@ const CheckoutDialog = ({ open, onOpenChange, method }: CheckoutDialogProps) => 
       return;
     }
 
+    // 2. Upsert into profiles (insert only if email doesn't exist)
+    const { data: existing } = await supabase
+      .from("profiles")
+      .select("id")
+      .eq("email", trimmedEmail)
+      .maybeSingle();
+
+    if (!existing) {
+      const { error: profileError } = await supabase
+        .from("profiles")
+        .insert([{ email: trimmedEmail, status: "lead" }]);
+
+      if (profileError) {
+        console.error("Profile insert error:", profileError);
+        // Non-blocking: continue even if profile insert fails
+      }
+    }
+
+    // 3. For MP: call n8n webhook to get personalized link
+    if (method === "mp") {
+      try {
+        const response = await fetch(N8N_WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: trimmedEmail, name: trimmedName }),
+        });
+
+        const data = await response.json();
+
+        if (data.success && data.init_point) {
+          window.location.href = data.init_point;
+        } else {
+          toast.error("No pudimos generar tu link de pago. Intentá de nuevo.");
+          setLoading(false);
+        }
+      } catch {
+        toast.error("Error de conexión. Intentá de nuevo en unos segundos.");
+        setLoading(false);
+      }
+      return;
+    }
+
+    // 4. For PayPal: show PayPal button
     setLeadSaved(true);
     setLoading(false);
-
-    if (method === "mp") {
-      window.location.href = MP_URL;
-    }
-    // If paypal, stay open to show PayPal button
   };
 
   return (
