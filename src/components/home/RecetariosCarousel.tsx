@@ -53,16 +53,14 @@ const RecetariosCarousel = () => {
         : `checkout_recetario_${selected.id}`;
 
     try {
-      const { error: dbError } = await supabase.from("email_leads").insert({
-        name: name.trim(),
-        email: email.trim(),
-        source,
-      });
-
-      if (dbError) {
-        setError("Hubo un error, intentá de nuevo.");
-        setLoading(false);
-        return;
+      // Silent lead capture — never blocks the flow
+      try {
+        const { error: leadError } = await supabase
+          .from("email_leads")
+          .upsert([{ email: email.trim(), name: name.trim(), source, status: "lead" }], { onConflict: "email" });
+        if (leadError) console.error("Carousel lead upsert error:", leadError);
+      } catch (upsertErr) {
+        console.error("Unexpected carousel lead upsert error:", upsertErr);
       }
 
       if (selected.type === "free") {
@@ -76,8 +74,8 @@ const RecetariosCarousel = () => {
         window.location.href = selected.mpLink;
       }
     } catch (err) {
-      console.error("Checkout error:", err);
-      setError("Ocurrió un error inesperado. Intentá de nuevo.");
+      console.error("Carousel checkout error:", err);
+      toast({ title: "Error", description: "Ocurrió un error inesperado. Intentá de nuevo.", variant: "destructive" });
     } finally {
       setLoading(false);
     }
