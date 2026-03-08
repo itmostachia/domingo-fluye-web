@@ -114,7 +114,7 @@ const CheckoutDialog = ({ open, onOpenChange, method }: CheckoutDialogProps) => 
           <form onSubmit={handleSubmit} className="space-y-4 mt-2">
             <div>
               <label htmlFor="checkout-name" className="text-sm font-medium text-foreground mb-1.5 block">
-                Nombre
+                Nombre y Apellido
               </label>
               <Input
                 id="checkout-name"
@@ -127,7 +127,7 @@ const CheckoutDialog = ({ open, onOpenChange, method }: CheckoutDialogProps) => 
             </div>
             <div>
               <label htmlFor="checkout-email" className="text-sm font-medium text-foreground mb-1.5 block">
-                Email
+                Email de Mercado Pago (Importante)
               </label>
               <Input
                 id="checkout-email"
@@ -138,6 +138,9 @@ const CheckoutDialog = ({ open, onOpenChange, method }: CheckoutDialogProps) => 
                 disabled={loading}
                 maxLength={255}
               />
+              <p className="text-xs text-muted-foreground mt-1.5">
+                Ingresá el mismo correo con el que vas a realizar el pago. Esto es vital para que podamos activar tu acceso o enviarte las recetas automáticamente.
+              </p>
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
             <Button type="submit" className="w-full active:scale-95 transition-all duration-200" disabled={loading}>
