@@ -56,19 +56,20 @@ const CheckoutDialog = ({ open, onOpenChange, method }: CheckoutDialogProps) => 
     const trimmedEmail = email.trim();
     const trimmedName = name.trim();
 
-    // Club subscription: upsert into profiles (NOT email_leads)
+    // 1. Guardar en perfiles como lead (Solo Suscripción al Club)
+    // Usamos insert. Si el email ya existe (código 23505), lo ignoramos silenciosamente para no trabar el flujo de pago.
     const { error: profileError } = await supabase
       .from("profiles")
-      .upsert([{ email: trimmedEmail, status: "lead" }], { onConflict: "email" });
+      .insert([{ email: trimmedEmail, status: "lead" }]);
 
-    if (profileError) {
-      console.error("Profile upsert error:", profileError);
-      setError("Hubo un error, intentá de nuevo.");
+    if (profileError && profileError.code !== '23505') {
+      console.error("Profile insert error:", profileError);
+      setError("Hubo un error conectando con la base de datos. Intentá de nuevo.");
       setLoading(false);
       return;
     }
 
-    // 3. For MP: call n8n webhook to get personalized link
+    // 2. Flujo de Mercado Pago
     if (method === "mp") {
       try {
         const response = await fetch(N8N_WEBHOOK_URL, {
@@ -92,7 +93,7 @@ const CheckoutDialog = ({ open, onOpenChange, method }: CheckoutDialogProps) => 
       return;
     }
 
-    // 4. For PayPal: show PayPal button
+    // 3. Flujo de PayPal
     setLeadSaved(true);
     setLoading(false);
   };
