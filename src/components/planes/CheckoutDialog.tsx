@@ -56,35 +56,16 @@ const CheckoutDialog = ({ open, onOpenChange, method }: CheckoutDialogProps) => 
     const trimmedEmail = email.trim();
     const trimmedName = name.trim();
 
-    // 1. Save to email_leads (unchanged)
-    const { error: dbError } = await supabase.from("email_leads").insert({
-      name: trimmedName,
-      email: trimmedEmail,
-      source: "checkout_iniciado",
-    });
+    // Club subscription: upsert into profiles (NOT email_leads)
+    const { error: profileError } = await supabase
+      .from("profiles")
+      .upsert([{ email: trimmedEmail, status: "lead" }], { onConflict: "email" });
 
-    if (dbError) {
+    if (profileError) {
+      console.error("Profile upsert error:", profileError);
       setError("Hubo un error, intentá de nuevo.");
       setLoading(false);
       return;
-    }
-
-    // 2. Upsert into profiles (insert only if email doesn't exist)
-    const { data: existing } = await supabase
-      .from("profiles")
-      .select("id")
-      .eq("email", trimmedEmail)
-      .maybeSingle();
-
-    if (!existing) {
-      const { error: profileError } = await supabase
-        .from("profiles")
-        .insert([{ email: trimmedEmail, status: "lead" }]);
-
-      if (profileError) {
-        console.error("Profile insert error:", profileError);
-        // Non-blocking: continue even if profile insert fails
-      }
     }
 
     // 3. For MP: call n8n webhook to get personalized link
