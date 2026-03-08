@@ -63,9 +63,7 @@ const CheckoutDialog = ({ open, onOpenChange, method }: CheckoutDialogProps) => 
 
     if (profileError) {
       console.error("Profile upsert error:", profileError);
-      setError("Hubo un error conectando con la base de datos. Intentá de nuevo.");
-      setLoading(false);
-      return;
+      // Error registrado pero NO bloqueamos el flujo de pago
     }
 
     // 2. Flujo de Mercado Pago
