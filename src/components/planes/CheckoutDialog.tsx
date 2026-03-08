@@ -56,14 +56,13 @@ const CheckoutDialog = ({ open, onOpenChange, method }: CheckoutDialogProps) => 
     const trimmedEmail = email.trim();
     const trimmedName = name.trim();
 
-    // 1. Guardar en perfiles como lead (Solo Suscripción al Club)
-    // Usamos insert. Si el email ya existe (código 23505), lo ignoramos silenciosamente para no trabar el flujo de pago.
+    // 1. Upsert en profiles como lead (Solo Suscripción al Club)
     const { error: profileError } = await supabase
       .from("profiles")
-      .insert([{ email: trimmedEmail, status: "lead" }]);
+      .upsert([{ email: trimmedEmail, status: "lead" }], { onConflict: "email" });
 
-    if (profileError && profileError.code !== '23505') {
-      console.error("Profile insert error:", profileError);
+    if (profileError) {
+      console.error("Profile upsert error:", profileError);
       setError("Hubo un error conectando con la base de datos. Intentá de nuevo.");
       setLoading(false);
       return;
