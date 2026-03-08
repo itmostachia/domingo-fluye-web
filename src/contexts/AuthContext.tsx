@@ -33,14 +33,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      const currentUser = session?.user ?? null;
-      setUser(currentUser);
-      if (currentUser) {
-        await fetchProfile(currentUser.id);
-      } else {
+      try {
+        const currentUser = session?.user ?? null;
+        setUser(currentUser);
+        if (currentUser) {
+          await fetchProfile(currentUser.id);
+        } else {
+          setStatus(null);
+        }
+      } catch (err) {
+        console.error("Error en onAuthStateChange, limpiando sesión:", err);
+        await supabase.auth.signOut().catch(() => {});
+        setUser(null);
         setStatus(null);
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     });
 
     const checkSession = async () => {
