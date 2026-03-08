@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabaseReal";
 import { Loader2, Lock, Zap, Shield } from "lucide-react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { toast } from "sonner";
 
 type PaymentMethod = "mp" | "paypal";
 
@@ -16,7 +17,7 @@ interface CheckoutDialogProps {
 
 const PAYPAL_CLIENT_ID = "Aeqs0puS0M6b2Y3PUDMZ5O9Zacdn1vaxhKkJwVjgLA48uiX-1GyASC2ty1ieJEhK_npsACSzq_gfqluC";
 const PAYPAL_PLAN_ID = "P-2BM83687D51615206NGO6R2A";
-const MP_URL = "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=066b0b058cb84983a0c9de3ab56fb376";
+const N8N_WEBHOOK_URL = "https://n8n.srv945661.hstgr.cloud/webhook/crear-suscripcion";
 
 const CheckoutDialog = ({ open, onOpenChange, method }: CheckoutDialogProps) => {
   const [name, setName] = useState("");
