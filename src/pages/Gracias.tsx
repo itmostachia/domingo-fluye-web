@@ -1,9 +1,25 @@
+import { useEffect, useRef } from "react";
 import Layout from "@/components/Layout";
 import SEOHead from "@/components/SEOHead";
 import { Link } from "react-router-dom";
 import { CheckCircle } from "lucide-react";
+import { trackPurchase } from "@/lib/metaPixel";
+import { clearUTMData } from "@/lib/utm";
 
 const Gracias = () => {
+  const hasFired = useRef(false);
+
+  useEffect(() => {
+    // Doble guard: useRef para StrictMode, sessionStorage para refresh
+    const alreadyFired = sessionStorage.getItem('cef_purchase_fired');
+    if (!hasFired.current && !alreadyFired) {
+      hasFired.current = true;
+      trackPurchase(7990, 'ARS');
+      sessionStorage.setItem('cef_purchase_fired', '1');
+      clearUTMData();
+    }
+  }, []);
+
   return (
     <Layout>
       <SEOHead

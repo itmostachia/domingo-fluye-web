@@ -6,6 +6,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { lazy, Suspense } from "react";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { captureUTMParams } from "@/lib/utm";
+
+// Capturar UTM/fbclid de la URL al iniciar la app (antes del render)
+captureUTMParams();
 import Index from "./pages/Index";
 import ComoFunciona from "./pages/ComoFunciona";
 import Planes from "./pages/Planes";

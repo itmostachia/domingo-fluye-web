@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -6,6 +6,8 @@ import { supabase } from "@/lib/supabaseReal";
 import { Loader2, Lock, Zap, Shield } from "lucide-react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { toast } from "sonner";
+import { getUTMData } from "@/lib/utm";
+import { trackInitiateCheckout, trackLead } from "@/lib/metaPixel";
 
 type PaymentMethod = "mp" | "paypal";
 
@@ -25,6 +27,11 @@ const CheckoutDialog = ({ open, onOpenChange, method }: CheckoutDialogProps) => 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [leadSaved, setLeadSaved] = useState(false);
+
+  // Evento InitiateCheckout cuando se abre el dialog
+  useEffect(() => {
+    if (open) trackInitiateCheckout();
+  }, [open]);
 
   const resetState = () => {
     setName("");
@@ -58,14 +65,18 @@ const CheckoutDialog = ({ open, onOpenChange, method }: CheckoutDialogProps) => 
 
     // 1. Registrar como lead en email_leads (Solo Suscripción al Club)
     // Usamos upsert con onConflict en email. Si falla, lo ignoramos silenciosamente para no trabar el flujo de pago.
+    const utmData = getUTMData();
     const { error: leadError } = await supabase
       .from("email_leads")
-      .upsert([{ email: trimmedEmail, name: trimmedName, status: "lead" }], { onConflict: "email" });
+      .upsert([{ email: trimmedEmail, name: trimmedName, status: "lead", source: "club_checkout", ...utmData }], { onConflict: "email" });
 
     if (leadError) {
       console.error("Lead upsert error:", leadError);
       // Error registrado pero NO bloqueamos el flujo de pago
     }
+
+    // Evento Lead para Meta Pixel
+    trackLead('Club Suscripcion');
 
     // 2. Flujo de Mercado Pago
     if (method === "mp") {
@@ -73,7 +84,7 @@ const CheckoutDialog = ({ open, onOpenChange, method }: CheckoutDialogProps) => 
         const response = await fetch(N8N_WEBHOOK_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: trimmedEmail, name: trimmedName }),
+          body: JSON.stringify({ email: trimmedEmail, name: trimmedName, ...utmData }),
         });
 
         const data = await response.json();

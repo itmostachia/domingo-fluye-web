@@ -11,6 +11,8 @@ import { supabase } from "@/lib/supabaseReal";
 import { Loader2, Gift, ShoppingCart, BookOpen, Download, Star, Shield, Zap, Lock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { recetariosData, recetariosCategories, type RecetarioItem, type RecetarioCategory } from "@/data/recetariosData";
+import { getUTMData } from "@/lib/utm";
+import { trackLead } from "@/lib/metaPixel";
 
 type TypeFilter = "Todos" | "Gratuitos" | "Premium";
 
@@ -48,14 +50,18 @@ const Recetarios = () => {
 
     try {
       // Silent lead capture — never blocks the flow
+      const utmData = getUTMData();
       try {
         const { error: leadError } = await supabase
           .from("email_leads")
-          .upsert([{ email: email.trim(), name: name.trim(), source: selected.sourceId, status: "lead" }], { onConflict: "email" });
+          .upsert([{ email: email.trim(), name: name.trim(), source: selected.sourceId, status: "lead", ...utmData }], { onConflict: "email" });
         if (leadError) console.error("Recetario lead upsert error:", leadError);
       } catch (upsertErr) {
         console.error("Unexpected lead upsert error:", upsertErr);
       }
+
+      // Evento Lead para Meta Pixel
+      trackLead(selected.title);
 
       if (selected.type === "free") {
         // Non-blocking webhook call
@@ -67,7 +73,8 @@ const Recetarios = () => {
               email: email.trim(),
               name: name.trim() || 'Amiga',
               source: selected.sourceId,
-              recetario_id: selected.sourceId.replace('recetario_gratis_', '')
+              recetario_id: selected.sourceId.replace('recetario_gratis_', ''),
+              ...utmData
             })
           });
         } catch (webhookErr) {
