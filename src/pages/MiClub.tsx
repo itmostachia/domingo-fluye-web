@@ -131,7 +131,7 @@ const ClubDashboard = () => {
                           <h3 className="font-display font-bold text-foreground">{manual.title}</h3>
                           {isAvailable ? (
                             <Button size="sm" className="font-semibold rounded-xl" asChild>
-                              <a href="https://drive.google.com/file/d/1Jvh8O024qaDagJkQGUZ0FjEp6J1I1tzP/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+                              <a href={manual.link} target="_blank" rel="noopener noreferrer">
                                 <Download className="w-4 h-4 mr-2" />
                                 Descargar PDF
                               </a>
