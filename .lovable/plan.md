@@ -1,13 +1,13 @@
 
 
-## Plan: Add Meta Pixel to index.html
+## Plan: Activar Manual de Abril en Mi Club
 
-Add the Meta Pixel tracking code to the `<head>` section of `index.html`, right before the closing `</head>` tag.
+### Cambio único en `src/pages/MiClub.tsx`
 
-### Changes
+1. Agregar campo `link` al tipo de los manuales.
+2. Cambiar el manual de Abril (id: 2) de `status: "upcoming"` a `status: "available"` y asignarle el link `https://drive.google.com/file/d/1K5sy5apRM1MHB-KeYpKoIQZR7qv5EHRj/view?usp=drive_link`.
+3. Agregar `link` al manual de Marzo con su URL existente.
+4. Actualizar el botón "Descargar PDF" para usar `manual.link` dinámicamente en vez del URL hardcodeado.
 
-**File: `index.html`**
-- Insert the Meta Pixel `<script>` and `<noscript>` snippet inside `<head>`, after the existing `<link>` tags and before `</head>`.
-
-No other files are modified. No backend or logic changes.
+Resultado: Abril se verá idéntico a Marzo (misma card, mismo botón, mismo estilo). Sin cambios de backend.
 
