@@ -1,3 +1,7 @@
+import blogBowlOtono from "@/assets/blog-bowl-otono.jpg";
+import blogVerdurasTemporada from "@/assets/blog-verduras-temporada.jpg";
+import blogSopaCrema from "@/assets/blog-sopa-crema.jpg";
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -9,6 +13,98 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
+  {
+    slug: "frio-cambio-clima-3-trucos",
+    title: "El frío te agarró en pampa y la vía: 3 trucos para que el cambio de clima no te vuelva loca",
+    excerpt: "Cuando el otoño no avisa y a las 19 te preguntan qué hay de comer, estos atajos te salvan la cena.",
+    date: "25 de abril, 2026",
+    tag: "Tips",
+    coverImage: blogBowlOtono,
+    content: `
+      <p>Acá en San Francisco el otoño no te avisa. Un día andás en musculosa y al otro salís a buscar a tu hijo al cole con el saquito porque te congelás. Y con el chiflete, viene la peor pregunta del universo a las 19:00 hs: <em>"Ma, ¿qué comemos?"</em>.</p>
+
+      <figure>
+        <img src="${blogBowlOtono}" alt="Bowl de sopa naranja calentita para el otoño" />
+        <figcaption>Lo calentito que te abraza desde adentro, sin pasar 3 horas frente a la hornalla.</figcaption>
+      </figure>
+
+      <p>Seamos sinceras, la ensaladita mixta ya no tira. El cuerpo te pide algo calentito que te abrace desde adentro, pero la energía que tenemos nosotras es la misma de siempre. Cero ganas de estar clavada 3 horas frente a la hornalla haciendo un estofado. Si sos de las mías, que quiere que en casa se coma sano pero le da una pereza terrible vivir en la cocina, anotate estos atajos:</p>
+
+      <h2>1. El Bowl Salvador</h2>
+      <p>No necesitás un guiso largo. Armá un bowl con una base de <strong>lentejas turcas</strong> (aleluya que no llevan remojo), tirale un poco de verdura asada o salteada y coroná con un huevo a la plancha. Calentito, re nutritivo y se hace mientras ponés la mesa.</p>
+
+      <h2>2. Horno inteligente</h2>
+      <p>Si vas a prender el horno, no pierdas más tiempo: <strong>llenalo</strong>. Si metés una tarta de 5 minutos, aprovechá y tirá una calabaza entera y un par de batatas. Tu "yo" del miércoles a la noche te va a hacer un monumento por haber dejado eso listo.</p>
+
+      <blockquote>
+        <p>"Aprender a comer rico en invierno sin estresarse es pura organización."</p>
+      </blockquote>
+
+      <p>Todo esto es lo que charlamos y ponemos en práctica dentro del <strong>Club del Domingo</strong>.</p>
+    `,
+  },
+  {
+    slug: "3-verduras-temporada-camuflar",
+    title: "3 verduras regaladas para camuflar y que tu hijo coma sin chistar",
+    excerpt: "Calabaza, batata y espinaca: las estrellas baratas del otoño y los trucos para que nadie haga cara de asco.",
+    date: "20 de abril, 2026",
+    tag: "Recetas",
+    coverImage: blogVerdurasTemporada,
+    content: `
+      <p>Hablemos de verdad: ir a la verdulería últimamente es un deporte de riesgo. Pero la clave para no gastar de más es comprar lo que la naturaleza nos da de temporada. Ahora en otoño, hay tres estrellas que están riquísimas, dulces y súper baratas. El problema es: <strong>¿cómo hacemos para que los más chicos no hagan cara de asco cuando ven el plato?</strong></p>
+
+      <figure>
+        <img src="${blogVerdurasTemporada}" alt="Cajón de madera con calabazas frescas de temporada" />
+        <figcaption>Las verduras de estación: ricas, dulces y a precio de regalo.</figcaption>
+      </figure>
+
+      <h2>Camuflaje nivel experta</h2>
+
+      <h3>La Calabaza</h3>
+      <p>Si te sobra calabaza al horno, no la tires. Mandala a la licuadora con un poquito de agua tibia, sal, nuez moscada y una cucharada de aceite de oliva. Te queda una salsa espesa y naranja espectacular para tirarle a los fideos. <strong>¡Parece salsa cheddar!</strong></p>
+
+      <h3>La Batata</h3>
+      <p>Es mi as bajo la manga para lo dulce. Si querés hacer un budín o un brownie y que no te quede seco (sobre todo usando harinas sin gluten), ponele puré de batata. Le da una textura increíble.</p>
+
+      <h3>La Espinaca</h3>
+      <p>El verde asusta, ya sé. Pero si procesás la espinaca cruda en la masa de unos panqueques, el color queda flúor y lo podés vender como la <strong>"comida de los superhéroes"</strong>.</p>
+
+      <blockquote>
+        <p>"Comer sano no es comprar cosas raras, es saber usar lo que tenemos."</p>
+      </blockquote>
+
+      <p>Si querés más de estos trucos para el día a día, te espero adentro del <strong>Club del Domingo</strong>, donde los menúes se arman pensando en tu paz mental y en tu billetera.</p>
+    `,
+  },
+  {
+    slug: "sopa-levanta-muertos-secreto",
+    title: "La sopa \"levanta muertos\" (y mi secreto para que no te dé hambre a la hora)",
+    excerpt: "El truco con harina de garbanzos para que tu sopa crema sea cena completa y no te abra la alacena a las 22.",
+    date: "15 de abril, 2026",
+    tag: "Recetas",
+    coverImage: blogSopaCrema,
+    content: `
+      <p>Inauguramos oficialmente la temporada de andar con la bufanda hasta la nariz y de necesitar un abrazo en forma de comida cuando llegás a casa. Y nada grita más "refugio" que una buena <strong>sopa crema</strong>.</p>
+
+      <figure>
+        <img src="${blogSopaCrema}" alt="Bowl de sopa crema con tostadas de ajo" />
+        <figcaption>La sopa que abriga, llena de verdad y no te deja con hambre a la hora.</figcaption>
+      </figure>
+
+      <p>Pero acá hay un temita. Licuar zapallo y zanahoria con agua es riquísimo, pero es agüita. Te tomás un plato hondo y a la hora tu hijo te está abriendo la alacena pidiendo galletitas porque tiene hambre.</p>
+
+      <p>Para que la sopa llene y sea una cena completa, mi secreto no es tirarle un pote de crema de leche. Mi secreto es la <strong>harina de garbanzos</strong>.</p>
+
+      <h2>¿Cómo se hace?</h2>
+      <p>Herví las verduras que tengas (zanahoria, zapallo, cebolla), y pasalas por la minipimer o licuadora. Volvé a poner esa sopa en la olla a fuego bajo. Aparte, en un vasito, disolvé <strong>2 cucharadas soperas de harina de garbanzos</strong> con un dedito de agua fría (esto es clave para que no haga grumos). Tirá esa mezcla a la sopa y revolvé por 5 minutos hasta que espese y se cocine la harina.</p>
+
+      <blockquote>
+        <p>"Te queda una textura nivel restaurante y sumaste una bomba de proteína vegetal por dos mangos."</p>
+      </blockquote>
+
+      <p>Estos atajos son mi religión y es lo que enseño todas las semanas en el <strong>Club del Domingo</strong>. Si querés dejar de improvisar, el link para sumarte está en el menú de la página.</p>
+    `,
+  },
   {
     slug: "como-organizar-freezer",
     title: "Cómo organizar tu freezer para la semana en 5 pasos",
