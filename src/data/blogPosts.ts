@@ -24,7 +24,7 @@ export const blogPosts: BlogPost[] = [
       <p>Acá en San Francisco el otoño no te avisa. Un día andás en musculosa y al otro salís a buscar a tu hijo al cole con el saquito porque te congelás. Y con el chiflete, viene la peor pregunta del universo a las 19:00 hs: <em>"Ma, ¿qué comemos?"</em>.</p>
 
       <figure>
-        <img src="${"${blogBowlOtono}"}" alt="Bowl de sopa naranja calentita para el otoño" />
+        <img src="${blogBowlOtono}" alt="Bowl de sopa naranja calentita para el otoño" />
         <figcaption>Lo calentito que te abraza desde adentro, sin pasar 3 horas frente a la hornalla.</figcaption>
       </figure>
 
@@ -54,7 +54,7 @@ export const blogPosts: BlogPost[] = [
       <p>Hablemos de verdad: ir a la verdulería últimamente es un deporte de riesgo. Pero la clave para no gastar de más es comprar lo que la naturaleza nos da de temporada. Ahora en otoño, hay tres estrellas que están riquísimas, dulces y súper baratas. El problema es: <strong>¿cómo hacemos para que los más chicos no hagan cara de asco cuando ven el plato?</strong></p>
 
       <figure>
-        <img src="${"${blogVerdurasTemporada}"}" alt="Cajón de madera con calabazas frescas de temporada" />
+        <img src="${blogVerdurasTemporada}" alt="Cajón de madera con calabazas frescas de temporada" />
         <figcaption>Las verduras de estación: ricas, dulces y a precio de regalo.</figcaption>
       </figure>
 
@@ -87,7 +87,7 @@ export const blogPosts: BlogPost[] = [
       <p>Inauguramos oficialmente la temporada de andar con la bufanda hasta la nariz y de necesitar un abrazo en forma de comida cuando llegás a casa. Y nada grita más "refugio" que una buena <strong>sopa crema</strong>.</p>
 
       <figure>
-        <img src="${"${blogSopaCrema}"}" alt="Bowl de sopa crema con tostadas de ajo" />
+        <img src="${blogSopaCrema}" alt="Bowl de sopa crema con tostadas de ajo" />
         <figcaption>La sopa que abriga, llena de verdad y no te deja con hambre a la hora.</figcaption>
       </figure>
 
