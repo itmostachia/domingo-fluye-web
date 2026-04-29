@@ -33,6 +33,9 @@ import {
 import CountdownTimer from "@/components/taller/CountdownTimer";
 import CuposCounter from "@/components/taller/CuposCounter";
 import WorkshopCheckoutDialog from "@/components/taller/WorkshopCheckoutDialog";
+import StickyTopBar from "@/components/taller/StickyTopBar";
+import SocialProofToast from "@/components/taller/SocialProofToast";
+import VsTransformation from "@/components/taller/VsTransformation";
 import { WORKSHOP, getCuposDisponibles } from "@/lib/workshopConfig";
 import { trackViewContent } from "@/lib/metaPixel";
 import { useEffect } from "react";
@@ -279,21 +282,38 @@ const Taller = () => {
                 </div>
               </motion.div>
 
-              {/* Recordatorio fecha + duracion fuera de la card (info contextual) */}
+              {/* Microcopy debajo del CTA + trust reforzado */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.55 }}
-                className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px] text-muted-foreground"
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="space-y-3 max-w-xl"
               >
-                <span className="inline-flex items-center gap-1.5">
-                  <Sparkles size={13} className="text-coral" />
-                  En vivo por Google Meet
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <Shield size={13} className="text-coral" />
-                  100% online · sin viajar
-                </span>
+                <p className="text-[12px] text-muted-foreground inline-flex items-center gap-1.5">
+                  <Sparkles size={12} className="text-coral" />
+                  Reservás en menos de 2 minutos · Pago con Mercado Pago
+                </p>
+
+                {/* Trust block reforzado: rating + cantidad + recomendación */}
+                <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-2 border-t border-border/60">
+                  <span className="inline-flex items-center gap-1.5">
+                    <span className="flex items-center gap-0.5">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} size={12} className="fill-miel text-miel" />
+                      ))}
+                    </span>
+                    <span className="text-xs font-bold text-foreground">4.9</span>
+                    <span className="text-xs text-muted-foreground">en el Club</span>
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+                    <Users size={12} className="text-coral" />
+                    +100 familias usan el método
+                  </span>
+                  <span className="hidden sm:inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+                    <HeartHandshake size={12} className="text-coral" />
+                    92% lo recomienda
+                  </span>
+                </div>
               </motion.div>
             </div>
           </div>
@@ -437,6 +457,9 @@ const Taller = () => {
           </div>
         </div>
       </section>
+
+      {/* VS TRANSFORMATION (antes/despues) =============================== */}
+      <VsTransformation onReserve={handleReserve} />
 
       {/* QUE VAS A APRENDER =============================================== */}
       <section className="section-padding relative overflow-hidden bg-gradient-section">
@@ -619,9 +642,36 @@ const Taller = () => {
         </div>
       </section>
 
-      {/* GARANTIAS ====================================================== */}
+      {/* RISK REVERSAL + GARANTIAS ====================================== */}
       <section className="section-padding relative">
         <div className="container-tight">
+          {/* Risk reversal — garantía explícita destacada */}
+          <ScrollReveal>
+            <div className="relative max-w-3xl mx-auto bg-card rounded-3xl p-7 md:p-10 shadow-warm border-2 border-miel/30 overflow-hidden mb-10">
+              {/* Decorativo */}
+              <div className="absolute -top-16 -right-16 w-40 h-40 rounded-full bg-coral/8 blur-3xl pointer-events-none" />
+              <div className="absolute -bottom-16 -left-16 w-40 h-40 rounded-full bg-miel/12 blur-3xl pointer-events-none" />
+
+              <div className="relative grid grid-cols-1 md:grid-cols-[auto_1fr] gap-5 md:gap-7 items-start">
+                <div className="flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-coral/15 via-miel/20 to-terracota/15 flex items-center justify-center mx-auto md:mx-0">
+                  <Shield className="w-8 h-8 md:w-10 md:h-10 text-coral" />
+                </div>
+                <div className="text-center md:text-left">
+                  <p className="text-[10px] uppercase tracking-[0.22em] font-bold text-coral mb-2">
+                    Garantía 0 riesgo
+                  </p>
+                  <h3 className="font-display text-2xl md:text-3xl text-foreground mb-3 leading-tight">
+                    Si después del taller sentís que no te sirvió, te devolvemos el 100%.
+                  </h3>
+                  <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+                    Sin preguntas, sin trámites complicados. Escribís un mail y resolvemos.
+                    Queremos que valga la pena — el riesgo es nuestro, no tuyo.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-4xl mx-auto">
             {[
               {
@@ -672,28 +722,32 @@ const Taller = () => {
             <Accordion type="single" collapsible className="max-w-2xl mx-auto space-y-3">
               {[
                 {
-                  q: "¿Necesito experiencia previa cocinando?",
-                  a: "No. El taller es teórico/práctico y se enfoca en organización, no en técnicas avanzadas. Si cocinás aunque sea básico, podés aplicarlo el mismo día.",
+                  q: "No tengo tiempo. ¿Vale la pena ir si la idea es justamente ahorrar tiempo?",
+                  a: "Esa es exactamente la razón para venir. El taller dura entre una y dos horas y te ahorra horas de improvisación cada semana. Lo que vas a aprender lo aplicás esa misma semana — la inversión de tiempo se devuelve en días.",
                 },
                 {
-                  q: "¿Qué pasa si no puedo asistir en vivo?",
-                  a: "El taller se graba y te enviamos la grabación para que lo veas tantas veces como quieras, a tu ritmo. No te perdés nada.",
+                  q: "Ya probé recetarios y otras cosas y nada me funcionó. ¿Por qué este taller sería distinto?",
+                  a: "Porque no es un recetario más. Acá no aprendés recetas sueltas: aprendés un método de organización. La diferencia está en el cómo, no en el qué. Si lo que te sobra son recetas y lo que te falta es sistema, este taller es para vos.",
                 },
                 {
-                  q: "¿Cómo me llega el link del Meet?",
-                  a: "Al reservar tu lugar nos dejás tu WhatsApp. Te enviamos el link del Meet por ese mismo número un rato antes del taller. También por email.",
+                  q: "¿Necesito experiencia cocinando o saber recetas avanzadas?",
+                  a: "No. El taller no se enfoca en técnicas: se enfoca en planificación. Si cocinás algo aunque sea básico, podés aplicarlo desde el mismo domingo. El método sirve igual para alguien que recién arranca o para alguien que ya cocina hace años.",
                 },
                 {
-                  q: "¿Cómo accedo al mes gratis del Club?",
-                  a: "Apenas pagás el taller te activamos el acceso al Club durante todo mayo. Recibís todo lo que reciben los socios: manual mensual, +40 recetas, listas y comunidad.",
+                  q: "¿Y si pago y después siento que no era para mí?",
+                  a: "Tenés garantía 0 riesgo: si después del taller sentís que no te sirvió, te devolvemos el 100% del dinero. Sin preguntas, sin trámites. Escribís a hola@cocinaenflor.com.ar y lo resolvemos.",
                 },
                 {
-                  q: "¿Tiene devolución?",
-                  a: "Si después del taller sentís que no te sirvió, escribinos a hola@cocinaenflor.com.ar y resolvemos contigo. Queremos que valga la pena.",
+                  q: "¿Qué pasa si no puedo conectarme el 7 de mayo a las 20 hs?",
+                  a: "El taller queda grabado y te enviamos la grabación para que lo veas las veces que quieras, a tu ritmo. No te perdés nada por no estar en vivo.",
                 },
                 {
-                  q: "¿Qué necesito para conectarme?",
-                  a: "Una computadora, tablet o celular con conexión a internet. Lo damos por Google Meet, no necesitás bajar nada.",
+                  q: "¿Cómo me llega el link del Meet y cómo accedo al mes gratis del Club?",
+                  a: "Al reservar nos dejás tu WhatsApp. Te enviamos el link del Meet por ahí (también por email). El acceso al Club durante todo mayo se activa apenas pagás — recibís manual mensual, +40 recetas, listas de compras y la comunidad privada.",
+                },
+                {
+                  q: "¿Y si me arrepiento de la suscripción al Club después del mes gratis?",
+                  a: "Sin compromiso. El mes en el Club es regalo, no se renueva automáticamente. Si después de mayo querés seguir, te suscribís cuando vos decidas. Si no, no pasa nada.",
                 },
               ].map((item, i) => (
                 <AccordionItem
@@ -795,6 +849,10 @@ const Taller = () => {
       </div>
 
       <WorkshopCheckoutDialog open={open} onOpenChange={setOpen} />
+
+      {/* Persuasión global: barra superior pegada + toast social proof */}
+      <StickyTopBar onReserve={handleReserve} />
+      <SocialProofToast />
     </Layout>
   );
 };
