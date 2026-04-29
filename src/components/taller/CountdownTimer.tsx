@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { getTimeUntilWorkshop } from "@/lib/workshopConfig";
 
 interface CountdownTimerProps {
-  variant?: "hero" | "compact" | "card";
+  variant?: "hero" | "compact" | "card" | "strip";
   className?: string;
 }
 
@@ -54,6 +54,33 @@ const CountdownTimer = ({ variant = "hero", className = "" }: CountdownTimerProp
               {String(item.value).padStart(2, "0")}
             </div>
             <div className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1">{item.label}</div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (variant === "strip") {
+    // Mini cards horizontales con separador ":" entre items — denso visual sin ocupar mucho
+    return (
+      <div className={`inline-flex items-center gap-1 ${className}`}>
+        {items.map((item, i) => (
+          <div key={item.label} className="flex items-center gap-1">
+            <motion.div
+              animate={item.label === "seg" ? { scale: [1, 1.04, 1] } : {}}
+              transition={{ duration: 1, repeat: Infinity }}
+              className="flex flex-col items-center bg-card border border-coral/30 rounded-lg px-2 py-1.5 min-w-[40px] sm:min-w-[44px] shadow-sm"
+            >
+              <span className="font-display text-lg sm:text-xl text-coral tabular-nums leading-none">
+                {String(item.value).padStart(2, "0")}
+              </span>
+              <span className="text-[8px] uppercase tracking-wider text-muted-foreground mt-0.5 font-bold">
+                {item.label}
+              </span>
+            </motion.div>
+            {i < items.length - 1 && (
+              <span className="text-coral/40 text-lg font-bold leading-none mb-2">:</span>
+            )}
           </div>
         ))}
       </div>

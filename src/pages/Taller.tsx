@@ -18,6 +18,7 @@ import {
   CalendarCheck,
   Brain,
   Flame,
+  Clock,
 } from "lucide-react";
 import Layout from "@/components/Layout";
 import SEOHead from "@/components/SEOHead";
@@ -231,8 +232,26 @@ const Taller = () => {
                   </p>
                 </div>
 
-                {/* CTA + urgencia */}
+                {/* URGENCIA: countdown destacado + cupos prominent */}
                 <div className="px-5 pb-4">
+                  <div className="relative bg-gradient-to-br from-coral/8 via-miel/12 to-coral/6 border border-coral/20 rounded-xl p-3 sm:p-4 mb-4 overflow-hidden">
+                    {/* Sutiles dots decorativos */}
+                    <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-coral/10 blur-2xl pointer-events-none" />
+                    <div className="absolute -bottom-8 -left-8 w-20 h-20 rounded-full bg-miel/15 blur-2xl pointer-events-none" />
+
+                    <div className="relative flex items-center justify-between gap-3 flex-wrap">
+                      <div>
+                        <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-coral mb-1.5 inline-flex items-center gap-1">
+                          <Clock size={11} className="text-coral" />
+                          Empieza en
+                        </p>
+                        <CountdownTimer variant="strip" />
+                      </div>
+                      <CuposCounter variant="prominent" />
+                    </div>
+                  </div>
+
+                  {/* CTA */}
                   <button
                     onClick={handleReserve}
                     className="group relative w-full bg-primary text-primary-foreground py-4 sm:py-5 rounded-xl font-bold text-base md:text-lg shadow-cta hover:shadow-glow active:scale-[0.98] transition-all duration-300 overflow-hidden"
@@ -243,11 +262,6 @@ const Taller = () => {
                     </span>
                     <span className="absolute inset-0 bg-gradient-to-r from-vino to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </button>
-
-                  <div className="flex items-center justify-between gap-3 mt-3 flex-wrap">
-                    <CountdownTimer variant="compact" className="text-foreground" />
-                    <CuposCounter variant="inline" />
-                  </div>
                 </div>
 
                 {/* Trust footer */}
