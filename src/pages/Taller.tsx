@@ -2,8 +2,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Sparkles,
-  Calendar,
-  Clock,
   PlayCircle,
   Gift,
   Check,
@@ -13,13 +11,13 @@ import {
   HeartHandshake,
   Star,
   Lock,
-  Zap,
   ArrowRight,
   Shield,
   Users,
   MessageCircle,
   CalendarCheck,
   Brain,
+  Flame,
 } from "lucide-react";
 import Layout from "@/components/Layout";
 import SEOHead from "@/components/SEOHead";
@@ -60,11 +58,11 @@ const Taller = () => {
       />
 
       {/* HERO ============================================================ */}
-      <section className="relative overflow-hidden min-h-screen flex items-center pt-24 md:pt-28 pb-12">
-        {/* Base cream gradient — coherente con Planes y secciones del index */}
+      <section className="relative overflow-hidden pt-6 md:pt-10 pb-12 md:pb-16">
+        {/* Base cream */}
         <div className="absolute inset-0 bg-gradient-to-br from-soft-peach via-warm-cream to-background pointer-events-none" />
 
-        {/* Blobs warm difuminados (estilo bg-mesh del design system) */}
+        {/* Blobs warm difuminados */}
         <motion.div
           className="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full bg-coral/12 blur-[120px] pointer-events-none"
           animate={{ scale: [1, 1.08, 1], opacity: [0.6, 0.85, 0.6] }}
@@ -77,97 +75,189 @@ const Taller = () => {
         />
         <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full bg-terracota/8 blur-[90px] pointer-events-none" />
 
-        <div className="container-wide relative py-8 md:py-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-            {/* Columna texto */}
-            <div className="lg:col-span-7">
-              {/* Badge en vivo — cream con borde sutil */}
+        <div className="container-wide relative">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+            {/* Foto col 5 — order-1 mobile (arriba), order-2 desktop (derecha) */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="order-1 lg:order-2 lg:col-span-5 relative max-w-[280px] sm:max-w-sm lg:max-w-md mx-auto w-full"
+            >
+              {/* Glow blob warm detras */}
+              <div className="absolute -inset-4 sm:-inset-6 bg-gradient-to-br from-coral/25 via-miel/20 to-terracota/15 rounded-[3rem] blur-3xl pointer-events-none" />
+
+              {/* Imagen */}
+              <motion.div
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="relative aspect-[3/4] rounded-[2rem] overflow-hidden shadow-warm-lg border-2 border-card"
+              >
+                <img
+                  src={tallerImg}
+                  alt="Flor preparando un taller de cocina"
+                  className="w-full h-full object-cover object-center"
+                  loading="eager"
+                />
+              </motion.div>
+
+              {/* Badge bottom: bonus */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7, duration: 0.5 }}
+                className="absolute -bottom-4 -left-3 sm:-left-6 bg-card border border-miel/40 px-3 py-2.5 sm:px-4 sm:py-3 rounded-2xl shadow-warm-lg max-w-[200px] sm:max-w-[220px]"
+              >
+                <div className="flex items-center gap-1.5 mb-0.5">
+                  <Gift size={12} className="text-coral" />
+                  <span className="text-[10px] uppercase tracking-wider font-bold text-coral">
+                    Bonus incluido
+                  </span>
+                </div>
+                <p className="text-[11px] sm:text-xs font-semibold text-foreground leading-snug">
+                  Mes de mayo en el Club gratis
+                </p>
+              </motion.div>
+
+              {/* Badge top-right: stars */}
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.85, duration: 0.5 }}
+                className="absolute -top-3 -right-2 sm:-right-4 bg-card border border-border px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-2xl shadow-warm"
+              >
+                <div className="flex items-center gap-0.5 mb-0.5">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={10} className="fill-miel text-miel" />
+                  ))}
+                </div>
+                <p className="text-[10px] text-foreground font-semibold">
+                  +100 familias
+                </p>
+              </motion.div>
+            </motion.div>
+
+            {/* Texto col 7 — order-2 mobile, order-1 desktop */}
+            <div className="order-2 lg:order-1 lg:col-span-7">
+              {/* Stack de urgencia: live + cupos */}
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="inline-flex items-center gap-2 bg-card/90 backdrop-blur-sm border border-deep-brown/10 px-4 py-2 rounded-full mb-6 shadow-card"
+                className="flex flex-wrap items-center gap-2 mb-4"
               >
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-coral opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-coral" />
+                <span className="inline-flex items-center gap-1.5 bg-card border border-coral/40 px-3 py-1.5 rounded-full shadow-card">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-coral opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-coral" />
+                  </span>
+                  <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.18em] text-coral">
+                    En vivo · {WORKSHOP.dateLabelShort}
+                  </span>
                 </span>
-                <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-deep-brown">
-                  Taller en vivo · queda grabado
+                <span className="inline-flex items-center gap-1 bg-miel/20 border border-miel/40 px-3 py-1.5 rounded-full">
+                  <Flame size={11} className="text-coral" />
+                  <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.18em] text-deep-brown">
+                    Cupos limitados
+                  </span>
                 </span>
               </motion.div>
 
+              {/* Pre-titulo: nombre del taller */}
+              <motion.p
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.08 }}
+                className="text-coral font-bold text-[11px] sm:text-xs uppercase tracking-[0.22em] mb-3"
+              >
+                Taller virtual con Flor — “¿Qué comemos hoy?”
+              </motion.p>
+
+              {/* H1 punchy: promesa concreta */}
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.1 }}
-                className="font-display text-4xl md:text-5xl lg:text-[3.75rem] xl:text-[4.25rem] text-foreground leading-[1.05] mb-6"
+                transition={{ duration: 0.7, delay: 0.15 }}
+                className="font-display text-[2.25rem] sm:text-5xl lg:text-[3.5rem] xl:text-[4rem] text-foreground leading-[1.02] mb-5"
               >
-                ¿Qué comemos hoy?
-                <span className="block mt-3 text-gradient-warm">
-                  Aprendé el método que uso todos los días en mi casa.
-                </span>
+                Resolvé toda tu semana
+                <span className="block mt-1 text-gradient-warm">en una hora.</span>
               </motion.h1>
 
+              {/* Sub directa */}
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.22 }}
-                className="text-lg md:text-xl text-muted-foreground mb-8 max-w-xl leading-relaxed"
+                transition={{ duration: 0.6, delay: 0.25 }}
+                className="text-base md:text-lg text-muted-foreground mb-6 max-w-xl leading-relaxed"
               >
-                Un taller virtual en vivo con Flor para que dejes de improvisar la comida y
-                tengas la semana resuelta antes de que empiece.
+                El método que uso todos los días en mi casa: <strong className="text-foreground">diagramar el menú semanal</strong>, lista de compras y el freezer como aliado. Queda grabado.
               </motion.p>
 
-              {/* Detalles fecha + duracion — cards blancas con borde sutil */}
+              {/* OFERTA CARD — anchor de valor visible above the fold */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.35 }}
-                className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2.5 mb-8"
+                className="relative bg-card border-2 border-miel/40 rounded-2xl p-4 sm:p-5 mb-6 max-w-xl shadow-card"
               >
-                {[
-                  { icon: Calendar, text: WORKSHOP.dateLabelShort, color: "text-coral" },
-                  { icon: Clock, text: WORKSHOP.duration, color: "text-terracota" },
-                  { icon: PlayCircle, text: "Queda grabado", color: "text-deep-brown" },
-                  { icon: Gift, text: "+ Mes Club gratis", color: "text-coral" },
-                ].map(({ icon: Icon, text, color }) => (
-                  <span
-                    key={text}
-                    className="inline-flex items-center gap-1.5 bg-card border border-border px-3 py-2 rounded-lg text-sm font-medium text-foreground shadow-card"
-                  >
-                    <Icon size={14} className={color} />
-                    {text}
-                  </span>
-                ))}
+                {/* Decorative dot */}
+                <span className="absolute -top-2 -right-2 inline-flex w-5 h-5 rounded-full bg-coral border-4 border-card" />
+
+                <div className="flex flex-col sm:flex-row sm:items-end gap-3 sm:gap-5">
+                  <div className="flex-1">
+                    <p className="text-[10px] uppercase tracking-[0.18em] font-bold text-coral mb-1">
+                      Tu inversión hoy
+                    </p>
+                    <div className="flex items-baseline gap-3 flex-wrap">
+                      <span className="font-display text-[2rem] sm:text-4xl text-foreground tabular-nums leading-none">
+                        {WORKSHOP.priceLabel}
+                      </span>
+                      <span className="text-sm text-muted-foreground line-through tabular-nums">
+                        {formatARS(WORKSHOP.price + WORKSHOP.bonusValue)}
+                      </span>
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-coral/10 text-coral text-[10px] font-bold uppercase tracking-wider">
+                        Ahorrás {formatARS(WORKSHOP.bonusValue)}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="border-t sm:border-t-0 sm:border-l border-border pt-3 sm:pt-0 sm:pl-5">
+                    <p className="text-xs sm:text-sm text-muted-foreground inline-flex items-start gap-1.5 leading-snug">
+                      <Gift size={14} className="text-coral mt-0.5 flex-shrink-0" />
+                      <span>
+                        + Mes de mayo en el <strong className="text-foreground">Club gratis</strong>
+                      </span>
+                    </p>
+                  </div>
+                </div>
               </motion.div>
 
-              {/* Countdown — cards blancas */}
+              {/* Countdown */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.45 }}
-                className="mb-8"
+                transition={{ duration: 0.5, delay: 0.45 }}
+                className="mb-6 max-w-xl"
               >
-                <p className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground mb-3 font-bold">
+                <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground mb-2 font-bold">
                   Empieza en
                 </p>
-                <CountdownTimer variant="card" className="max-w-md" />
+                <CountdownTimer variant="card" />
               </motion.div>
 
               {/* CTA + cupos */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6 max-w-xl"
+                transition={{ duration: 0.6, delay: 0.55 }}
+                className="flex flex-col sm:flex-row sm:items-center gap-3 mb-5 max-w-xl"
               >
                 <button
                   onClick={handleReserve}
-                  className="group relative bg-primary text-primary-foreground px-8 py-5 rounded-xl font-bold text-base md:text-lg shadow-cta hover:shadow-glow active:scale-95 transition-all duration-300 overflow-hidden"
+                  className="group relative bg-primary text-primary-foreground px-7 py-5 rounded-xl font-bold text-base md:text-lg shadow-cta hover:shadow-glow active:scale-95 transition-all duration-300 overflow-hidden flex-1 sm:flex-none"
                 >
                   <span className="relative z-10 flex items-center justify-center gap-2">
-                    Reservar mi lugar — {WORKSHOP.priceLabel}
+                    Reservar mi lugar
                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                   </span>
                   <span className="absolute inset-0 bg-gradient-to-r from-vino to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -179,81 +269,19 @@ const Taller = () => {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.75 }}
-                className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground"
+                transition={{ duration: 0.6, delay: 0.7 }}
+                className="flex flex-wrap gap-x-5 gap-y-2 text-[13px] text-muted-foreground"
               >
                 {[
                   { icon: Lock, text: "Pago seguro con Mercado Pago" },
-                  { icon: Zap, text: "Acceso inmediato" },
-                  { icon: Shield, text: "100% online · sin viajar" },
+                  { icon: PlayCircle, text: "Queda grabado" },
+                  { icon: Shield, text: "Sin permanencia" },
                 ].map(({ icon: Icon, text }) => (
                   <span key={text} className="inline-flex items-center gap-1.5">
                     <Icon size={13} className="text-coral" />
                     {text}
                   </span>
                 ))}
-              </motion.div>
-            </div>
-
-            {/* Columna imagen Flor */}
-            <div className="lg:col-span-5 relative">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.92, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ duration: 0.9, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="relative max-w-md mx-auto"
-              >
-                {/* Glow blob warm detras */}
-                <div className="absolute -inset-6 bg-gradient-to-br from-coral/25 via-miel/20 to-terracota/15 rounded-[3rem] blur-3xl pointer-events-none" />
-
-                {/* Imagen */}
-                <motion.div
-                  animate={{ y: [0, -8, 0] }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                  className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-warm-lg border-2 border-card"
-                >
-                  <img
-                    src={tallerImg}
-                    alt="Flor preparando un taller de cocina"
-                    className="w-full h-full object-cover"
-                    loading="eager"
-                  />
-                </motion.div>
-
-                {/* Badge flotante: bonus */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.9, duration: 0.5 }}
-                  className="absolute -bottom-5 -left-4 sm:-left-6 bg-card border border-miel/40 px-4 py-3 rounded-2xl shadow-warm-lg max-w-[220px]"
-                >
-                  <div className="flex items-center gap-1.5 mb-1">
-                    <Gift size={13} className="text-coral" />
-                    <span className="text-[10px] uppercase tracking-wider font-bold text-coral">
-                      Bonus incluido
-                    </span>
-                  </div>
-                  <p className="text-xs font-semibold text-foreground leading-snug">
-                    Mes de mayo en el Club totalmente gratis
-                  </p>
-                </motion.div>
-
-                {/* Badge flotante top-right: 5 estrellas */}
-                <motion.div
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1, duration: 0.5 }}
-                  className="absolute -top-4 -right-2 sm:-right-4 bg-card border border-border px-3 py-2 rounded-2xl shadow-warm"
-                >
-                  <div className="flex items-center gap-0.5 mb-0.5">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} size={11} className="fill-miel text-miel" />
-                    ))}
-                  </div>
-                  <p className="text-[10px] text-foreground font-semibold">
-                    +100 familias con Flor
-                  </p>
-                </motion.div>
               </motion.div>
             </div>
           </div>
