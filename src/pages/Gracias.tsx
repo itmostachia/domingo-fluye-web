@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import Layout from "@/components/Layout";
 import SEOHead from "@/components/SEOHead";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { CheckCircle } from "lucide-react";
 import { trackPurchase } from "@/lib/metaPixel";
 import { clearUTMData } from "@/lib/utm";
@@ -9,7 +9,18 @@ import { clearUTMData } from "@/lib/utm";
 const Gracias = () => {
   const hasFired = useRef(false);
 
+  // Si el flow viene del Taller, redirigir a /gracias-taller (Pixel value distinto)
+  let isTallerFlow = false;
+  try {
+    isTallerFlow =
+      typeof window !== "undefined" &&
+      localStorage.getItem("cef_post_payment") === "taller";
+  } catch {
+    /* incognito */
+  }
+
   useEffect(() => {
+    if (isTallerFlow) return; // el evento Purchase lo dispara /gracias-taller
     // Doble guard: useRef para StrictMode, sessionStorage para refresh
     const alreadyFired = sessionStorage.getItem('cef_purchase_fired');
     if (!hasFired.current && !alreadyFired) {
@@ -18,7 +29,11 @@ const Gracias = () => {
       sessionStorage.setItem('cef_purchase_fired', '1');
       clearUTMData();
     }
-  }, []);
+  }, [isTallerFlow]);
+
+  if (isTallerFlow) {
+    return <Navigate to="/gracias-taller" replace />;
+  }
 
   return (
     <Layout>
