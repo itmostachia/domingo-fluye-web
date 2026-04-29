@@ -6,9 +6,10 @@ import logoImg from "@/assets/logo-cocina-en-flor.png";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabaseReal";
 
-const navItems = [
+const navItems: { label: string; href: string; live?: boolean }[] = [
   { label: "Cómo funciona", href: "/como-funciona" },
   { label: "Planes", href: "/planes" },
+  { label: "Taller", href: "/taller", live: true },
   { label: "Recetarios", href: "/recetarios" },
   { label: "Recetas", href: "/recetas" },
   { label: "Mi Club ✨", href: "/mi-club" },
@@ -52,13 +53,21 @@ const Navbar = () => {
             <Link
               key={item.href}
               to={item.href}
-              className={`text-sm font-medium px-3 py-2 rounded-lg transition-all duration-200 ${
+              className={`relative text-sm font-medium px-3 py-2 rounded-lg transition-all duration-200 ${
                 location.pathname === item.href
                   ? "text-primary bg-primary/5"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
               }`}
             >
-              {item.label}
+              <span className="inline-flex items-center gap-1.5">
+                {item.label}
+                {item.live && (
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary" />
+                  </span>
+                )}
+              </span>
             </Link>
           ))}
           {!isLoading && (
@@ -142,7 +151,15 @@ const Navbar = () => {
                         : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                     }`}
                   >
-                    {item.label}
+                    <span className="inline-flex items-center gap-1.5">
+                      {item.label}
+                      {item.live && (
+                        <span className="relative flex h-1.5 w-1.5">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary" />
+                        </span>
+                      )}
+                    </span>
                   </Link>
                 </motion.div>
               ))}
