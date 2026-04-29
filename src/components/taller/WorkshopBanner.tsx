@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Sparkles, ArrowRight } from "lucide-react";
+import { Sparkles, ArrowRight, Gift } from "lucide-react";
 import { WORKSHOP, getTimeUntilWorkshop } from "@/lib/workshopConfig";
 import { useEffect, useState } from "react";
 
@@ -18,63 +18,64 @@ const WorkshopBanner = () => {
     time.days > 0 ? `Faltan ${time.days} día${time.days === 1 ? "" : "s"}` : `Faltan ${time.hours} hs`;
 
   return (
-    <section className="relative py-6 md:py-8 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-vino via-primary to-terracota" />
-      <div className="absolute inset-0 opacity-30 bg-mesh pointer-events-none" />
+    <section className="py-6 md:py-10 relative">
+      <div className="container-wide">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="relative overflow-hidden bg-card rounded-2xl md:rounded-3xl shadow-card border border-miel/30 p-5 md:p-7"
+        >
+          {/* Sutiles blobs warm de ambiente — coherentes con el resto de la pagina */}
+          <div className="absolute -top-24 -right-24 w-56 h-56 rounded-full bg-miel/15 blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-24 -left-24 w-48 h-48 rounded-full bg-coral/10 blur-3xl pointer-events-none" />
 
-      <motion.div
-        className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-miel/30 blur-3xl"
-        animate={{ scale: [1, 1.2, 1], opacity: [0.4, 0.6, 0.4] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute -bottom-12 -left-12 w-40 h-40 rounded-full bg-coral-light/30 blur-3xl"
-        animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.5, 0.3] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-      />
+          {/* Linea fina superior con gradient warm */}
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-coral via-miel to-terracota" />
 
-      <div className="container-wide relative">
-        <Link to="/taller" className="block group">
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8"
-          >
-            <div className="flex items-center gap-3 md:gap-4 text-primary-foreground">
+          <Link to="/taller" className="block group relative">
+            <div className="flex flex-col md:flex-row items-center gap-5 md:gap-6">
+              {/* Icono decorativo */}
               <motion.div
-                animate={{ rotate: [0, 12, -12, 0], scale: [1, 1.1, 1] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-xl bg-miel/30 backdrop-blur-sm flex items-center justify-center"
+                animate={{ rotate: [0, 10, -10, 0], scale: [1, 1.06, 1] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                className="flex-shrink-0 w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br from-miel/40 via-coral/20 to-terracota/15 flex items-center justify-center shadow-card"
               >
-                <Sparkles className="w-5 h-5 md:w-6 md:h-6 text-miel" />
+                <Sparkles className="w-7 h-7 text-coral" />
               </motion.div>
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-0.5">
-                  <span className="inline-flex items-center gap-1 text-[10px] md:text-xs uppercase font-bold tracking-wider bg-primary-foreground/20 backdrop-blur-sm px-2 py-0.5 rounded-full">
-                    <span className="w-1.5 h-1.5 rounded-full bg-miel animate-pulse" />
+
+              {/* Texto */}
+              <div className="flex-1 text-center md:text-left">
+                <div className="inline-flex items-center gap-2 mb-1.5">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-coral opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-coral" />
+                  </span>
+                  <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-deep-brown">
                     En vivo · {daysLabel}
                   </span>
                 </div>
-                <p className="font-display text-base md:text-xl leading-tight">
+                <h3 className="font-display text-lg md:text-2xl text-foreground leading-tight mb-1">
                   Taller en vivo con Flor — {WORKSHOP.dateLabelShort}
-                </p>
-                <p className="text-xs md:text-sm text-primary-foreground/85 mt-0.5">
-                  Tu entrada incluye 1 mes en el Club gratis 🎁
+                </h3>
+                <p className="text-sm md:text-base text-muted-foreground inline-flex items-center justify-center md:justify-start gap-1.5 flex-wrap">
+                  <Gift size={13} className="text-primary" />
+                  Tu entrada incluye 1 mes en el Club totalmente gratis
                 </p>
               </div>
-            </div>
 
-            <motion.div
-              whileHover={{ x: 4 }}
-              className="inline-flex items-center gap-2 bg-primary-foreground text-primary px-5 py-2.5 md:px-6 md:py-3 rounded-xl text-sm md:text-base font-bold shadow-lg group-hover:shadow-xl transition-shadow whitespace-nowrap"
-            >
-              Quiero mi lugar
-              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </motion.div>
-          </motion.div>
-        </Link>
+              {/* CTA */}
+              <motion.div
+                whileHover={{ x: 3 }}
+                className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 md:px-7 md:py-3.5 rounded-xl text-sm md:text-base font-bold shadow-cta group-hover:shadow-glow transition-shadow whitespace-nowrap"
+              >
+                Quiero mi lugar
+                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              </motion.div>
+            </div>
+          </Link>
+        </motion.div>
       </div>
     </section>
   );

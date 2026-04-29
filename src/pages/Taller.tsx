@@ -60,39 +60,39 @@ const Taller = () => {
       />
 
       {/* HERO ============================================================ */}
-      <section className="relative overflow-hidden min-h-[100vh] flex items-center pt-24 md:pt-28">
-        {/* Fondo gradient warm */}
-        <div className="absolute inset-0 bg-gradient-to-br from-vino via-primary to-terracota" />
-        <div className="absolute inset-0 opacity-30 bg-mesh pointer-events-none" />
+      <section className="relative overflow-hidden min-h-screen flex items-center pt-24 md:pt-28 pb-12">
+        {/* Base cream gradient — coherente con Planes y secciones del index */}
+        <div className="absolute inset-0 bg-gradient-to-br from-soft-peach via-warm-cream to-background pointer-events-none" />
 
-        {/* Decorativo: blobs de luz */}
+        {/* Blobs warm difuminados (estilo bg-mesh del design system) */}
         <motion.div
-          className="absolute top-[20%] right-[10%] w-72 h-72 rounded-full bg-miel/30 blur-3xl pointer-events-none"
-          animate={{ scale: [1, 1.2, 1], opacity: [0.4, 0.6, 0.4] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full bg-coral/12 blur-[120px] pointer-events-none"
+          animate={{ scale: [1, 1.08, 1], opacity: [0.6, 0.85, 0.6] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute bottom-[10%] left-[5%] w-96 h-96 rounded-full bg-coral-light/25 blur-3xl pointer-events-none"
-          animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute top-1/3 -left-40 w-[500px] h-[500px] rounded-full bg-miel/18 blur-[110px] pointer-events-none"
+          animate={{ scale: [1, 1.12, 1], opacity: [0.5, 0.75, 0.5] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         />
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full bg-terracota/8 blur-[90px] pointer-events-none" />
 
-        <div className="container-wide relative py-12 md:py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        <div className="container-wide relative py-8 md:py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             {/* Columna texto */}
-            <div className="lg:col-span-7 text-primary-foreground">
-              {/* Badge en vivo */}
+            <div className="lg:col-span-7">
+              {/* Badge en vivo — cream con borde sutil */}
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="inline-flex items-center gap-2 glass-dark px-4 py-2 rounded-full mb-6"
+                className="inline-flex items-center gap-2 bg-card/90 backdrop-blur-sm border border-deep-brown/10 px-4 py-2 rounded-full mb-6 shadow-card"
               >
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-miel opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-miel" />
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-coral opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-coral" />
                 </span>
-                <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary-foreground">
+                <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-deep-brown">
                   Taller en vivo · queda grabado
                 </span>
               </motion.div>
@@ -101,10 +101,10 @@ const Taller = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.1 }}
-                className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-[4rem] leading-[1.05] mb-6 drop-shadow-lg"
+                className="font-display text-4xl md:text-5xl lg:text-[3.75rem] xl:text-[4.25rem] text-foreground leading-[1.05] mb-6"
               >
-                ¿Qué comemos hoy?{" "}
-                <span className="block mt-2 text-miel">
+                ¿Qué comemos hoy?
+                <span className="block mt-3 text-gradient-warm">
                   Aprendé el método que uso todos los días en mi casa.
                 </span>
               </motion.h1>
@@ -112,74 +112,75 @@ const Taller = () => {
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.25 }}
-                className="text-lg md:text-xl text-primary-foreground/90 mb-8 max-w-xl leading-relaxed drop-shadow-sm"
+                transition={{ duration: 0.7, delay: 0.22 }}
+                className="text-lg md:text-xl text-muted-foreground mb-8 max-w-xl leading-relaxed"
               >
                 Un taller virtual en vivo con Flor para que dejes de improvisar la comida y
                 tengas la semana resuelta antes de que empiece.
               </motion.p>
 
-              {/* Detalles fecha + duracion */}
+              {/* Detalles fecha + duracion — cards blancas con borde sutil */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="grid grid-cols-2 sm:flex sm:flex-wrap gap-3 mb-8"
+                transition={{ duration: 0.6, delay: 0.35 }}
+                className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2.5 mb-8"
               >
                 {[
-                  { icon: Calendar, text: WORKSHOP.dateLabelShort },
-                  { icon: Clock, text: `${WORKSHOP.duration}` },
-                  { icon: PlayCircle, text: "Queda grabado" },
-                  { icon: Gift, text: "+ Mes Club gratis" },
-                ].map(({ icon: Icon, text }) => (
+                  { icon: Calendar, text: WORKSHOP.dateLabelShort, color: "text-coral" },
+                  { icon: Clock, text: WORKSHOP.duration, color: "text-terracota" },
+                  { icon: PlayCircle, text: "Queda grabado", color: "text-deep-brown" },
+                  { icon: Gift, text: "+ Mes Club gratis", color: "text-coral" },
+                ].map(({ icon: Icon, text, color }) => (
                   <span
                     key={text}
-                    className="inline-flex items-center gap-1.5 glass-dark px-3 py-2 rounded-lg text-sm font-medium text-primary-foreground"
+                    className="inline-flex items-center gap-1.5 bg-card border border-border px-3 py-2 rounded-lg text-sm font-medium text-foreground shadow-card"
                   >
-                    <Icon size={14} className="text-miel" />
+                    <Icon size={14} className={color} />
                     {text}
                   </span>
                 ))}
               </motion.div>
 
-              {/* Countdown */}
+              {/* Countdown — cards blancas */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.55 }}
+                transition={{ duration: 0.6, delay: 0.45 }}
                 className="mb-8"
               >
-                <p className="text-xs uppercase tracking-[0.2em] text-primary-foreground/70 mb-2.5 font-semibold">
+                <p className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground mb-3 font-bold">
                   Empieza en
                 </p>
-                <CountdownTimer variant="hero" className="max-w-md" />
+                <CountdownTimer variant="card" className="max-w-md" />
               </motion.div>
 
-              {/* CTA */}
+              {/* CTA + cupos */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.7 }}
-                className="flex flex-col sm:flex-row gap-3 mb-6 max-w-xl"
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6 max-w-xl"
               >
                 <button
                   onClick={handleReserve}
-                  className="group relative bg-primary-foreground text-primary px-8 py-5 rounded-xl text-center font-bold text-base md:text-lg shadow-warm-lg hover:shadow-glow transition-all duration-300 overflow-hidden"
+                  className="group relative bg-primary text-primary-foreground px-8 py-5 rounded-xl font-bold text-base md:text-lg shadow-cta hover:shadow-glow active:scale-95 transition-all duration-300 overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center justify-center gap-2">
                     Reservar mi lugar — {WORKSHOP.priceLabel}
                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                   </span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-vino to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </button>
-                <CuposCounter className="self-center" />
+                <CuposCounter />
               </motion.div>
 
               {/* Trust pills */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.85 }}
-                className="flex flex-wrap gap-4 text-sm text-primary-foreground/75"
+                transition={{ duration: 0.6, delay: 0.75 }}
+                className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground"
               >
                 {[
                   { icon: Lock, text: "Pago seguro con Mercado Pago" },
@@ -187,7 +188,7 @@ const Taller = () => {
                   { icon: Shield, text: "100% online · sin viajar" },
                 ].map(({ icon: Icon, text }) => (
                   <span key={text} className="inline-flex items-center gap-1.5">
-                    <Icon size={14} className="text-miel" />
+                    <Icon size={13} className="text-coral" />
                     {text}
                   </span>
                 ))}
@@ -197,32 +198,38 @@ const Taller = () => {
             {/* Columna imagen Flor */}
             <div className="lg:col-span-5 relative">
               <motion.div
-                initial={{ opacity: 0, scale: 0.92 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, scale: 0.92, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="relative max-w-md mx-auto"
               >
-                <div className="absolute inset-0 bg-miel/20 rounded-[2rem] blur-3xl" />
-                <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl">
+                {/* Glow blob warm detras */}
+                <div className="absolute -inset-6 bg-gradient-to-br from-coral/25 via-miel/20 to-terracota/15 rounded-[3rem] blur-3xl pointer-events-none" />
+
+                {/* Imagen */}
+                <motion.div
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                  className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-warm-lg border-2 border-card"
+                >
                   <img
                     src={tallerImg}
                     alt="Flor preparando un taller de cocina"
                     className="w-full h-full object-cover"
                     loading="eager"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-vino/20 via-transparent to-transparent" />
-                </div>
+                </motion.div>
 
-                {/* Badge flotante: precio + bonus */}
+                {/* Badge flotante: bonus */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.9, duration: 0.5 }}
-                  className="absolute -bottom-4 -left-4 sm:-left-6 glass px-4 py-3 rounded-2xl shadow-warm-lg max-w-[200px]"
+                  className="absolute -bottom-5 -left-4 sm:-left-6 bg-card border border-miel/40 px-4 py-3 rounded-2xl shadow-warm-lg max-w-[220px]"
                 >
-                  <div className="flex items-center gap-2 mb-1">
-                    <Gift size={14} className="text-primary" />
-                    <span className="text-[10px] uppercase tracking-wider font-bold text-primary">
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <Gift size={13} className="text-coral" />
+                    <span className="text-[10px] uppercase tracking-wider font-bold text-coral">
                       Bonus incluido
                     </span>
                   </div>
@@ -236,7 +243,7 @@ const Taller = () => {
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1, duration: 0.5 }}
-                  className="absolute -top-4 -right-2 sm:-right-4 glass px-3 py-2 rounded-2xl shadow-warm-lg"
+                  className="absolute -top-4 -right-2 sm:-right-4 bg-card border border-border px-3 py-2 rounded-2xl shadow-warm"
                 >
                   <div className="flex items-center gap-0.5 mb-0.5">
                     {[...Array(5)].map((_, i) => (
@@ -251,9 +258,6 @@ const Taller = () => {
             </div>
           </div>
         </div>
-
-        {/* Fade bottom hacia background */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
       </section>
 
       {/* BONUS STACK ====================================================== */}
@@ -672,42 +676,69 @@ const Taller = () => {
 
       {/* CTA FINAL ====================================================== */}
       <section className="relative overflow-hidden py-16 md:py-24">
-        <div className="absolute inset-0 bg-gradient-to-br from-vino via-primary to-terracota" />
-        <div className="absolute inset-0 opacity-30 bg-mesh pointer-events-none" />
-        <motion.div
-          className="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-miel/25 blur-3xl pointer-events-none"
-          animate={{ scale: [1, 1.2, 1] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
+        {/* Base cream */}
+        <div className="absolute inset-0 bg-gradient-to-br from-soft-peach via-warm-cream to-background pointer-events-none" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-coral/10 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 right-1/4 w-72 h-72 rounded-full bg-miel/12 blur-3xl pointer-events-none" />
 
-        <div className="container-tight relative text-center text-primary-foreground">
+        <div className="container-tight relative">
           <ScrollReveal>
-            <span className="inline-flex items-center gap-2 glass-dark px-4 py-2 rounded-full mb-6 text-xs font-bold uppercase tracking-[0.2em]">
-              <Sparkles size={14} className="text-miel" />
-              Cupos limitados
-            </span>
-            <h2 className="font-display text-3xl md:text-5xl lg:text-6xl mb-5 leading-tight drop-shadow-lg">
-              {WORKSHOP.dateLabelShort}.<br />
-              <span className="text-miel">¿Estás adentro?</span>
-            </h2>
-            <p className="text-lg md:text-xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
-              Reservá ahora, te llevás el taller en vivo, la grabación y el mes gratis en el Club.
-            </p>
+            <div className="relative max-w-2xl mx-auto bg-card rounded-3xl p-8 md:p-12 shadow-warm-lg border border-border overflow-hidden">
+              {/* Linea superior gradient warm */}
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-coral via-miel to-terracota" />
 
-            <div className="mb-8 max-w-md mx-auto">
-              <CountdownTimer variant="hero" />
-            </div>
+              {/* Decorativo interno */}
+              <div className="absolute -top-20 -right-20 w-48 h-48 rounded-full bg-coral/8 blur-3xl pointer-events-none" />
+              <div className="absolute -bottom-16 -left-16 w-40 h-40 rounded-full bg-miel/12 blur-3xl pointer-events-none" />
 
-            <button
-              onClick={handleReserve}
-              className="group inline-flex items-center gap-2 bg-primary-foreground text-primary px-10 py-5 rounded-xl font-bold text-base md:text-lg shadow-warm-lg hover:shadow-glow transition-all duration-300 active:scale-95"
-            >
-              Reservar mi lugar — {WORKSHOP.priceLabel}
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </button>
+              <div className="relative text-center">
+                <span className="inline-flex items-center gap-2 bg-coral/10 px-4 py-2 rounded-full mb-6 text-[11px] font-bold uppercase tracking-[0.22em] text-coral">
+                  <Sparkles size={13} />
+                  Cupos limitados
+                </span>
 
-            <div className="mt-6">
-              <CuposCounter />
+                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-3 leading-tight">
+                  {WORKSHOP.dateLabelShort}.
+                </h2>
+                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-gradient-coral mb-6 leading-tight">
+                  ¿Estás adentro?
+                </h2>
+
+                <p className="text-base md:text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
+                  Reservá ahora, te llevás el taller en vivo, la grabación y el mes gratis en el Club.
+                </p>
+
+                <div className="mb-8 max-w-sm mx-auto">
+                  <CountdownTimer variant="card" />
+                </div>
+
+                <button
+                  onClick={handleReserve}
+                  className="group relative inline-flex items-center gap-2 bg-primary text-primary-foreground px-10 py-5 rounded-xl font-bold text-base md:text-lg shadow-cta hover:shadow-glow transition-all duration-300 active:scale-95 overflow-hidden"
+                >
+                  <span className="relative z-10 flex items-center gap-2">
+                    Reservar mi lugar — {WORKSHOP.priceLabel}
+                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                  </span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-vino to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </button>
+
+                <div className="mt-6 flex justify-center">
+                  <CuposCounter />
+                </div>
+
+                <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mt-6 pt-6 border-t border-border/60 text-xs text-muted-foreground">
+                  <span className="inline-flex items-center gap-1.5">
+                    <Lock size={12} className="text-green-600" /> Pago seguro
+                  </span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <PlayCircle size={12} className="text-coral" /> Queda grabado
+                  </span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <Gift size={12} className="text-coral" /> + Mes Club gratis
+                  </span>
+                </div>
+              </div>
             </div>
           </ScrollReveal>
         </div>
