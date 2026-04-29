@@ -189,99 +189,99 @@ const Taller = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.25 }}
-                className="text-base md:text-lg text-muted-foreground mb-6 max-w-xl leading-relaxed"
+                className="text-base md:text-lg text-muted-foreground mb-5 max-w-xl leading-relaxed"
               >
                 El método que uso todos los días en mi casa: <strong className="text-foreground">diagramar el menú semanal</strong>, lista de compras y el freezer como aliado. Queda grabado.
               </motion.p>
 
-              {/* OFERTA CARD — anchor de valor visible above the fold */}
+              {/* OFERTA + CHECKOUT CARD — todo lo necesario para decidir + comprar */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.35 }}
-                className="relative bg-card border-2 border-miel/40 rounded-2xl p-4 sm:p-5 mb-6 max-w-xl shadow-card"
+                className="relative bg-card border-2 border-miel/40 rounded-2xl mb-5 max-w-xl shadow-warm overflow-hidden"
               >
-                {/* Decorative dot */}
-                <span className="absolute -top-2 -right-2 inline-flex w-5 h-5 rounded-full bg-coral border-4 border-card" />
+                {/* Línea superior gradient warm */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-coral via-miel to-terracota" />
 
-                <div className="flex flex-col sm:flex-row sm:items-end gap-3 sm:gap-5">
-                  <div className="flex-1">
-                    <p className="text-[10px] uppercase tracking-[0.18em] font-bold text-coral mb-1">
-                      Tu inversión hoy
-                    </p>
-                    <div className="flex items-baseline gap-3 flex-wrap">
-                      <span className="font-display text-[2rem] sm:text-4xl text-foreground tabular-nums leading-none">
-                        {WORKSHOP.priceLabel}
-                      </span>
-                      <span className="text-sm text-muted-foreground line-through tabular-nums">
-                        {formatARS(WORKSHOP.price + WORKSHOP.bonusValue)}
-                      </span>
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-coral/10 text-coral text-[10px] font-bold uppercase tracking-wider">
-                        Ahorrás {formatARS(WORKSHOP.bonusValue)}
-                      </span>
-                    </div>
+                {/* Decorative dot */}
+                <span className="absolute -top-2 -right-2 inline-flex w-5 h-5 rounded-full bg-coral border-4 border-card z-10" />
+
+                {/* HEADER: precio + bonus */}
+                <div className="p-5 pb-4">
+                  <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-coral mb-1.5">
+                    Tu inversión hoy
+                  </p>
+                  <div className="flex items-baseline gap-3 flex-wrap mb-3">
+                    <span className="font-display text-[2.25rem] sm:text-[2.5rem] text-foreground tabular-nums leading-none">
+                      {WORKSHOP.priceLabel}
+                    </span>
+                    <span className="text-sm text-muted-foreground line-through tabular-nums">
+                      {formatARS(WORKSHOP.price + WORKSHOP.bonusValue)}
+                    </span>
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-coral/10 text-coral text-[10px] font-bold uppercase tracking-wider">
+                      Ahorrás {formatARS(WORKSHOP.bonusValue)}
+                    </span>
                   </div>
-                  <div className="border-t sm:border-t-0 sm:border-l border-border pt-3 sm:pt-0 sm:pl-5">
-                    <p className="text-xs sm:text-sm text-muted-foreground inline-flex items-start gap-1.5 leading-snug">
-                      <Gift size={14} className="text-coral mt-0.5 flex-shrink-0" />
-                      <span>
-                        + Mes de mayo en el <strong className="text-foreground">Club gratis</strong>
-                      </span>
-                    </p>
+                  <p className="text-sm text-muted-foreground inline-flex items-start gap-1.5 leading-snug">
+                    <Gift size={14} className="text-coral mt-0.5 flex-shrink-0" />
+                    <span>
+                      + Mes de mayo en el <strong className="text-foreground">Club totalmente gratis</strong>
+                    </span>
+                  </p>
+                </div>
+
+                {/* CTA + urgencia */}
+                <div className="px-5 pb-4">
+                  <button
+                    onClick={handleReserve}
+                    className="group relative w-full bg-primary text-primary-foreground py-4 sm:py-5 rounded-xl font-bold text-base md:text-lg shadow-cta hover:shadow-glow active:scale-[0.98] transition-all duration-300 overflow-hidden"
+                  >
+                    <span className="relative z-10 flex items-center justify-center gap-2">
+                      Reservar mi lugar
+                      <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                    </span>
+                    <span className="absolute inset-0 bg-gradient-to-r from-vino to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </button>
+
+                  <div className="flex items-center justify-between gap-3 mt-3 flex-wrap">
+                    <CountdownTimer variant="compact" className="text-foreground" />
+                    <CuposCounter variant="inline" />
                   </div>
+                </div>
+
+                {/* Trust footer */}
+                <div className="border-t border-border/60 bg-soft-peach/40 px-5 py-2.5 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] text-muted-foreground">
+                  <span className="inline-flex items-center gap-1">
+                    <Lock size={11} className="text-green-600" />
+                    Pago seguro
+                  </span>
+                  <span className="inline-flex items-center gap-1">
+                    <PlayCircle size={11} className="text-coral" />
+                    Queda grabado
+                  </span>
+                  <span className="inline-flex items-center gap-1">
+                    <Shield size={11} className="text-coral" />
+                    Sin permanencia
+                  </span>
                 </div>
               </motion.div>
 
-              {/* Countdown */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.45 }}
-                className="mb-6 max-w-xl"
-              >
-                <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground mb-2 font-bold">
-                  Empieza en
-                </p>
-                <CountdownTimer variant="card" />
-              </motion.div>
-
-              {/* CTA + cupos */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.55 }}
-                className="flex flex-col sm:flex-row sm:items-center gap-3 mb-5 max-w-xl"
-              >
-                <button
-                  onClick={handleReserve}
-                  className="group relative bg-primary text-primary-foreground px-7 py-5 rounded-xl font-bold text-base md:text-lg shadow-cta hover:shadow-glow active:scale-95 transition-all duration-300 overflow-hidden flex-1 sm:flex-none"
-                >
-                  <span className="relative z-10 flex items-center justify-center gap-2">
-                    Reservar mi lugar
-                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                  </span>
-                  <span className="absolute inset-0 bg-gradient-to-r from-vino to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </button>
-                <CuposCounter />
-              </motion.div>
-
-              {/* Trust pills */}
+              {/* Recordatorio fecha + duracion fuera de la card (info contextual) */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.7 }}
-                className="flex flex-wrap gap-x-5 gap-y-2 text-[13px] text-muted-foreground"
+                transition={{ duration: 0.6, delay: 0.55 }}
+                className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px] text-muted-foreground"
               >
-                {[
-                  { icon: Lock, text: "Pago seguro con Mercado Pago" },
-                  { icon: PlayCircle, text: "Queda grabado" },
-                  { icon: Shield, text: "Sin permanencia" },
-                ].map(({ icon: Icon, text }) => (
-                  <span key={text} className="inline-flex items-center gap-1.5">
-                    <Icon size={13} className="text-coral" />
-                    {text}
-                  </span>
-                ))}
+                <span className="inline-flex items-center gap-1.5">
+                  <Sparkles size={13} className="text-coral" />
+                  En vivo por Google Meet
+                </span>
+                <span className="inline-flex items-center gap-1.5">
+                  <Shield size={13} className="text-coral" />
+                  100% online · sin viajar
+                </span>
               </motion.div>
             </div>
           </div>
