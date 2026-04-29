@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { getTimeUntilWorkshop } from "@/lib/workshopConfig";
 
 interface CountdownTimerProps {
-  variant?: "hero" | "compact" | "card" | "strip";
+  variant?: "hero" | "compact" | "card" | "strip" | "numbers";
   className?: string;
 }
 
@@ -42,6 +42,21 @@ const CountdownTimer = ({ variant = "hero", className = "" }: CountdownTimerProp
           {time.days}d {String(time.hours).padStart(2, "0")}h {String(time.minutes).padStart(2, "0")}m
         </span>
       </div>
+    );
+  }
+
+  if (variant === "numbers") {
+    return (
+      <span className={`inline-flex items-baseline gap-1 tabular-nums ${className}`}>
+        <span className="font-bold">{time.days}</span>
+        <span className="opacity-60 text-[0.85em]">d</span>
+        <span className="font-bold ml-0.5">{String(time.hours).padStart(2, "0")}</span>
+        <span className="opacity-60 text-[0.85em]">h</span>
+        <span className="font-bold ml-0.5">{String(time.minutes).padStart(2, "0")}</span>
+        <span className="opacity-60 text-[0.85em]">m</span>
+        <span className="font-bold ml-0.5">{String(time.seconds).padStart(2, "0")}</span>
+        <span className="opacity-60 text-[0.85em]">s</span>
+      </span>
     );
   }
 

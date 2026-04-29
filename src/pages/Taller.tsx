@@ -33,7 +33,7 @@ import {
 import CountdownTimer from "@/components/taller/CountdownTimer";
 import CuposCounter from "@/components/taller/CuposCounter";
 import WorkshopCheckoutDialog from "@/components/taller/WorkshopCheckoutDialog";
-import { WORKSHOP } from "@/lib/workshopConfig";
+import { WORKSHOP, getCuposDisponibles } from "@/lib/workshopConfig";
 import { trackViewContent } from "@/lib/metaPixel";
 import { useEffect } from "react";
 import tallerImg from "@/assets/taller-flor.jpg";
@@ -43,9 +43,12 @@ const formatARS = (n: number) => `$${n.toLocaleString("es-AR")}`;
 
 const Taller = () => {
   const [open, setOpen] = useState(false);
+  const [cupos, setCupos] = useState(() => getCuposDisponibles());
 
   useEffect(() => {
     trackViewContent(`Taller ${WORKSHOP.dateLabelShort}`);
+    const id = setInterval(() => setCupos(getCuposDisponibles()), 60_000);
+    return () => clearInterval(id);
   }, []);
 
   const handleReserve = () => setOpen(true);
@@ -179,7 +182,7 @@ const Taller = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.15 }}
-                className="font-display text-[2.25rem] sm:text-5xl lg:text-[3.5rem] xl:text-[4rem] text-foreground leading-[1.02] mb-5"
+                className="font-display text-[1.85rem] sm:text-[2.5rem] lg:text-[3rem] xl:text-[3.5rem] text-foreground leading-[1.02] mb-4"
               >
                 Resolvé toda tu semana
                 <span className="block mt-1 text-gradient-warm">en una hora.</span>
@@ -190,43 +193,38 @@ const Taller = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.25 }}
-                className="text-base md:text-lg text-muted-foreground mb-5 max-w-xl leading-relaxed"
+                className="text-sm md:text-base text-muted-foreground mb-4 max-w-xl leading-relaxed"
               >
                 El método que uso todos los días en mi casa: <strong className="text-foreground">diagramar el menú semanal</strong>, lista de compras y el freezer como aliado. Queda grabado.
               </motion.p>
 
-              {/* BANDA DE URGENCIA — countdown + cupos visibles antes de la oferta */}
+              {/* OFERTA + CHECKOUT CARD — todo en una sola tarjeta, botón above-the-fold */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.32 }}
-                className="relative bg-gradient-to-br from-coral/10 via-miel/15 to-coral/8 border border-coral/25 rounded-2xl p-3 sm:p-4 mb-3 max-w-xl overflow-hidden"
-              >
-                <div className="absolute -top-10 -right-10 w-28 h-28 rounded-full bg-coral/12 blur-2xl pointer-events-none" />
-                <div className="absolute -bottom-10 -left-10 w-24 h-24 rounded-full bg-miel/15 blur-2xl pointer-events-none" />
-
-                <div className="relative flex items-center justify-between gap-3 flex-wrap">
-                  <div className="flex-shrink-0">
-                    <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-coral mb-1.5 inline-flex items-center gap-1">
-                      <Clock size={11} className="text-coral" />
-                      Empieza en
-                    </p>
-                    <CountdownTimer variant="strip" />
-                  </div>
-                  <CuposCounter variant="prominent" />
-                </div>
-              </motion.div>
-
-              {/* OFERTA + CHECKOUT CARD — limpia, click directo precio → botón */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
                 className="relative bg-card border-2 border-miel/40 rounded-2xl mb-5 max-w-xl shadow-warm overflow-hidden"
               >
+                {/* Línea superior gradient warm */}
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-coral via-miel to-terracota" />
                 <span className="absolute -top-2 -right-2 inline-flex w-5 h-5 rounded-full bg-coral border-4 border-card z-10" />
 
+                {/* HEADER URGENCIA — una línea compacta, no compite con el botón */}
+                <div className="relative bg-gradient-to-r from-coral/8 via-miel/12 to-coral/6 border-b border-coral/15 px-4 sm:px-5 py-2.5 flex items-center justify-between gap-3 flex-wrap">
+                  <div className="inline-flex items-center gap-2">
+                    <Clock size={13} className="text-coral flex-shrink-0" />
+                    <span className="text-[10px] uppercase tracking-[0.18em] font-bold text-coral">
+                      Empieza en
+                    </span>
+                    <CountdownTimer variant="numbers" className="text-foreground text-sm" />
+                  </div>
+                  <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-coral">
+                    <Flame size={12} className="text-coral animate-pulse" />
+                    Quedan {cupos} lugares
+                  </span>
+                </div>
+
+                {/* PRECIO + BONUS */}
                 <div className="p-5 pb-4">
                   <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-coral mb-1.5">
                     Tu inversión hoy
@@ -250,6 +248,7 @@ const Taller = () => {
                   </p>
                 </div>
 
+                {/* CTA */}
                 <div className="px-5 pb-4">
                   <button
                     onClick={handleReserve}
@@ -263,6 +262,7 @@ const Taller = () => {
                   </button>
                 </div>
 
+                {/* Trust footer */}
                 <div className="border-t border-border/60 bg-soft-peach/40 px-5 py-2.5 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] text-muted-foreground">
                   <span className="inline-flex items-center gap-1">
                     <Lock size={11} className="text-green-600" />
