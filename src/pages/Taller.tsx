@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   Sparkles,
@@ -36,7 +37,7 @@ import WorkshopCheckoutDialog from "@/components/taller/WorkshopCheckoutDialog";
 import StickyTopBar from "@/components/taller/StickyTopBar";
 import SocialProofToast from "@/components/taller/SocialProofToast";
 import VsTransformation from "@/components/taller/VsTransformation";
-import { WORKSHOP, getCuposDisponibles } from "@/lib/workshopConfig";
+import { WORKSHOP, getCuposDisponibles, getTimeUntilWorkshop } from "@/lib/workshopConfig";
 import { trackViewContent } from "@/lib/metaPixel";
 import { useEffect } from "react";
 import tallerImg from "@/assets/taller-flor.jpg";
@@ -48,11 +49,19 @@ const Taller = () => {
   const [open, setOpen] = useState(false);
   const [cupos, setCupos] = useState(() => getCuposDisponibles());
 
+  // Si el taller ya pasó (live terminó), redirect a Flor Sale (donde está la promo grabación + Club)
+  const tallerEnded = getTimeUntilWorkshop().hasEnded;
+
   useEffect(() => {
+    if (tallerEnded) return;
     trackViewContent(`Taller ${WORKSHOP.dateLabelShort}`);
     const id = setInterval(() => setCupos(getCuposDisponibles()), 60_000);
     return () => clearInterval(id);
-  }, []);
+  }, [tallerEnded]);
+
+  if (tallerEnded) {
+    return <Navigate to="/flor-sale" replace />;
+  }
 
   const handleReserve = () => setOpen(true);
 

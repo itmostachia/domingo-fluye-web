@@ -18,7 +18,9 @@ import FAQ from "./pages/FAQ";
 import Contacto from "./pages/Contacto";
 import Gracias from "./pages/Gracias";
 import GraciasTaller from "./pages/GraciasTaller";
+import GraciasFlorSale from "./pages/GraciasFlorSale";
 import Taller from "./pages/Taller";
+import FlorSale from "./pages/FlorSale";
 import Legal from "./pages/Legal";
 import Blog from "./pages/Blog";
 import Recetas from "./pages/Recetas";
@@ -50,7 +52,9 @@ const App = () => (
               <Route path="/contacto" element={<Contacto />} />
               <Route path="/gracias" element={<Gracias />} />
               <Route path="/gracias-taller" element={<GraciasTaller />} />
+              <Route path="/gracias-flor-sale" element={<GraciasFlorSale />} />
               <Route path="/taller" element={<Taller />} />
+              <Route path="/flor-sale" element={<FlorSale />} />
               <Route path="/legal" element={<Legal />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<Suspense fallback={<div className="min-h-screen" />}><BlogPost /></Suspense>} />

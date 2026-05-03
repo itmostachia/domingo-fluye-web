@@ -6,7 +6,8 @@ import logoImg from "@/assets/logo-cocina-en-flor.png";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabaseReal";
 
-const navItems: { label: string; href: string; live?: boolean }[] = [
+const navItems: { label: string; href: string; live?: boolean; hot?: boolean }[] = [
+  { label: "🔥 Flor Sale", href: "/flor-sale", hot: true },
   { label: "Cómo funciona", href: "/como-funciona" },
   { label: "Planes", href: "/planes" },
   { label: "Taller", href: "/taller", live: true },
@@ -54,9 +55,13 @@ const Navbar = () => {
               key={item.href}
               to={item.href}
               className={`relative text-sm font-medium px-3 py-2 rounded-lg transition-all duration-200 ${
-                location.pathname === item.href
-                  ? "text-primary bg-primary/5"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                item.hot
+                  ? location.pathname === item.href
+                    ? "text-coral bg-coral/10 font-bold"
+                    : "text-coral hover:bg-coral/10 font-bold"
+                  : location.pathname === item.href
+                    ? "text-primary bg-primary/5"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
               }`}
             >
               <span className="inline-flex items-center gap-1.5">
@@ -65,6 +70,12 @@ const Navbar = () => {
                   <span className="relative flex h-1.5 w-1.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
                     <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary" />
+                  </span>
+                )}
+                {item.hot && (
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-coral opacity-75" />
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-coral" />
                   </span>
                 )}
               </span>
@@ -146,9 +157,11 @@ const Navbar = () => {
                   <Link
                     to={item.href}
                     className={`block py-2.5 px-3 rounded-lg text-base font-medium transition-colors ${
-                      location.pathname === item.href
-                        ? "text-primary bg-primary/5"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                      item.hot
+                        ? "text-coral bg-coral/10 font-bold"
+                        : location.pathname === item.href
+                          ? "text-primary bg-primary/5"
+                          : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                     }`}
                   >
                     <span className="inline-flex items-center gap-1.5">
@@ -157,6 +170,12 @@ const Navbar = () => {
                         <span className="relative flex h-1.5 w-1.5">
                           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
                           <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary" />
+                        </span>
+                      )}
+                      {item.hot && (
+                        <span className="relative flex h-1.5 w-1.5">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-coral opacity-75" />
+                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-coral" />
                         </span>
                       )}
                     </span>

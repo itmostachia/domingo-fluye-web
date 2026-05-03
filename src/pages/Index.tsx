@@ -4,6 +4,7 @@ import HeroSection from "@/components/home/HeroSection";
 import Marquee from "@/components/Marquee";
 import SEOHead from "@/components/SEOHead";
 import WorkshopBanner from "@/components/taller/WorkshopBanner";
+import FlorSaleBanner from "@/components/flor-sale/FlorSaleBanner";
 
 const PainPoints = lazy(() => import("@/components/home/PainPoints"));
 const SectionConnector = lazy(() => import("@/components/SectionConnector"));
@@ -33,6 +34,7 @@ const Index = () => {
         description="Un sistema mensual para cocinar en 90 minutos y olvidarte del caos de la semana. +40 recetas por mes, lista de compras y soporte."
       />
       <HeroSection />
+      <FlorSaleBanner />
       <WorkshopBanner />
       <Marquee />
       <Suspense fallback={<SectionFallback />}>

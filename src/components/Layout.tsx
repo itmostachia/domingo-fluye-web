@@ -18,7 +18,11 @@ const pageVariants = {
 const Layout = ({ children }: LayoutProps) => {
   const location = useLocation();
   // Rutas con CTA sticky propio — evita doble sticky
-  const skipStickyCTA = location.pathname === "/taller" || location.pathname === "/gracias-taller";
+  const skipStickyCTA =
+    location.pathname === "/taller" ||
+    location.pathname === "/gracias-taller" ||
+    location.pathname === "/flor-sale" ||
+    location.pathname === "/gracias-flor-sale";
 
   return (
     <div className="min-h-screen flex flex-col">

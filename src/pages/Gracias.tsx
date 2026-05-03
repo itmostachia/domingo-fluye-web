@@ -9,18 +9,21 @@ import { clearUTMData } from "@/lib/utm";
 const Gracias = () => {
   const hasFired = useRef(false);
 
-  // Si el flow viene del Taller, redirigir a /gracias-taller (Pixel value distinto)
-  let isTallerFlow = false;
+  // Si el flow viene del Taller o Flor Sale, redirigir al gracias específico (Pixel value distinto)
+  let postPaymentFlow: string | null = null;
   try {
-    isTallerFlow =
-      typeof window !== "undefined" &&
-      localStorage.getItem("cef_post_payment") === "taller";
+    if (typeof window !== "undefined") {
+      postPaymentFlow = localStorage.getItem("cef_post_payment");
+    }
   } catch {
     /* incognito */
   }
 
+  const isTallerFlow = postPaymentFlow === "taller";
+  const isFlorSaleFlow = postPaymentFlow === "flor_sale";
+
   useEffect(() => {
-    if (isTallerFlow) return; // el evento Purchase lo dispara /gracias-taller
+    if (isTallerFlow || isFlorSaleFlow) return; // Pixel se dispara en /gracias-* específico
     // Doble guard: useRef para StrictMode, sessionStorage para refresh
     const alreadyFired = sessionStorage.getItem('cef_purchase_fired');
     if (!hasFired.current && !alreadyFired) {
@@ -29,10 +32,13 @@ const Gracias = () => {
       sessionStorage.setItem('cef_purchase_fired', '1');
       clearUTMData();
     }
-  }, [isTallerFlow]);
+  }, [isTallerFlow, isFlorSaleFlow]);
 
   if (isTallerFlow) {
     return <Navigate to="/gracias-taller" replace />;
+  }
+  if (isFlorSaleFlow) {
+    return <Navigate to="/gracias-flor-sale" replace />;
   }
 
   return (
