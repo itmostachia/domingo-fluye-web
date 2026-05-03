@@ -1,10 +1,12 @@
-import { useState } from "react";
-import { Check, Sparkles } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Check, Sparkles, Flame, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxBlob from "@/components/ParallaxBlob";
 import { Button } from "@/components/ui/button";
 import CheckoutDialog from "@/components/planes/CheckoutDialog";
+import { isSaleActive } from "@/lib/florSaleConfig";
 
 type PaymentMethod = "mp" | "paypal";
 
@@ -20,6 +22,14 @@ const features = [
 const PricingSection = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod | null>(null);
+  const [saleActive, setSaleActive] = useState(() => isSaleActive());
+
+  useEffect(() => {
+    const tick = () => setSaleActive(isSaleActive());
+    tick();
+    const id = setInterval(tick, 60_000);
+    return () => clearInterval(id);
+  }, []);
 
   const openCheckout = (method: PaymentMethod) => {
     setPaymentMethod(method);
@@ -106,6 +116,47 @@ const PricingSection = () => {
               ))}
             </div>
           </ScrollReveal>
+
+          {/* Cross-sell: Flor Sale alternativa */}
+          {saleActive && (
+            <ScrollReveal delay={0.4}>
+              <Link
+                to="/flor-sale"
+                className="block max-w-md mx-auto mt-10 group"
+                aria-label="Ir a Flor Sale"
+              >
+                <motion.div
+                  whileHover={{ y: -3 }}
+                  className="relative overflow-hidden rounded-2xl p-5 bg-gradient-to-br from-coral/10 via-card to-miel/10 border-2 border-coral/30 shadow-card transition-all hover:shadow-warm-lg"
+                >
+                  <div className="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-coral/20 blur-3xl pointer-events-none" />
+                  <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-coral via-miel to-terracota" />
+
+                  <div className="relative flex items-center gap-4">
+                    <motion.div
+                      animate={{ rotate: [0, 8, -8, 0], scale: [1, 1.1, 1] }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                      className="flex-shrink-0 w-11 h-11 rounded-xl bg-gradient-to-br from-coral/30 via-miel/30 to-terracota/20 flex items-center justify-center shadow-card"
+                    >
+                      <Flame className="w-5 h-5 text-coral" />
+                    </motion.div>
+                    <div className="flex-1 min-w-0 text-left">
+                      <div className="text-[10px] uppercase tracking-[0.18em] font-bold text-coral mb-0.5">
+                        🔥 Flor Sale · termina pronto
+                      </div>
+                      <p className="text-sm font-semibold text-foreground leading-tight">
+                        ¿Querés llevarte recetarios + manual de mayo?
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-0.5">
+                        Combo a $20.990 (-47%) — pago único
+                      </p>
+                    </div>
+                    <ArrowRight size={16} className="text-coral group-hover:translate-x-1 transition-transform flex-shrink-0" />
+                  </div>
+                </motion.div>
+              </Link>
+            </ScrollReveal>
+          )}
         </div>
       </div>
 

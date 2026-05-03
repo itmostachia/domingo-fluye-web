@@ -1,13 +1,27 @@
 import { Link } from "react-router-dom";
-import { Check, ArrowRight, Sparkles, Star, Lock, Zap, XCircle } from "lucide-react";
+import { Check, ArrowRight, Sparkles, Star, Lock, Zap, XCircle, Flame } from "lucide-react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import heroImage from "@/assets/hero-kitchen.jpg";
 import manualImage from "@/assets/manual-mockup.jpg";
+import { isSaleActive, getTimeUntilSaleEnd } from "@/lib/florSaleConfig";
 
 
 const HeroSection = () => {
   const sectionRef = useRef(null);
+  const [saleActive, setSaleActive] = useState(() => isSaleActive());
+  const [timeLeft, setTimeLeft] = useState(() => getTimeUntilSaleEnd());
+
+  useEffect(() => {
+    const tick = () => {
+      setSaleActive(isSaleActive());
+      setTimeLeft(getTimeUntilSaleEnd());
+    };
+    tick();
+    const id = setInterval(tick, 60_000);
+    return () => clearInterval(id);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"]
@@ -61,11 +75,37 @@ const HeroSection = () => {
       <motion.div className="relative container-wide py-24 md:py-36 lg:py-44" style={{ opacity }}>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div variants={containerVariants} initial="hidden" animate="visible">
+            {/* Flor Sale hot badge — solo si la sale está activa */}
+            {saleActive && (
+              <motion.div variants={itemVariants} className="mb-3">
+                <Link
+                  to="/flor-sale"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-coral via-coral to-terracota text-white px-4 py-2 rounded-full font-bold text-sm shadow-cta hover:shadow-glow active:scale-95 transition-all group"
+                  aria-label="Ir a Flor Sale"
+                >
+                  <motion.span
+                    animate={{ rotate: [0, 12, -12, 0] }}
+                    transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+                    className="inline-flex"
+                  >
+                    <Flame size={14} className="fill-white/40" />
+                  </motion.span>
+                  <span className="uppercase tracking-wider text-[11px] sm:text-xs">
+                    🔥 Flor Sale activa
+                  </span>
+                  <span className="hidden sm:inline text-white/85 text-xs font-medium">
+                    · -47% · termina en {timeLeft.days}d
+                  </span>
+                  <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
+                </Link>
+              </motion.div>
+            )}
+
             {/* Social proof pill */}
             <motion.div
               variants={itemVariants}
               className="inline-flex items-center gap-2 glass-dark px-4 py-2 rounded-full mb-6">
-              
+
               <span className="flex items-center gap-0.5">
                 {[...Array(5)].map((_, i) =>
                 <Star key={i} size={13} className="text-miel fill-miel" />

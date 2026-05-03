@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import StickyCTA from "./StickyCTA";
+import FlorSaleGlobalSticky from "./flor-sale/FlorSaleGlobalSticky";
 
 interface LayoutProps {
   children: ReactNode;
@@ -40,6 +41,7 @@ const Layout = ({ children }: LayoutProps) => {
         </motion.main>
       </AnimatePresence>
       <Footer />
+      <FlorSaleGlobalSticky />
       {!skipStickyCTA && <StickyCTA />}
       <div className="h-16 md:hidden" />
     </div>

@@ -4,11 +4,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { HelpCircle } from "lucide-react";
+import { HelpCircle, Flame, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxBlob from "@/components/ParallaxBlob";
+import { isSaleActive } from "@/lib/florSaleConfig";
 
-const faqs = [
+const baseFaqs = [
   { q: "¿Es para principiantes en la cocina?", a: "¡Sí! Las recetas son simples, con ingredientes comunes y pasos claros. No necesitás experiencia previa." },
   { q: "¿Necesito un freezer grande?", a: "No. Con el freezer de una heladera común alcanza. El sistema está pensado para espacios reales." },
   { q: "¿Puedo adaptar las recetas si alguien no come algo?", a: "Sí. Cada receta incluye sustituciones para los ingredientes más comunes." },
@@ -17,7 +20,23 @@ const faqs = [
   { q: "¿La comida es apta para chicos?", a: "Totalmente. Son recetas de comida de familia real: milanesas, guisos, pastas, tartas, estofados. Comida que les gusta." },
 ];
 
+const florSaleFaq = {
+  q: "¿Qué es Flor Sale y cómo funciona?",
+  a: "Es nuestra Hot Sale del Club: 2 combos especiales a $20.990 (47-51% off) por tiempo limitado. Promo 1 = Recetario Otoño Invierno + Recetario Congelados + Manual del Club mayo. Promo 2 = Grabación del taller \"¿Qué comemos hoy?\" + Manual del Club mayo. Pago único, sin renovación, te llega todo por email al instante. Termina el 31 de mayo.",
+};
+
 const FAQSection = () => {
+  const [saleActive, setSaleActive] = useState(() => isSaleActive());
+
+  useEffect(() => {
+    const tick = () => setSaleActive(isSaleActive());
+    tick();
+    const id = setInterval(tick, 60_000);
+    return () => clearInterval(id);
+  }, []);
+
+  const faqs = saleActive ? [florSaleFaq, ...baseFaqs] : baseFaqs;
+
   return (
     <section className="section-padding relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-soft-peach/60 via-accent/35 to-soft-peach/50 pointer-events-none" />
@@ -63,6 +82,21 @@ const FAQSection = () => {
             </Accordion>
           </div>
         </ScrollReveal>
+
+        {saleActive && (
+          <ScrollReveal delay={0.25}>
+            <div className="max-w-2xl mx-auto mt-8 text-center">
+              <Link
+                to="/flor-sale"
+                className="inline-flex items-center gap-2 text-coral hover:text-coral/80 font-semibold text-sm group"
+              >
+                <Flame size={16} />
+                Ver los combos de Flor Sale
+                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+          </ScrollReveal>
+        )}
       </div>
     </section>
   );

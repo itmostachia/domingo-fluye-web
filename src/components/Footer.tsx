@@ -1,7 +1,18 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Flame } from "lucide-react";
 import logoImg from "@/assets/logo-cocina-en-flor.png";
+import { isSaleActive } from "@/lib/florSaleConfig";
 
 const Footer = () => {
+  const [saleActive, setSaleActive] = useState(() => isSaleActive());
+  useEffect(() => {
+    const tick = () => setSaleActive(isSaleActive());
+    tick();
+    const id = setInterval(tick, 60_000);
+    return () => clearInterval(id);
+  }, []);
+
   return (
     <footer className="bg-foreground text-primary-foreground">
       <div className="container-wide py-12 md:py-16">
@@ -16,6 +27,11 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold text-sm uppercase tracking-wider mb-3 opacity-60">Navegación</h4>
             <div className="flex flex-col gap-2">
+              {saleActive && (
+                <Link to="/flor-sale" className="text-sm font-bold text-coral hover:text-coral/80 transition-opacity inline-flex items-center gap-1.5">
+                  <Flame size={14} className="text-coral" /> Flor Sale 🔥
+                </Link>
+              )}
               <Link to="/como-funciona" className="text-sm opacity-70 hover:opacity-100 transition-opacity">Cómo funciona</Link>
               <Link to="/planes" className="text-sm opacity-70 hover:opacity-100 transition-opacity">Planes</Link>
               <Link to="/recetas" className="text-sm opacity-70 hover:opacity-100 transition-opacity">Recetas</Link>
