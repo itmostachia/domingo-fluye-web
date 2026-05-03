@@ -31,6 +31,7 @@ import {
   type PromoConfig,
 } from "@/lib/florSaleConfig";
 import { trackViewContent } from "@/lib/metaPixel";
+import florSaleHero from "@/assets/flor-sale-cover-hero.jpg";
 import FlorSaleCountdown from "@/components/flor-sale/FlorSaleCountdown";
 import FlorSalePromoCard from "@/components/flor-sale/FlorSalePromoCard";
 import FlorSaleCheckoutDialog from "@/components/flor-sale/FlorSaleCheckoutDialog";
@@ -88,9 +89,47 @@ const FlorSale = () => {
   return (
     <Layout>
       <SEOHead
-        title={`${FLOR_SALE.campaignName} — Hasta -51% en mayo | Cocina en Flor`}
-        description="Hot Sale del Club de los Domingos. Combos exclusivos a $20.990 con recetarios premium, manual del Club y la grabación del taller. Solo durante mayo."
+        title={`Flor Sale — Hot Sale del Club | Recetarios + Manual mayo $20.990`}
+        description="🔥 Flor Sale: combos exclusivos a $20.990 (-51%). Recetario Otoño Invierno + Recetario Congelados + Manual del Club mayo, o Grabación del Taller + Manual del Club. Pago único. Acceso inmediato. Solo durante mayo."
         path="/flor-sale"
+        image="/og-flor-sale.jpg"
+        keywords="hot sale cocina, recetario congelados, recetario otoño, club cocina, manual recetas, planificación comidas, mayo 2026, oferta cocina, cocina en flor, taller que comemos hoy"
+        schemaJsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: "Flor Sale — Combo Recetarios + Club Mayo",
+            description: "Combo Hot Sale de mayo. Incluye Recetario Otoño Invierno + Recetario Congelados + Manual del Club mes de mayo.",
+            brand: { "@type": "Brand", name: "Cocina en Flor" },
+            image: "https://cocinaenflor.com.ar/og-flor-sale.jpg",
+            offers: {
+              "@type": "Offer",
+              url: "https://cocinaenflor.com.ar/flor-sale",
+              priceCurrency: "ARS",
+              price: 20990,
+              priceValidUntil: "2026-05-31",
+              availability: "https://schema.org/InStock",
+              seller: { "@type": "Organization", name: "Cocina en Flor" },
+            },
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: "Flor Sale — Combo Taller + Club Mayo",
+            description: "Combo Hot Sale de mayo. Incluye Grabación del Taller \"¿Qué comemos hoy?\" + Manual del Club mes de mayo.",
+            brand: { "@type": "Brand", name: "Cocina en Flor" },
+            image: "https://cocinaenflor.com.ar/og-flor-sale.jpg",
+            offers: {
+              "@type": "Offer",
+              url: "https://cocinaenflor.com.ar/flor-sale",
+              priceCurrency: "ARS",
+              price: 20990,
+              priceValidUntil: "2026-05-31",
+              availability: "https://schema.org/InStock",
+              seller: { "@type": "Organization", name: "Cocina en Flor" },
+            },
+          },
+        ]}
       />
 
       {/* HERO ============================================================== */}
