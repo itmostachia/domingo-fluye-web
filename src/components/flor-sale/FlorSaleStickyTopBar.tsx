@@ -36,7 +36,7 @@ const FlorSaleStickyTopBar = ({ onReserve }: Props) => {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -60, opacity: 0 }}
           transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="fixed top-0 left-0 right-0 z-[60] bg-card/95 backdrop-blur-xl border-b border-coral/40 shadow-card"
+          className="fixed top-16 left-0 right-0 z-[45] bg-card/95 backdrop-blur-xl border-b border-coral/40 shadow-card"
         >
           <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-coral via-miel to-terracota" />
 

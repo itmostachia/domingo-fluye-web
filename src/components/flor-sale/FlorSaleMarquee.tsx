@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Flame } from "lucide-react";
 
 const ITEMS = [
-  "🔥 HOT SALE MAYO",
+  "🔥 FLOR SALE MAYO",
   "-47% OFF",
   "PAGO ÚNICO · SIN RENOVACIÓN",
   "ACCESO INMEDIATO",
