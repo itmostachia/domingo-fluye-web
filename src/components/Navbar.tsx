@@ -48,13 +48,13 @@ const Navbar = () => {
           <img src={logoImg} alt="Cocina en Flor" className="h-9 md:h-10 w-auto" />
         </Link>
 
-        {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-1">
+        {/* Desktop nav (lg+ to fit 10 items + auth + CTA) */}
+        <div className="hidden lg:flex items-center gap-0.5">
           {navItems.map((item) => (
             <Link
               key={item.href}
               to={item.href}
-              className={`relative text-sm font-medium px-3 py-2 rounded-lg transition-all duration-200 ${
+              className={`relative text-[13px] font-medium px-2.5 py-2 rounded-lg transition-all duration-200 whitespace-nowrap ${
                 item.hot
                   ? location.pathname === item.href
                     ? "text-coral bg-coral/10 font-bold"
@@ -64,7 +64,7 @@ const Navbar = () => {
                     : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
               }`}
             >
-              <span className="inline-flex items-center gap-1.5">
+              <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
                 {item.label}
                 {item.live && (
                   <span className="relative flex h-1.5 w-1.5">
@@ -126,10 +126,10 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Mobile toggle */}
+        {/* Mobile toggle (hasta lg) */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2 text-foreground rounded-lg hover:bg-muted/50 transition-colors"
+          className="lg:hidden p-2 text-foreground rounded-lg hover:bg-muted/50 transition-colors"
           aria-label="Menú"
         >
           {isOpen ? <X size={22} /> : <Menu size={22} />}
@@ -144,7 +144,7 @@ const Navbar = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="md:hidden bg-card/95 backdrop-blur-xl border-t border-border/50 overflow-hidden"
+            className="lg:hidden bg-card/95 backdrop-blur-xl border-t border-border/50 overflow-hidden"
           >
             <div className="container-wide py-4 flex flex-col gap-1">
               {navItems.map((item, i) => (

@@ -77,24 +77,24 @@ const FlorSalePromoCard = ({ promo, onReserve, featured, index }: Props) => {
       {/* Decorativo blob warm */}
       <div className={`absolute -top-32 -right-32 w-56 h-56 rounded-full bg-gradient-to-br ${accentClasses.bg} blur-3xl pointer-events-none`} />
 
-      {/* HOT SALE sticker */}
+      {/* HOT SALE sticker INSIDE card (no se corta por overflow-hidden) */}
       <motion.div
-        initial={{ rotate: -8, scale: 0 }}
-        animate={{ rotate: -8, scale: 1 }}
+        initial={{ rotate: -6, scale: 0 }}
+        animate={{ rotate: -6, scale: 1 }}
         transition={{ delay: 0.4 + index * 0.12, duration: 0.5, type: "spring" }}
-        className={`absolute top-5 right-5 z-10 bg-gradient-to-br ${accentClasses.badge} text-white px-3 py-1.5 rounded-xl shadow-cta`}
+        className={`absolute top-4 right-4 z-10 bg-gradient-to-br ${accentClasses.badge} text-white px-3 py-1.5 rounded-xl shadow-cta inline-flex items-center gap-1.5`}
       >
-        <p className="text-[10px] uppercase tracking-[0.2em] font-bold leading-none">🔥 Hot Sale</p>
-        <p className="text-xs font-display leading-none mt-0.5">-{savingsPercent(promo)}%</p>
+        <span className="text-[10px] uppercase tracking-[0.18em] font-bold leading-none">🔥 -{savingsPercent(promo)}%</span>
       </motion.div>
 
+      {/* Featured ribbon INSIDE (no -top-3 outside) */}
+      {featured && launched && (
+        <div className="absolute top-0 left-0 z-10 bg-gradient-to-r from-coral to-terracota text-white pl-4 pr-5 py-1.5 rounded-br-2xl text-[10px] font-bold uppercase tracking-wider shadow-lg flex items-center gap-1.5">
+          <span>⭐</span> Más elegida
+        </div>
+      )}
+
       <div className="relative p-7 md:p-8 flex flex-col h-full">
-        {/* Featured badge top */}
-        {featured && launched && (
-          <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-coral to-terracota text-white px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider whitespace-nowrap shadow-lg">
-            ⭐ Más elegida
-          </span>
-        )}
 
         {/* Title */}
         <div className="mb-4 mt-1">

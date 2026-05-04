@@ -5,10 +5,7 @@ import {
   Sparkles,
   Shield,
   Lock,
-  Gift,
-  Check,
   ArrowRight,
-  Heart,
   Users,
   Star,
   Quote,
@@ -43,7 +40,6 @@ import florFoto1 from "@/assets/flor-foto-1.webp";
 import florFoto1Mobile from "@/assets/flor-foto-1-mobile.webp";
 import florFoto2 from "@/assets/flor-foto-2.webp";
 import florFoto2Mobile from "@/assets/flor-foto-2-mobile.webp";
-import florFoto3 from "@/assets/flor-foto-3.webp";
 import florFoto4 from "@/assets/flor-foto-4.webp";
 import sticker47 from "@/assets/flor-sale-sticker-47.webp";
 import ribbonMayo from "@/assets/flor-sale-ribbon-mayo.webp";
@@ -181,31 +177,38 @@ const FlorSale = () => {
                 decoding="async"
               />
             </picture>
-            {/* Overlay coral suave */}
+            {/* Overlay coral suave + bottom oscurecedor para legibilidad de quote */}
             <div className="absolute inset-0 bg-gradient-to-tr from-coral/15 via-transparent to-miel/10 pointer-events-none" />
-            {/* Sticker -47% flotante */}
+            <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-foreground/40 via-foreground/10 to-transparent pointer-events-none" />
+
+            {/* Sticker -47% bajado para no chocar con navbar fixed (h-16) */}
             <motion.img
               src={sticker47}
               alt="-47% OFF"
               loading="eager"
               decoding="async"
-              className="absolute top-6 left-6 w-24 sm:w-28 md:w-32 h-auto drop-shadow-2xl select-none pointer-events-none"
+              className="absolute top-24 sm:top-28 left-5 sm:left-6 w-24 sm:w-28 md:w-32 h-auto drop-shadow-2xl select-none pointer-events-none z-10"
               animate={{ rotate: [-8, -2, -8], scale: [1, 1.06, 1] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               style={{ filter: "drop-shadow(0 8px 20px rgba(239, 123, 108, 0.4))" }}
             />
-            {/* Quote flotante mobile/desktop */}
+
+            {/* Quote flotante: SOLO desktop, posición optimizada para no overlap mesa */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="hidden md:block absolute bottom-6 left-6 right-6 lg:right-12 bg-card/92 backdrop-blur-xl rounded-2xl px-5 py-4 border border-coral/20 shadow-warm-lg max-w-[420px]"
+              className="hidden lg:flex absolute bottom-8 left-6 right-12 bg-card/95 backdrop-blur-xl rounded-2xl px-5 py-4 border border-coral/30 shadow-warm-lg max-w-[440px] items-start gap-3"
             >
-              <Quote size={14} className="text-coral mb-1" />
-              <p className="text-sm text-foreground italic leading-snug font-display">
-                "El sistema que armé para mi familia, ahora a 47% off."
-              </p>
-              <p className="text-xs text-muted-foreground mt-1.5 font-medium">— Flor, creadora del Club</p>
+              <div className="flex-shrink-0 w-9 h-9 rounded-full bg-gradient-to-br from-coral/30 to-miel/30 flex items-center justify-center">
+                <Quote size={14} className="text-coral" />
+              </div>
+              <div>
+                <p className="text-sm text-foreground italic leading-snug font-display">
+                  "El sistema que armé para mi familia, ahora a 47% off."
+                </p>
+                <p className="text-xs text-muted-foreground mt-1.5 font-medium">— Flor, creadora del Club</p>
+              </div>
             </motion.div>
           </div>
 
@@ -332,17 +335,21 @@ const FlorSale = () => {
         </div>
       </section>
 
-      {/* PROMO CARDS Z-PATTERN ============================================ */}
+      {/* PROMO CARDS ====================================================== */}
       <section id="promos" className="relative overflow-hidden py-16 md:py-24">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-warm-cream/40 to-background pointer-events-none" />
 
-        {/* Foto-3 background sutil */}
-        <div className="absolute inset-y-0 right-0 w-1/3 hidden lg:block opacity-[0.06] pointer-events-none">
-          <picture>
-            <source type="image/webp" srcSet={florFoto3} />
-            <img src={florFoto3} alt="" className="w-full h-full object-cover" loading="lazy" />
-          </picture>
-        </div>
+        {/* Decorativo blob coral en lugar de foto */}
+        <motion.div
+          className="absolute -top-40 right-0 w-[500px] h-[500px] rounded-full bg-coral/10 blur-[120px] pointer-events-none"
+          animate={{ scale: [1, 1.08, 1], opacity: [0.6, 0.85, 0.6] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute -bottom-32 -left-20 w-[400px] h-[400px] rounded-full bg-miel/15 blur-[110px] pointer-events-none"
+          animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.75, 0.5] }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+        />
 
         <div className="container-wide relative">
           <ScrollReveal>
@@ -401,104 +408,7 @@ const FlorSale = () => {
         </div>
       </section>
 
-      {/* CONOCÉ A FLOR (Founder Mode) ===================================== */}
-      <section className="relative overflow-hidden py-16 md:py-24 bg-gradient-to-br from-soft-peach/40 via-warm-cream to-soft-peach/30">
-        <div className="container-wide relative">
-          <div className="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-16 items-center">
-            {/* Texto izquierda */}
-            <ScrollReveal>
-              <span className="inline-block text-xs font-semibold uppercase tracking-[0.22em] text-coral mb-4 bg-coral/10 px-4 py-1.5 rounded-full">
-                Conocé a Flor
-              </span>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground leading-tight mb-5">
-                "Esto no es un sistema más.
-                <br />
-                <span className="text-gradient-warm">Es el que uso con mi familia."</span>
-              </h2>
-              <div className="space-y-4 text-base md:text-lg text-muted-foreground leading-relaxed mb-7">
-                <p>
-                  Soy Flor, mamá, cocinera y creadora de <strong className="text-foreground">Cocina en Flor</strong>.
-                  Hace años que armo el menú de mi semana en 90 minutos del domingo.
-                </p>
-                <p>
-                  Cuando mis amigas empezaron a pedirme <em>"el sistema"</em>, lo escribí. Hoy más
-                  de <strong className="text-foreground">100 mamás</strong> lo siguen cada mes.
-                </p>
-                <p className="text-foreground font-medium">
-                  Esta es la primera vez que abrimos los recetarios + manual a este precio. Solo en mayo.
-                </p>
-              </div>
-              <div className="flex flex-wrap items-center gap-4">
-                <button
-                  onClick={handleHeroReserve}
-                  className="group inline-flex items-center gap-2 bg-foreground hover:bg-foreground/90 text-primary-foreground px-7 py-4 rounded-xl font-bold text-base shadow-cta hover:shadow-glow active:scale-95 transition-all"
-                >
-                  Empezar mi mayo
-                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                </button>
-                <span className="text-xs text-muted-foreground inline-flex items-center gap-1.5">
-                  <Lock size={11} className="text-green-600" />
-                  Sin permanencia · Pago único
-                </span>
-              </div>
-            </ScrollReveal>
-
-            {/* Foto Flor derecha + sticker logo flotante */}
-            <ScrollReveal delay={0.15}>
-              <div className="relative max-w-[480px] mx-auto lg:max-w-none">
-                <motion.div
-                  whileHover={{ y: -4 }}
-                  className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-warm-lg ring-1 ring-coral/15"
-                >
-                  <picture>
-                    <source
-                      type="image/webp"
-                      srcSet={`${florFoto1Mobile} 700w, ${florFoto1} 1200w`}
-                      sizes="(max-width: 1024px) 480px, 50vw"
-                    />
-                    <img
-                      src={florFoto1}
-                      alt="Flor cocinando en su casa"
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </picture>
-                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 via-transparent to-transparent" />
-                </motion.div>
-
-                {/* Logo CEF + Hot Sale flotante */}
-                <motion.img
-                  src={logoHot}
-                  alt="Cocina en Flor Hot Sale"
-                  className="absolute -bottom-6 -right-2 sm:-right-6 w-32 sm:w-40 md:w-44 h-auto drop-shadow-2xl select-none pointer-events-none"
-                  initial={{ rotate: -8, scale: 0 }}
-                  whileInView={{ rotate: -8, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, type: "spring", delay: 0.4 }}
-                  loading="lazy"
-                />
-
-                {/* Mini quote flotante mobile fallback */}
-                <motion.div
-                  className="md:hidden mt-5 bg-card/95 backdrop-blur-xl rounded-2xl p-4 border border-coral/20 shadow-warm"
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                >
-                  <Quote size={14} className="text-coral mb-1" />
-                  <p className="text-sm text-foreground italic leading-snug">
-                    "El sistema que armé para mi familia, ahora a 47% off."
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-1.5 font-medium">— Flor</p>
-                </motion.div>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* COMPARATIVA PRECIO DRAMATIC ====================================== */}
+      {/* COMPARATIVA PRECIO (anclar valor justo después de promos) ======== */}
       <section className="relative overflow-hidden py-16 md:py-20">
         <div className="absolute inset-0 bg-gradient-to-b from-background to-warm-cream/50 pointer-events-none" />
 
@@ -518,17 +428,19 @@ const FlorSale = () => {
             </div>
           </ScrollReveal>
 
+          {/* Wrapper extra con padding para el sticker absoluto que sale del card */}
           <ScrollReveal delay={0.1}>
-            <div className="relative bg-card rounded-3xl border-2 border-coral/20 shadow-warm-lg overflow-hidden max-w-3xl mx-auto">
-              {/* Sticker flotante esquina */}
+            <div className="relative max-w-3xl mx-auto pt-8 pr-6">
+              {/* Sticker flotante FUERA del card con overflow */}
               <motion.img
                 src={sticker47}
                 alt="-47% OFF"
-                className="absolute -top-6 -right-6 w-20 sm:w-24 h-auto z-10 select-none pointer-events-none drop-shadow-xl"
+                className="absolute top-0 right-0 w-20 sm:w-24 h-auto z-10 select-none pointer-events-none drop-shadow-xl"
                 animate={{ rotate: [-12, -4, -12] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               />
 
+              <div className="relative bg-card rounded-3xl border-2 border-coral/20 shadow-warm-lg overflow-hidden">
               <div className="bg-gradient-to-r from-coral/8 via-miel/12 to-coral/6 px-6 py-4 border-b border-border/40">
                 <div className="grid grid-cols-3 text-[11px] uppercase tracking-[0.18em] font-bold">
                   <span className="text-muted-foreground">Producto</span>
@@ -572,6 +484,7 @@ const FlorSale = () => {
                   Te ahorrás hasta $22.009 · -47% OFF
                 </span>
               </div>
+              </div>
             </div>
           </ScrollReveal>
 
@@ -592,85 +505,83 @@ const FlorSale = () => {
         </div>
       </section>
 
-      {/* MAYO ANTES / DESPUÉS ============================================ */}
-      <section className="relative overflow-hidden py-16 md:py-20">
-        <div className="absolute inset-0 bg-gradient-section pointer-events-none" />
-        {/* Foto-3 sutil */}
-        <div className="absolute inset-y-0 right-0 w-1/2 hidden md:block opacity-[0.05] pointer-events-none">
-          <picture>
-            <source type="image/webp" srcSet={florFoto3} />
-            <img src={florFoto3} alt="" className="w-full h-full object-cover" loading="lazy" />
-          </picture>
-        </div>
-
-        <div className="container-tight relative">
-          <ScrollReveal>
-            <div className="text-center mb-10 max-w-2xl mx-auto">
-              <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-coral mb-3 bg-coral/10 px-4 py-1.5 rounded-full">
-                Tu mayo — antes vs después
+      {/* CONOCÉ A FLOR (Founder Mode) — después de comparativa para trust ===== */}
+      <section className="relative overflow-hidden py-16 md:py-24 bg-gradient-to-br from-soft-peach/40 via-warm-cream to-soft-peach/30">
+        <div className="container-wide relative">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-16 items-center">
+            {/* Texto izquierda */}
+            <ScrollReveal>
+              <span className="inline-block text-xs font-semibold uppercase tracking-[0.22em] text-coral mb-4 bg-coral/10 px-4 py-1.5 rounded-full">
+                Conocé a Flor
               </span>
-              <h2 className="font-display text-3xl md:text-4xl text-foreground mb-3">
-                Cómo se siente cocinar con un sistema
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground leading-tight mb-5">
+                "Esto no es un sistema más.
+                <br />
+                <span className="text-gradient-warm">Es el que uso con mi familia."</span>
               </h2>
-              <p className="text-muted-foreground text-base md:text-lg">
-                No es magia. Es un plan que ya organizó la semana de +100 familias.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto">
-            <ScrollReveal delay={0.05}>
-              <div className="bg-card rounded-2xl p-7 border-2 border-border/60 h-full relative">
-                <div className="absolute top-5 right-5 text-[10px] uppercase tracking-wider font-bold text-muted-foreground bg-muted px-2.5 py-1 rounded-full">
-                  Sin Flor Sale
-                </div>
-                <h3 className="font-display text-xl text-foreground/85 mb-4 pr-24">
-                  Mayo en piloto automático
-                </h3>
-                <ul className="space-y-3">
-                  {[
-                    "Domingo a la noche pensando \"qué cocino mañana\".",
-                    "Comprás dos veces por semana porque no tenés lista.",
-                    "Pedís delivery 3 veces y desblanqueas el presupuesto.",
-                    "El freezer es un misterio: lo abrís y no sabés qué hay.",
-                    "El lunes te despertás con esa angustia de siempre.",
-                  ].map((line) => (
-                    <li key={line} className="flex items-start gap-2.5 text-sm text-muted-foreground">
-                      <span className="flex-shrink-0 w-5 h-5 rounded-full bg-muted flex items-center justify-center mt-0.5">
-                        <span className="text-muted-foreground">·</span>
-                      </span>
-                      {line}
-                    </li>
-                  ))}
-                </ul>
+              <div className="space-y-4 text-base md:text-lg text-muted-foreground leading-relaxed mb-7">
+                <p>
+                  Soy Flor, mamá, cocinera y creadora de <strong className="text-foreground">Cocina en Flor</strong>.
+                  Hace años que armo el menú de mi semana en 90 minutos del domingo.
+                </p>
+                <p>
+                  Cuando mis amigas empezaron a pedirme <em>"el sistema"</em>, lo escribí. Hoy más
+                  de <strong className="text-foreground">100 mamás</strong> lo siguen cada mes.
+                </p>
+                <p className="text-foreground font-medium">
+                  Esta es la primera vez que abrimos los recetarios + manual a este precio. Solo en mayo.
+                </p>
+              </div>
+              <div className="flex flex-wrap items-center gap-4">
+                <button
+                  onClick={handleHeroReserve}
+                  className="group inline-flex items-center gap-2 bg-foreground hover:bg-foreground/90 text-primary-foreground px-7 py-4 rounded-xl font-bold text-base shadow-cta hover:shadow-glow active:scale-95 transition-all"
+                >
+                  Empezar mi mayo
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                </button>
+                <span className="text-xs text-muted-foreground inline-flex items-center gap-1.5">
+                  <Lock size={11} className="text-green-600" />
+                  Sin permanencia · Pago único
+                </span>
               </div>
             </ScrollReveal>
 
+            {/* Foto Flor derecha — wrapper con padding para logo flotante que sale */}
             <ScrollReveal delay={0.15}>
-              <div className="relative bg-gradient-to-br from-card via-card to-coral/5 rounded-2xl p-7 border-2 border-coral/40 shadow-warm h-full">
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-coral via-miel to-terracota rounded-t-2xl" />
-                <div className="absolute top-5 right-5 text-[10px] uppercase tracking-wider font-bold text-coral bg-coral/10 px-2.5 py-1 rounded-full inline-flex items-center gap-1">
-                  <Flame size={10} /> Con Flor Sale
-                </div>
-                <h3 className="font-display text-xl text-foreground mb-4 pr-28">
-                  Mayo resuelto desde el primer domingo
-                </h3>
-                <ul className="space-y-3">
-                  {[
-                    "Sabés qué cocinás cada semana antes de empezar.",
-                    "Una sola compra grande con la lista lista del manual.",
-                    "Ahorrás $30k+ del mes en comida pedida.",
-                    "Abrís el freezer y todo está rotulado y a mano.",
-                    "Llegás al lunes sin esa pregunta tóxica de las 8pm.",
-                  ].map((line) => (
-                    <li key={line} className="flex items-start gap-2.5 text-sm text-foreground/85">
-                      <span className="flex-shrink-0 w-5 h-5 rounded-full bg-coral/15 flex items-center justify-center mt-0.5">
-                        <Check size={10} className="text-coral" />
-                      </span>
-                      {line}
-                    </li>
-                  ))}
-                </ul>
+              <div className="relative max-w-[480px] mx-auto lg:max-w-none pb-8 sm:pb-12 pr-4 sm:pr-12">
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-warm-lg ring-1 ring-coral/15"
+                >
+                  <picture>
+                    <source
+                      type="image/webp"
+                      srcSet={`${florFoto1Mobile} 700w, ${florFoto1} 1200w`}
+                      sizes="(max-width: 1024px) 480px, 50vw"
+                    />
+                    <img
+                      src={florFoto1}
+                      alt="Flor cocinando en su casa"
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
+                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 via-transparent to-transparent" />
+                </motion.div>
+
+                {/* Logo CEF + Hot Sale flotante (ahora cabe gracias al padding del wrapper) */}
+                <motion.img
+                  src={logoHot}
+                  alt="Cocina en Flor Hot Sale"
+                  className="absolute bottom-0 right-0 w-32 sm:w-40 md:w-44 h-auto drop-shadow-2xl select-none pointer-events-none"
+                  initial={{ rotate: -8, scale: 0 }}
+                  whileInView={{ rotate: -8, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, type: "spring", delay: 0.4 }}
+                  loading="lazy"
+                />
               </div>
             </ScrollReveal>
           </div>
@@ -741,50 +652,6 @@ const FlorSale = () => {
               </ScrollReveal>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* GARANTÍA SELLO =================================================== */}
-      <section className="relative overflow-hidden py-10 md:py-14">
-        <div className="container-tight relative">
-          <ScrollReveal>
-            <div className="max-w-3xl mx-auto bg-gradient-to-br from-card via-card to-coral/5 rounded-3xl p-8 md:p-10 border-2 border-coral/30 shadow-warm-lg">
-              <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-6 md:gap-8 items-center">
-                <div className="relative w-28 h-28 md:w-32 md:h-32 mx-auto md:mx-0 flex-shrink-0">
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                    className="absolute inset-0 rounded-full bg-gradient-to-br from-coral via-miel to-terracota"
-                  />
-                  <div className="absolute inset-1.5 rounded-full bg-card flex items-center justify-center">
-                    <div className="text-center">
-                      <Shield size={26} className="text-coral mx-auto" />
-                      <div className="text-[9px] uppercase tracking-wider font-bold text-coral leading-tight mt-1">
-                        7 días
-                      </div>
-                      <div className="text-[8px] text-muted-foreground leading-tight">garantía</div>
-                    </div>
-                  </div>
-                </div>
-                <div className="text-center md:text-left">
-                  <h3 className="font-display text-2xl md:text-3xl text-foreground mb-2 leading-tight">
-                    Si no era para vos, te devolvemos el dinero
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Tenés <strong className="text-foreground">7 días desde la compra</strong> para
-                    probarlo en serio. Si en esa semana sentís que no te sirvió, escribís a{" "}
-                    <a
-                      href="mailto:hola@cocinaenflor.com.ar"
-                      className="text-coral font-semibold hover:underline"
-                    >
-                      hola@cocinaenflor.com.ar
-                    </a>
-                    {" "}y te devolvemos el 100%. Sin trámites, sin preguntas raras.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </ScrollReveal>
         </div>
       </section>
 
