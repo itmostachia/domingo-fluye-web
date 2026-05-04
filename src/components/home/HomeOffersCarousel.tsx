@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Flame, Sparkles, ArrowRight, Gift } from "lucide-react";
+import { Flame, Sparkles, ArrowRight, Gift, ChevronLeft, ChevronRight } from "lucide-react";
 import { isSaleActive, getTimeUntilSaleEnd, getRecentBuyersCount } from "@/lib/florSaleConfig";
 import { WORKSHOP, getTimeUntilWorkshop } from "@/lib/workshopConfig";
 
@@ -103,6 +103,26 @@ const HomeOffersCarousel = () => {
               )}
             </motion.div>
           </AnimatePresence>
+
+          {/* Flechas prev/next (solo si hay 2+ slides) */}
+          {slides.length > 1 && (
+            <>
+              <button
+                onClick={() => setIndex((i) => (i - 1 + slides.length) % slides.length)}
+                aria-label="Promo anterior"
+                className="absolute left-2 sm:-left-2 md:-left-5 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-card/95 backdrop-blur-sm border border-coral/30 shadow-card hover:shadow-warm hover:bg-coral hover:text-white text-coral active:scale-95 transition-all duration-200 flex items-center justify-center z-10"
+              >
+                <ChevronLeft size={18} />
+              </button>
+              <button
+                onClick={() => setIndex((i) => (i + 1) % slides.length)}
+                aria-label="Promo siguiente"
+                className="absolute right-2 sm:-right-2 md:-right-5 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-card/95 backdrop-blur-sm border border-coral/30 shadow-card hover:shadow-warm hover:bg-coral hover:text-white text-coral active:scale-95 transition-all duration-200 flex items-center justify-center z-10"
+              >
+                <ChevronRight size={18} />
+              </button>
+            </>
+          )}
 
           {/* Dots indicators (solo si hay 2+ slides) */}
           {slides.length > 1 && (

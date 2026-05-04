@@ -50,7 +50,9 @@ const Navbar = () => {
 
         {/* Desktop nav (lg+ to fit 10 items + auth + CTA) */}
         <div className="hidden lg:flex items-center gap-0.5">
-          {navItems.map((item) => (
+          {navItems
+            .filter((item) => !(item.hot && location.pathname === "/flor-sale"))
+            .map((item) => (
             <Link
               key={item.href}
               to={item.href}
@@ -147,7 +149,9 @@ const Navbar = () => {
             className="lg:hidden bg-card/95 backdrop-blur-xl border-t border-border/50 overflow-hidden"
           >
             <div className="container-wide py-4 flex flex-col gap-1">
-              {navItems.map((item, i) => (
+              {navItems
+                .filter((item) => !(item.hot && location.pathname === "/flor-sale"))
+                .map((item, i) => (
                 <motion.div
                   key={item.href}
                   initial={{ opacity: 0, x: -10 }}
