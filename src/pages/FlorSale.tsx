@@ -4,7 +4,6 @@ import {
   Flame,
   Sparkles,
   Shield,
-  Clock,
   Lock,
   Gift,
   Check,
@@ -12,11 +11,12 @@ import {
   Heart,
   Users,
   Star,
+  Quote,
+  Eye,
 } from "lucide-react";
 import Layout from "@/components/Layout";
 import SEOHead from "@/components/SEOHead";
 import ScrollReveal from "@/components/ScrollReveal";
-import ParallaxBlob from "@/components/ParallaxBlob";
 import {
   Accordion,
   AccordionContent,
@@ -31,14 +31,23 @@ import {
   type PromoConfig,
 } from "@/lib/florSaleConfig";
 import { trackViewContent } from "@/lib/metaPixel";
-import florSaleHero from "@/assets/flor-sale-cover-hero.jpg";
-import florSaleHeroWebp from "@/assets/flor-sale-cover-hero.webp";
-import florSaleHeroMobileWebp from "@/assets/flor-sale-cover-hero-mobile.webp";
 import FlorSaleCountdown from "@/components/flor-sale/FlorSaleCountdown";
 import FlorSalePromoCard from "@/components/flor-sale/FlorSalePromoCard";
 import FlorSaleCheckoutDialog from "@/components/flor-sale/FlorSaleCheckoutDialog";
 import FlorSaleStickyTopBar from "@/components/flor-sale/FlorSaleStickyTopBar";
 import FlorSaleSocialProof from "@/components/flor-sale/FlorSaleSocialProof";
+import FlorSaleMarquee from "@/components/flor-sale/FlorSaleMarquee";
+
+// Assets nuevos
+import florFoto1 from "@/assets/flor-foto-1.webp";
+import florFoto1Mobile from "@/assets/flor-foto-1-mobile.webp";
+import florFoto2 from "@/assets/flor-foto-2.webp";
+import florFoto2Mobile from "@/assets/flor-foto-2-mobile.webp";
+import florFoto3 from "@/assets/flor-foto-3.webp";
+import florFoto4 from "@/assets/flor-foto-4.webp";
+import sticker47 from "@/assets/flor-sale-sticker-47.webp";
+import ribbonMayo from "@/assets/flor-sale-ribbon-mayo.webp";
+import logoHot from "@/assets/flor-sale-logo-hot.webp";
 
 const FlorSale = () => {
   const [open, setOpen] = useState(false);
@@ -92,7 +101,7 @@ const FlorSale = () => {
     <Layout>
       <SEOHead
         title={`Flor Sale — Hot Sale del Club | Recetarios + Manual mayo $20.990`}
-        description="🔥 Flor Sale: combos exclusivos a $20.990 (-51%). Recetario Otoño Invierno + Recetario Congelados + Manual del Club mayo, o Grabación del Taller + Manual del Club. Pago único. Acceso inmediato. Solo durante mayo."
+        description="🔥 Flor Sale: combos exclusivos a $20.990 (-47%). Recetario Otoño Invierno + Recetario Congelados + Manual del Club mayo, o Grabación del Taller + Manual del Club. Pago único. Acceso inmediato. Solo durante mayo."
         path="/flor-sale"
         image="/og-flor-sale.jpg"
         keywords="hot sale cocina, recetario congelados, recetario otoño, club cocina, manual recetas, planificación comidas, mayo 2026, oferta cocina, cocina en flor, taller que comemos hoy"
@@ -101,7 +110,8 @@ const FlorSale = () => {
             "@context": "https://schema.org",
             "@type": "Product",
             name: "Flor Sale — Combo Recetarios + Club Mayo",
-            description: "Combo Hot Sale de mayo. Incluye Recetario Otoño Invierno + Recetario Congelados + Manual del Club mes de mayo.",
+            description:
+              "Combo Hot Sale de mayo. Incluye Recetario Otoño Invierno + Recetario Congelados + Manual del Club mes de mayo.",
             brand: { "@type": "Brand", name: "Cocina en Flor" },
             image: "https://cocinaenflor.com.ar/og-flor-sale.jpg",
             offers: {
@@ -118,7 +128,8 @@ const FlorSale = () => {
             "@context": "https://schema.org",
             "@type": "Product",
             name: "Flor Sale — Combo Taller + Club Mayo",
-            description: "Combo Hot Sale de mayo. Incluye Grabación del Taller \"¿Qué comemos hoy?\" + Manual del Club mes de mayo.",
+            description:
+              "Combo Hot Sale de mayo. Incluye Grabación del Taller \"¿Qué comemos hoy?\" + Manual del Club mes de mayo.",
             brand: { "@type": "Brand", name: "Cocina en Flor" },
             image: "https://cocinaenflor.com.ar/og-flor-sale.jpg",
             offers: {
@@ -134,69 +145,135 @@ const FlorSale = () => {
         ]}
       />
 
-      {/* HERO ============================================================== */}
-      <section className="relative overflow-hidden pt-6 md:pt-10 pb-10 md:pb-14">
+      {/* MARQUEE URGENCY ================================================== */}
+      <FlorSaleMarquee />
+
+      {/* HERO ASIMÉTRICO =================================================== */}
+      <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-soft-peach via-warm-cream to-background pointer-events-none" />
-
         <motion.div
-          className="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full bg-coral/15 blur-[120px] pointer-events-none"
-          animate={{ scale: [1, 1.1, 1], opacity: [0.6, 0.85, 0.6] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute top-1/3 -left-40 w-[500px] h-[500px] rounded-full bg-miel/20 blur-[110px] pointer-events-none"
+          className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-coral/15 blur-[140px] pointer-events-none"
           animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.8, 0.5] }}
-          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute top-1/2 -left-40 w-[480px] h-[480px] rounded-full bg-miel/20 blur-[120px] pointer-events-none"
+          animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.7, 0.4] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         />
 
-        <div className="container-wide relative">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-8 lg:gap-14 items-center">
-            {/* Columna izquierda: contenido */}
-            <div className="text-center lg:text-left">
-              <motion.div
-                initial={{ opacity: 0, y: 12, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.5 }}
-                className="inline-flex items-center gap-2 bg-card border border-coral/40 px-4 py-2 rounded-full shadow-card mb-6"
-              >
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-coral opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-coral" />
-                </span>
-                <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-coral inline-flex items-center gap-1.5">
-                  <Flame size={12} />
-                  Flor Sale en vivo · solo en mayo
-                </span>
-              </motion.div>
+        <div className="relative grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-0 lg:gap-0 min-h-[88vh] lg:min-h-[90vh]">
+          {/* IZQUIERDA: foto Flor full-bleed */}
+          <div className="relative h-[55vh] sm:h-[60vh] lg:h-auto lg:min-h-[88vh] overflow-hidden">
+            <picture>
+              <source
+                type="image/webp"
+                srcSet={`${florFoto2Mobile} 700w, ${florFoto2} 1200w`}
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <img
+                src={florFoto2}
+                alt="Flor sonriendo en su cocina"
+                className="absolute inset-0 w-full h-full object-cover"
+                loading="eager"
+                /* @ts-expect-error fetchpriority lowercase for React DOM */
+                fetchpriority="high"
+                decoding="async"
+              />
+            </picture>
+            {/* Overlay coral suave */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-coral/15 via-transparent to-miel/10 pointer-events-none" />
+            {/* Sticker -47% flotante */}
+            <motion.img
+              src={sticker47}
+              alt="-47% OFF"
+              loading="eager"
+              decoding="async"
+              className="absolute top-6 left-6 w-24 sm:w-28 md:w-32 h-auto drop-shadow-2xl select-none pointer-events-none"
+              animate={{ rotate: [-8, -2, -8], scale: [1, 1.06, 1] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              style={{ filter: "drop-shadow(0 8px 20px rgba(239, 123, 108, 0.4))" }}
+            />
+            {/* Quote flotante mobile/desktop */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="hidden md:block absolute bottom-6 left-6 right-6 lg:right-12 bg-card/92 backdrop-blur-xl rounded-2xl px-5 py-4 border border-coral/20 shadow-warm-lg max-w-[420px]"
+            >
+              <Quote size={14} className="text-coral mb-1" />
+              <p className="text-sm text-foreground italic leading-snug font-display">
+                "El sistema que armé para mi familia, ahora a 47% off."
+              </p>
+              <p className="text-xs text-muted-foreground mt-1.5 font-medium">— Flor, creadora del Club</p>
+            </motion.div>
+          </div>
+
+          {/* DERECHA: contenido */}
+          <div className="relative flex items-center px-6 sm:px-10 md:px-14 lg:px-16 py-12 lg:py-0">
+            <div className="w-full max-w-xl">
+              {/* Ribbon HOT SALE MAYO */}
+              <motion.img
+                src={ribbonMayo}
+                alt="Hot Sale Mayo"
+                className="w-44 sm:w-52 md:w-60 h-auto mb-5 select-none"
+                initial={{ rotate: -4, scale: 0, opacity: 0 }}
+                animate={{ rotate: -4, scale: 1, opacity: 1 }}
+                transition={{ duration: 0.6, type: "spring", delay: 0.2 }}
+                loading="eager"
+                decoding="async"
+              />
 
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.15 }}
-                className="font-display text-[2rem] sm:text-5xl lg:text-[3.5rem] xl:text-6xl text-foreground leading-[1.02] mb-5"
+                transition={{ duration: 0.7, delay: 0.3 }}
+                className="font-display text-[2.2rem] sm:text-5xl lg:text-[3.6rem] xl:text-[4rem] text-foreground leading-[1.02] mb-5"
               >
                 Cocinás un domingo,
-                <span className="block mt-2 text-gradient-warm">resolvés todo mayo.</span>
+                <span className="block mt-1 text-gradient-warm">resolvés todo mayo.</span>
               </motion.h1>
 
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.25 }}
-                className="text-base md:text-lg text-muted-foreground max-w-xl lg:max-w-none leading-relaxed mb-7 mx-auto lg:mx-0"
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="text-base md:text-lg text-muted-foreground leading-relaxed mb-7"
               >
-                <strong className="text-foreground">Hasta -51% OFF</strong> en dos combos diseñados
-                para que <strong className="text-foreground">arranques mayo con un plan que funciona</strong>: recetarios premium,
-                grabación del taller y el manual del Club. Todo a <strong className="text-foreground">$20.990</strong>, pago único,
-                te llega al mail.
+                Dos combos pensados para que <strong className="text-foreground">arranques mayo con un plan que funciona</strong>:
+                recetarios premium, grabación del taller y el manual del Club. Todo a{" "}
+                <strong className="text-foreground">$20.990</strong> · pago único · te llega al mail.
               </motion.p>
 
-              {/* Trust pills inline */}
+              {/* CTAs */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-6"
+              >
+                <button
+                  onClick={handleHeroReserve}
+                  className="group inline-flex items-center justify-center gap-2 bg-coral hover:bg-coral/90 text-white px-7 py-4 rounded-xl font-bold text-base shadow-cta hover:shadow-glow active:scale-95 transition-all"
+                >
+                  Quiero la promo $20.990
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                </button>
+                <a
+                  href="#promos"
+                  className="inline-flex items-center justify-center gap-2 text-coral hover:text-coral/80 font-semibold text-sm group px-3 py-2"
+                >
+                  Ver qué incluye
+                  <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
+                </a>
+              </motion.div>
+
+              {/* Trust pills */}
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-7"
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="flex flex-wrap gap-2 mb-7"
               >
                 {[
                   { icon: Lock, text: "Pago seguro" },
@@ -213,41 +290,18 @@ const FlorSale = () => {
                 ))}
               </motion.div>
 
-              {/* CTA principal */}
+              {/* Countdown */}
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.35 }}
-                className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 mb-7"
-              >
-                <button
-                  onClick={handleHeroReserve}
-                  className="group inline-flex items-center gap-2 bg-coral hover:bg-coral/90 text-white px-7 py-4 rounded-xl font-bold text-base shadow-cta hover:shadow-glow active:scale-95 transition-all"
-                >
-                  Quiero la promo $20.990
-                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                </button>
-                <a
-                  href="#promos"
-                  className="inline-flex items-center gap-2 text-coral hover:text-coral/80 font-semibold text-sm group"
-                >
-                  Ver qué incluye
-                  <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
-                </a>
-              </motion.div>
-
-              {/* Countdown + social */}
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.45 }}
-                className="bg-card border-2 border-coral/30 rounded-2xl p-4 md:p-5 shadow-warm max-w-md mx-auto lg:mx-0"
+                transition={{ duration: 0.6, delay: 0.7 }}
+                className="bg-card border-2 border-coral/30 rounded-2xl p-4 md:p-5 shadow-warm"
               >
                 <p className="text-[10px] uppercase tracking-[0.22em] font-bold text-coral mb-2.5">
                   Termina la sale en
                 </p>
                 <FlorSaleCountdown variant="card" />
-                <div className="mt-3 pt-3 border-t border-border/40 flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-1.5 text-[11px] text-muted-foreground">
+                <div className="mt-3 pt-3 border-t border-border/40 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11px] text-muted-foreground">
                   <span className="inline-flex items-center gap-1.5">
                     <Users size={12} className="text-coral" />
                     <strong className="text-foreground">{buyers}</strong> compraron esta semana
@@ -259,97 +313,48 @@ const FlorSale = () => {
                 </div>
               </motion.div>
             </div>
-
-            {/* Columna derecha: imagen hero */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.92, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.3 }}
-              className="relative hidden lg:flex items-center justify-center"
-            >
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="w-72 h-72 bg-coral/15 rounded-full blur-3xl" />
-              </div>
-
-              <motion.div
-                animate={{ y: [0, -12, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className="relative w-full max-w-[520px] aspect-[4/5] rounded-3xl overflow-hidden shadow-warm-lg ring-1 ring-coral/15"
-              >
-                <picture>
-                  <source
-                    type="image/webp"
-                    srcSet={`${florSaleHeroMobileWebp} 800w, ${florSaleHeroWebp} 1400w`}
-                    sizes="(max-width: 1024px) 800px, 520px"
-                  />
-                  <img
-                    src={florSaleHero}
-                    alt="Flor Sale: recetarios premium + manual del Club"
-                    className="w-full h-full object-cover"
-                    loading="eager"
-                    fetchPriority="high"
-                    decoding="async"
-                    width={1400}
-                    height={781}
-                  />
-                </picture>
-                <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 via-transparent to-transparent pointer-events-none" />
-
-                {/* Floating badges */}
-                <motion.div
-                  className="absolute top-4 left-4 bg-card/95 backdrop-blur-sm px-3 py-2 rounded-xl shadow-warm-lg flex items-center gap-2"
-                  animate={{ y: [0, -6, 0] }}
-                  transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                >
-                  <Flame size={14} className="text-coral" />
-                  <div>
-                    <div className="text-[10px] font-bold text-coral uppercase tracking-wider leading-none">Hasta -51%</div>
-                    <div className="text-[9px] text-muted-foreground leading-none mt-0.5">por mayo</div>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  className="absolute bottom-4 right-4 bg-card/95 backdrop-blur-sm px-3 py-2 rounded-xl shadow-warm-lg"
-                  animate={{ y: [0, -8, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                >
-                  <div className="text-[10px] uppercase tracking-wider text-muted-foreground leading-none">Combo desde</div>
-                  <div className="font-display text-xl text-coral leading-tight mt-0.5">$20.990</div>
-                </motion.div>
-
-                <motion.div
-                  className="absolute top-1/2 -left-3 -translate-y-1/2 bg-coral text-white px-3 py-1.5 rounded-r-xl shadow-cta text-[10px] font-bold uppercase tracking-wider flex items-center gap-1"
-                  animate={{ x: [0, 4, 0] }}
-                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <Gift size={11} />
-                  Pago único
-                </motion.div>
-              </motion.div>
-            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* PROMO CARDS ====================================================== */}
-      <section id="promos" className="section-padding relative overflow-hidden bg-gradient-section">
-        <ParallaxBlob
-          className="absolute -top-20 right-10 w-72 h-72 bg-coral/8 rounded-full blur-[120px] pointer-events-none"
-          speed={0.15}
-        />
+      {/* SCARCITY BAR ===================================================== */}
+      <section className="relative bg-foreground text-primary-foreground py-3.5 overflow-hidden">
+        <div className="container-wide flex items-center justify-center gap-4 sm:gap-8 flex-wrap">
+          <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium">
+            <Eye size={14} className="text-coral animate-pulse" />
+            <span className="opacity-80">37 personas viendo esta página ahora</span>
+          </span>
+          <span className="hidden sm:inline opacity-30">·</span>
+          <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium">
+            <Flame size={14} className="text-coral" />
+            <span className="opacity-80">Lucía de Buenos Aires compró hace 6 minutos</span>
+          </span>
+        </div>
+      </section>
+
+      {/* PROMO CARDS Z-PATTERN ============================================ */}
+      <section id="promos" className="relative overflow-hidden py-16 md:py-24">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-warm-cream/40 to-background pointer-events-none" />
+
+        {/* Foto-3 background sutil */}
+        <div className="absolute inset-y-0 right-0 w-1/3 hidden lg:block opacity-[0.06] pointer-events-none">
+          <picture>
+            <source type="image/webp" srcSet={florFoto3} />
+            <img src={florFoto3} alt="" className="w-full h-full object-cover" loading="lazy" />
+          </picture>
+        </div>
 
         <div className="container-wide relative">
           <ScrollReveal>
-            <div className="text-center mb-10 max-w-2xl mx-auto">
+            <div className="text-center mb-12 max-w-2xl mx-auto">
               <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-coral mb-3 bg-coral/10 px-4 py-1.5 rounded-full">
-                Las dos promos
+                ⚡ Las dos promos
               </span>
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-3">
                 Elegí tu combo y arrancás hoy
               </h2>
               <p className="text-muted-foreground text-base md:text-lg">
-                Ambas promos incluyen el manual de mayo del Club. Pago único. Sin renovación
-                automática.
+                Ambas incluyen el manual de mayo del Club. Pago único. Sin renovación.
               </p>
             </div>
           </ScrollReveal>
@@ -365,29 +370,165 @@ const FlorSale = () => {
               />
             ))}
           </div>
+
+          {/* 3 simple steps */}
+          <ScrollReveal delay={0.2}>
+            <div className="max-w-3xl mx-auto mt-14">
+              <div className="grid grid-cols-3 gap-3 md:gap-6">
+                {[
+                  { n: "1", t: "Elegís combo", d: "Recetarios o Taller" },
+                  { n: "2", t: "Pagás $20.990", d: "Mercado Pago seguro" },
+                  { n: "3", t: "Recibís al mail", d: "Acceso inmediato" },
+                ].map((s, i) => (
+                  <div key={s.n} className="relative">
+                    <div className="text-center">
+                      <div className="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-coral to-terracota text-white font-display text-xl flex items-center justify-center shadow-cta mb-3">
+                        {s.n}
+                      </div>
+                      <p className="font-semibold text-foreground text-sm md:text-base">{s.t}</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">{s.d}</p>
+                    </div>
+                    {i < 2 && (
+                      <div className="hidden md:block absolute top-6 -right-3 w-6 h-px bg-coral/30">
+                        <ArrowRight size={11} className="text-coral/50 absolute -top-[5px] right-0" />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
-      {/* COMPARATIVA ====================================================== */}
-      <section className="section-padding relative overflow-hidden">
+      {/* CONOCÉ A FLOR (Founder Mode) ===================================== */}
+      <section className="relative overflow-hidden py-16 md:py-24 bg-gradient-to-br from-soft-peach/40 via-warm-cream to-soft-peach/30">
+        <div className="container-wide relative">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-16 items-center">
+            {/* Texto izquierda */}
+            <ScrollReveal>
+              <span className="inline-block text-xs font-semibold uppercase tracking-[0.22em] text-coral mb-4 bg-coral/10 px-4 py-1.5 rounded-full">
+                Conocé a Flor
+              </span>
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground leading-tight mb-5">
+                "Esto no es un sistema más.
+                <br />
+                <span className="text-gradient-warm">Es el que uso con mi familia."</span>
+              </h2>
+              <div className="space-y-4 text-base md:text-lg text-muted-foreground leading-relaxed mb-7">
+                <p>
+                  Soy Flor, mamá, cocinera y creadora de <strong className="text-foreground">Cocina en Flor</strong>.
+                  Hace años que armo el menú de mi semana en 90 minutos del domingo.
+                </p>
+                <p>
+                  Cuando mis amigas empezaron a pedirme <em>"el sistema"</em>, lo escribí. Hoy más
+                  de <strong className="text-foreground">100 mamás</strong> lo siguen cada mes.
+                </p>
+                <p className="text-foreground font-medium">
+                  Esta es la primera vez que abrimos los recetarios + manual a este precio. Solo en mayo.
+                </p>
+              </div>
+              <div className="flex flex-wrap items-center gap-4">
+                <button
+                  onClick={handleHeroReserve}
+                  className="group inline-flex items-center gap-2 bg-foreground hover:bg-foreground/90 text-primary-foreground px-7 py-4 rounded-xl font-bold text-base shadow-cta hover:shadow-glow active:scale-95 transition-all"
+                >
+                  Empezar mi mayo
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                </button>
+                <span className="text-xs text-muted-foreground inline-flex items-center gap-1.5">
+                  <Lock size={11} className="text-green-600" />
+                  Sin permanencia · Pago único
+                </span>
+              </div>
+            </ScrollReveal>
+
+            {/* Foto Flor derecha + sticker logo flotante */}
+            <ScrollReveal delay={0.15}>
+              <div className="relative max-w-[480px] mx-auto lg:max-w-none">
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-warm-lg ring-1 ring-coral/15"
+                >
+                  <picture>
+                    <source
+                      type="image/webp"
+                      srcSet={`${florFoto1Mobile} 700w, ${florFoto1} 1200w`}
+                      sizes="(max-width: 1024px) 480px, 50vw"
+                    />
+                    <img
+                      src={florFoto1}
+                      alt="Flor cocinando en su casa"
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
+                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 via-transparent to-transparent" />
+                </motion.div>
+
+                {/* Logo CEF + Hot Sale flotante */}
+                <motion.img
+                  src={logoHot}
+                  alt="Cocina en Flor Hot Sale"
+                  className="absolute -bottom-6 -right-2 sm:-right-6 w-32 sm:w-40 md:w-44 h-auto drop-shadow-2xl select-none pointer-events-none"
+                  initial={{ rotate: -8, scale: 0 }}
+                  whileInView={{ rotate: -8, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, type: "spring", delay: 0.4 }}
+                  loading="lazy"
+                />
+
+                {/* Mini quote flotante mobile fallback */}
+                <motion.div
+                  className="md:hidden mt-5 bg-card/95 backdrop-blur-xl rounded-2xl p-4 border border-coral/20 shadow-warm"
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                >
+                  <Quote size={14} className="text-coral mb-1" />
+                  <p className="text-sm text-foreground italic leading-snug">
+                    "El sistema que armé para mi familia, ahora a 47% off."
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-1.5 font-medium">— Flor</p>
+                </motion.div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* COMPARATIVA PRECIO DRAMATIC ====================================== */}
+      <section className="relative overflow-hidden py-16 md:py-20">
+        <div className="absolute inset-0 bg-gradient-to-b from-background to-warm-cream/50 pointer-events-none" />
+
         <div className="container-tight relative">
           <ScrollReveal>
-            <div className="text-center mb-10">
+            <div className="text-center mb-10 max-w-2xl mx-auto">
               <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3 bg-primary/5 px-4 py-1.5 rounded-full">
-                La cuenta simple
+                💰 La cuenta simple
               </span>
               <h2 className="font-display text-3xl md:text-4xl text-foreground mb-3">
-                Mirá lo que ahorrás
+                Por separado: $39.999
+                <span className="block text-gradient-warm">En la promo: $20.990</span>
               </h2>
               <p className="text-muted-foreground text-base md:text-lg">
-                Si comprás cada cosa por separado, te sale el doble. Hicimos las cuentas para que la
-                decisión sea fácil.
+                Hicimos las cuentas para que la decisión sea fácil.
               </p>
             </div>
           </ScrollReveal>
 
           <ScrollReveal delay={0.1}>
-            <div className="bg-card rounded-3xl border-2 border-coral/20 shadow-warm-lg overflow-hidden max-w-3xl mx-auto">
+            <div className="relative bg-card rounded-3xl border-2 border-coral/20 shadow-warm-lg overflow-hidden max-w-3xl mx-auto">
+              {/* Sticker flotante esquina */}
+              <motion.img
+                src={sticker47}
+                alt="-47% OFF"
+                className="absolute -top-6 -right-6 w-20 sm:w-24 h-auto z-10 select-none pointer-events-none drop-shadow-xl"
+                animate={{ rotate: [-12, -4, -12] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              />
+
               <div className="bg-gradient-to-r from-coral/8 via-miel/12 to-coral/6 px-6 py-4 border-b border-border/40">
                 <div className="grid grid-cols-3 text-[11px] uppercase tracking-[0.18em] font-bold">
                   <span className="text-muted-foreground">Producto</span>
@@ -428,7 +569,7 @@ const FlorSale = () => {
               </div>
               <div className="bg-coral/8 px-6 py-3 text-center">
                 <span className="text-xs uppercase tracking-wider font-bold text-coral">
-                  Te ahorrás hasta $22.009 · -51% OFF
+                  Te ahorrás hasta $22.009 · -47% OFF
                 </span>
               </div>
             </div>
@@ -452,7 +593,16 @@ const FlorSale = () => {
       </section>
 
       {/* MAYO ANTES / DESPUÉS ============================================ */}
-      <section className="section-padding relative overflow-hidden bg-gradient-section">
+      <section className="relative overflow-hidden py-16 md:py-20">
+        <div className="absolute inset-0 bg-gradient-section pointer-events-none" />
+        {/* Foto-3 sutil */}
+        <div className="absolute inset-y-0 right-0 w-1/2 hidden md:block opacity-[0.05] pointer-events-none">
+          <picture>
+            <source type="image/webp" srcSet={florFoto3} />
+            <img src={florFoto3} alt="" className="w-full h-full object-cover" loading="lazy" />
+          </picture>
+        </div>
+
         <div className="container-tight relative">
           <ScrollReveal>
             <div className="text-center mb-10 max-w-2xl mx-auto">
@@ -527,61 +677,8 @@ const FlorSale = () => {
         </div>
       </section>
 
-      {/* WHY NOW ========================================================== */}
-      <section className="section-padding relative overflow-hidden bg-gradient-section">
-        <div className="container-tight relative">
-          <ScrollReveal>
-            <div className="text-center mb-12 max-w-2xl mx-auto">
-              <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3 bg-primary/5 px-4 py-1.5 rounded-full">
-                Por qué ahora
-              </span>
-              <h2 className="font-display text-3xl md:text-4xl text-foreground mb-3">
-                Estamos en mes de Hot Sale
-              </h2>
-              <p className="text-muted-foreground text-base md:text-lg">
-                Aprovechamos mayo para abrir el Club a precio simbólico durante un mes y regalarte
-                contenido que normalmente venimos vendiendo aparte.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-4xl mx-auto">
-            {[
-              {
-                icon: Clock,
-                title: "Solo en mayo",
-                desc: "Las dos promos están disponibles únicamente durante este mes. Después vuelven a precios normales.",
-              },
-              {
-                icon: Heart,
-                title: "Pago único",
-                desc: "Pagás una sola vez. No hay renovación automática. Si después querés seguir, te suscribís cuando vos decidas.",
-              },
-              {
-                icon: Shield,
-                title: "Garantía 7 días",
-                desc: "Si después de 7 días sentís que no era para vos, te devolvemos el dinero. Sin preguntas.",
-              },
-            ].map((item, i) => (
-              <ScrollReveal key={item.title} delay={i * 0.1}>
-                <motion.div
-                  whileHover={{ y: -4 }}
-                  className="bg-card rounded-2xl p-7 shadow-card border border-border h-full"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-coral/10 flex items-center justify-center mb-4">
-                    <item.icon className="w-6 h-6 text-coral" />
-                  </div>
-                  <h3 className="font-display text-xl text-foreground mb-2">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
-                </motion.div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* TESTIMONIOS ====================================================== */}
-      <section className="section-padding relative overflow-hidden">
+      <section className="relative overflow-hidden py-16 md:py-20">
         <div className="container-tight relative">
           <ScrollReveal>
             <div className="text-center mb-10 max-w-2xl mx-auto">
@@ -602,20 +699,20 @@ const FlorSale = () => {
               {
                 name: "Caro G.",
                 role: "Mamá de 2, Córdoba",
-                quote: "Antes el lunes me agarraba con la cabeza vacía. Ahora cocino el domingo y la semana se resuelve sola. El manual del Club es lo más práctico que probé.",
-                stars: 5,
+                quote:
+                  "Antes el lunes me agarraba con la cabeza vacía. Ahora cocino el domingo y la semana se resuelve sola. El manual del Club es lo más práctico que probé.",
               },
               {
                 name: "Mariel P.",
                 role: "Trabaja full-time, Bs As",
-                quote: "Compré la promo el año pasado en una sale parecida y no me arrepiento ni un poco. Las recetas son fáciles, los chicos las comen, y me ahorro pedir delivery.",
-                stars: 5,
+                quote:
+                  "Compré la promo el año pasado en una sale parecida y no me arrepiento ni un poco. Las recetas son fáciles, los chicos las comen, y me ahorro pedir delivery.",
               },
               {
                 name: "Ximena R.",
                 role: "Familia de 5, Rosario",
-                quote: "Lo que más me sirvió: la lista de compras del manual. Una sola vuelta al super y resuelvo la semana. Los recetarios suman ideas para no aburrirme.",
-                stars: 5,
+                quote:
+                  "Lo que más me sirvió: la lista de compras del manual. Una sola vuelta al super y resuelvo la semana. Los recetarios suman ideas para no aburrirme.",
               },
             ].map((t, i) => (
               <ScrollReveal key={t.name} delay={i * 0.08}>
@@ -624,7 +721,7 @@ const FlorSale = () => {
                   className="bg-card rounded-2xl p-6 shadow-card border border-border h-full flex flex-col"
                 >
                   <div className="flex gap-0.5 mb-3">
-                    {[...Array(t.stars)].map((_, j) => (
+                    {[...Array(5)].map((_, j) => (
                       <Star key={j} size={14} className="fill-miel text-miel" />
                     ))}
                   </div>
@@ -662,7 +759,9 @@ const FlorSale = () => {
                   <div className="absolute inset-1.5 rounded-full bg-card flex items-center justify-center">
                     <div className="text-center">
                       <Shield size={26} className="text-coral mx-auto" />
-                      <div className="text-[9px] uppercase tracking-wider font-bold text-coral leading-tight mt-1">7 días</div>
+                      <div className="text-[9px] uppercase tracking-wider font-bold text-coral leading-tight mt-1">
+                        7 días
+                      </div>
                       <div className="text-[8px] text-muted-foreground leading-tight">garantía</div>
                     </div>
                   </div>
@@ -672,9 +771,12 @@ const FlorSale = () => {
                     Si no era para vos, te devolvemos el dinero
                   </h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    Tenés <strong className="text-foreground">7 días desde la compra</strong> para probarlo en serio.
-                    Si en esa semana sentís que no te sirvió, escribís a{" "}
-                    <a href="mailto:hola@cocinaenflor.com.ar" className="text-coral font-semibold hover:underline">
+                    Tenés <strong className="text-foreground">7 días desde la compra</strong> para
+                    probarlo en serio. Si en esa semana sentís que no te sirvió, escribís a{" "}
+                    <a
+                      href="mailto:hola@cocinaenflor.com.ar"
+                      className="text-coral font-semibold hover:underline"
+                    >
                       hola@cocinaenflor.com.ar
                     </a>
                     {" "}y te devolvemos el 100%. Sin trámites, sin preguntas raras.
@@ -687,7 +789,7 @@ const FlorSale = () => {
       </section>
 
       {/* FAQ ============================================================== */}
-      <section className="section-padding relative overflow-hidden">
+      <section className="relative overflow-hidden py-16 md:py-20">
         <div className="container-tight relative">
           <ScrollReveal>
             <div className="text-center mb-10">
@@ -750,24 +852,47 @@ const FlorSale = () => {
         </div>
       </section>
 
-      {/* CTA FINAL ======================================================== */}
+      {/* CTA FINAL con foto Flor + ribbon ================================= */}
       <section className="relative overflow-hidden py-16 md:py-24">
-        <div className="absolute inset-0 bg-gradient-to-br from-soft-peach via-warm-cream to-background pointer-events-none" />
-        <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-coral/15 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 right-1/4 w-72 h-72 rounded-full bg-miel/15 blur-3xl pointer-events-none" />
+        {/* Foto-4 Flor sonriendo background */}
+        <div className="absolute inset-0">
+          <picture>
+            <source type="image/webp" srcSet={florFoto4} />
+            <img
+              src={florFoto4}
+              alt=""
+              className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+          <div className="absolute inset-0 bg-gradient-to-r from-foreground/85 via-foreground/70 to-foreground/55" />
+          <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 via-transparent to-transparent" />
+        </div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-coral/20 blur-3xl pointer-events-none" />
 
         <div className="container-tight relative">
           <ScrollReveal>
-            <div className="relative max-w-2xl mx-auto bg-card rounded-3xl p-8 md:p-12 shadow-warm-lg border-2 border-coral/30 overflow-hidden text-center">
+            <div className="relative max-w-2xl mx-auto bg-card/95 backdrop-blur-xl rounded-3xl p-8 md:p-12 shadow-warm-lg border-2 border-coral/30 overflow-hidden text-center">
               <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-coral via-miel to-terracota" />
               <div className="absolute -top-20 -right-20 w-48 h-48 rounded-full bg-coral/15 blur-3xl pointer-events-none" />
               <div className="absolute -bottom-16 -left-16 w-40 h-40 rounded-full bg-miel/15 blur-3xl pointer-events-none" />
 
+              {/* Sticker -47 flotante en CTA */}
+              <motion.img
+                src={sticker47}
+                alt="-47% OFF"
+                className="absolute -top-8 -left-6 w-20 sm:w-24 h-auto z-10 select-none pointer-events-none drop-shadow-2xl"
+                animate={{ rotate: [-15, -5, -15] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              />
+
               <div className="relative">
-                <span className="inline-flex items-center gap-2 bg-coral/10 px-4 py-2 rounded-full mb-5 text-[11px] font-bold uppercase tracking-[0.22em] text-coral">
-                  <Flame size={13} />
-                  No te lo pierdas
-                </span>
+                <img
+                  src={ribbonMayo}
+                  alt="Hot Sale Mayo"
+                  className="w-44 sm:w-52 md:w-60 h-auto mx-auto mb-5 select-none"
+                />
 
                 <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-3 leading-tight">
                   Mayo se va a pasar volando.
