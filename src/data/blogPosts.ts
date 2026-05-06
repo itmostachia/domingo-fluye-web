@@ -1,6 +1,9 @@
 import blogBowlOtono from "@/assets/blog-bowl-otono.jpg";
 import blogVerdurasTemporada from "@/assets/blog-verduras-temporada.jpg";
 import blogSopaCrema from "@/assets/blog-sopa-crema.jpg";
+import blogPancitosAvena from "@/assets/blog-pancitos-avena.jpg";
+import blogCrumbleManzana from "@/assets/blog-crumble-manzana.jpg";
+import blogFreezerTuppers from "@/assets/blog-freezer-tuppers.jpg";
 
 export interface BlogPost {
   slug: string;
@@ -13,6 +16,147 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
+  {
+    slug: "freezer-regla-cinta-tuppers",
+    title: "Expedientes Secretos: el agujero negro de los tuppers y mi regla de oro para el freezer",
+    excerpt: "Dejá de descongelar OVNIs culinarios. Mi truco de 5 segundos para que el freezer trabaje para vos.",
+    date: "5 de mayo, 2026",
+    tag: "Organización",
+    coverImage: blogFreezerTuppers,
+    content: `
+      <p>Hoy quiero hablar de uno de los misterios más grandes de la humanidad (y de nuestras cocinas, obvio). Seamos sinceras: <strong>¿a dónde van a parar las tapas de los tuppers?</strong> Te juro que en mi casa hay un agujero negro que se las traga. Comprás el set de 5 tuppers divinos, y a los dos meses tenés 5 bases y solo 2 tapas que encima no encajan bien. Es matemático.</p>
+
+      <figure>
+        <img src="${blogFreezerTuppers}" alt="Tuppers de vidrio organizados con etiquetas de cinta de papel" />
+        <figcaption>Cinta de papel + marcador = tu freezer deja de ser un cementerio.</figcaption>
+      </figure>
+
+      <p>Pero el misterio se pone peor, y seguro te pasó. Lográs armar un tupper con la comida que sobró o con esa "tanda doble" que hiciste, lo metés al freezer toda orgullosa de tu organización, y a los 15 días lo sacás y decís: <em>"¿Qué corno es este bloque de hielo rojo?"</em>.</p>
+
+      <p>Lo mirás a trasluz, lo girás... ¿Es puré de calabaza? ¿Es la salsa del tuco de la semana pasada? Terminás descongelando un "OVNI culinario" en el microondas y rezando para que a tu hijo le guste lo que sea que salga de ahí adentro.</p>
+
+      <h2>✍️ Mi Regla N°1 de Organización (la regla de la cinta)</h2>
+
+      <p>No confíes en tu memoria. Repito: <strong>nunca confíes en tu memoria</strong>. Tu memoria de madre a las 9 de la noche, después de todo un día de locos, te miente. Vas a pensar que te vas a acordar que ese tupper del fondo tiene lentejas, pero te aseguro que en 10 días se te borró del disco rígido.</p>
+
+      <p><strong>¿El atajo más barato y efectivo del mundo?</strong> Comprate un rollito de cinta de papel (sí, la de pintor) y un marcador indeleble. Dejalos a mano en un cajón de la cocina, cerquita de la mesada.</p>
+
+      <p>A partir de hoy, todo, absolutamente TODO lo que entra al freezer, lleva un pedacito de cinta pegado en la tapa con dos datos innegociables:</p>
+
+      <ol>
+        <li><strong>QUÉ ES</strong> (Ej: Tarta de choclo y queso)</li>
+        <li><strong>LA FECHA EN QUE LO HICISTE</strong> (Ej: 15/05)</li>
+      </ol>
+
+      <blockquote>
+        <p>"Parece una pavada atómica, pero este hábito de 5 segundos te cambia la vida."</p>
+      </blockquote>
+
+      <p>Te salva de tirar comida a la basura, te ayuda a armar el menú de la semana sabiendo qué "salvavidas" tenés listos, y el freezer pasa a ser tu mejor aliado.</p>
+
+      <p>Si tu freezer hoy es un caos y sentís que cocinás todos los días sin ver resultados, en el <strong>Club del Domingo</strong> nos dedicamos a armar estrategias para que cocines una vez y comas varias.</p>
+    `,
+  },
+  {
+    slug: "bajon-dulce-crumble-manzana-sarten",
+    title: "El bajón dulce de las 4 PM: mi atajo de 5 minutos para no bajarte un paquete de galletitas",
+    excerpt: "Crumble de manzana en sartén, calentito y nutritivo, en el mismo tiempo que tarda el agua del mate.",
+    date: "2 de mayo, 2026",
+    tag: "Recetas",
+    coverImage: blogCrumbleManzana,
+    content: `
+      <p>Pasa siempre, es matemático. Son las 4 o 5 de la tarde. Llegás de buscar a tu hijo al cole, dejan las mochilas tiradas por ahí, ponés la pava para armar unos buenos mates y, de repente... te ataca.</p>
+
+      <p>Te agarra esa necesidad incontrolable de comer <strong>ALGO DULCE</strong>.</p>
+
+      <figure>
+        <img src="${blogCrumbleManzana}" alt="Crumble de manzana humeante en una sartén con avena y canela" />
+        <figcaption>Un postre de restaurante en 5 minutos, sin prender el horno.</figcaption>
+      </figure>
+
+      <p>Con este fresquete que ya se instaló en San Francisco, seamos sinceras: el cuerpo no te pide pelar una mandarina. Te pide harinas, te pide chocolate, te pide agarrar ese paquete de galletitas que tenés escondido en la alacena y liquidarlo sin respirar.</p>
+
+      <p>El problema (y vos lo sabés tan bien como yo) es que si caemos en el paquete de ultraprocesados, a la media hora tu hijo y vos tienen hambre de nuevo, te sentís pesada y la energía se te va al subsuelo.</p>
+
+      <h2>🍎 Crumble de manzana exprés en sartén (¡en 5 minutos!)</h2>
+
+      <p>Olvidate de prender el horno o ensuciar tres mil boles. Esto se hace todo en una sola sartén.</p>
+
+      <h3>¿Qué necesitás? (cantidades a ojo, cero estrés)</h3>
+      <ul>
+        <li>1 manzana (roja o verde, la que haya).</li>
+        <li>Un poquito de manteca o aceite de coco.</li>
+        <li>Canela (le da el toque mágico).</li>
+        <li>3 cucharadas de avena en hojuelas.</li>
+        <li>1 cucharada de pasta de maní (o manteca blanda).</li>
+        <li>Un chorrito de miel o el endulzante que uses.</li>
+      </ul>
+
+      <h3>El paso a paso</h3>
+      <ol>
+        <li><strong>A la sartén:</strong> cortá la manzana en cubitos (¡dejale la cáscara!). Tirala a una sartén caliente con la manteca y la canela. 2 o 3 minutos a fuego medio.</li>
+        <li><strong>La arenita:</strong> en una taza, mezclá avena, pasta de maní y miel hasta formar una "arenita" húmeda.</li>
+        <li><strong>Toque final:</strong> tirá la arenita por arriba de las manzanas. Revolvé 2 minutos más hasta que la avena se tueste. ¡Listo!</li>
+      </ol>
+
+      <blockquote>
+        <p>"Es un abrazo al alma para esas tardes grises."</p>
+      </blockquote>
+
+      <p>Tener estos "ases bajo la manga" es lo que hace que comer sano deje de ser un sacrificio. En el <strong>Club del Domingo</strong> armamos estrategias reales para mamás reales que quieren organizarse sin vivir esclavas de la cocina.</p>
+    `,
+  },
+  {
+    slug: "pancitos-avena-queso-snack-vianda",
+    title: "El terror de las 21 hs: \"Ma, me olvidé de decirte que mañana llevo snack\" 😱",
+    excerpt: "Pancitos de avena y queso en 15 minutos, sin levadura ni esperas. Mi comodín para las crisis nocturnas.",
+    date: "30 de abril, 2026",
+    tag: "Recetas",
+    coverImage: blogPancitosAvena,
+    content: `
+      <p>Contame si no te pasó esto alguna vez (o varias): son las 9 de la noche, tu hijo ya está en el quinto sueño, la casa por fin está en silencio y vos te acordás de que tenés que revisar la mochila.</p>
+
+      <p>La abrís, sacás el tupper de la merienda todo sucio y de repente, el pánico te invade el cuerpo: <strong>¡te olvidaste por completo de que no tenés absolutamente nada para mandarle de snack mañana!</strong></p>
+
+      <figure>
+        <img src="${blogPancitosAvena}" alt="Pancitos de avena y queso dorados sobre tabla de madera" />
+        <figcaption>Crocantes por fuera, tiernitos por dentro. Listos en 15 minutos.</figcaption>
+      </figure>
+
+      <p>La mente empieza a mil por hora. La primera frase que se te cruza es: <em>"Ya fue, mañana le compro un alfajor en el kiosco de camino al cole"</em>.</p>
+
+      <p>Pero frená un cacho. Además de que te cobran un ojo de la cara, le terminás mandando algo ultraprocesado que a la hora lo va a dejar con hambre de nuevo. Para estos momentos de crisis, te comparto mi comodín número uno.</p>
+
+      <h2>🧀 Los pancitos salvadores de avena y queso (en 15 minutos)</h2>
+
+      <p>No lleva levadura, no hay que amasar 20 minutos y, lo más importante, <strong>no hay que esperar a que leuden</strong>. Los hacés mientras te lavás los dientes.</p>
+
+      <h3>¿Qué vas a necesitar?</h3>
+      <ul>
+        <li><strong>1 taza de avena:</strong> en hojuelas o harina de avena.</li>
+        <li><strong>1 taza de queso:</strong> rallado, en hebras, o ese pedacito de queso de máquina medio seco que tenés.</li>
+        <li><strong>1 huevo.</strong></li>
+        <li>Un chorrito de agua o leche (solo si está muy seco).</li>
+        <li><em>Opcional:</em> pizca de sal y una cucharadita de polvo de hornear.</li>
+      </ul>
+
+      <h3>El paso a paso (modo ninja)</h3>
+      <ol>
+        <li>Tirá todo en un bol.</li>
+        <li>Meté mano y amasá hasta formar una masa que no se pegotee.</li>
+        <li>Armá bolitas con las palmas.</li>
+        <li>A placa de horno fuerte o freidora de aire por 10 a 15 minutos hasta que estén doraditos.</li>
+      </ol>
+
+      <blockquote>
+        <p>"Mi atajo de mamá real: ya que ensuciaste el bol, hacé el doble."</p>
+      </blockquote>
+
+      <p>La mitad va al tupper de la vianda, la otra mitad la guardás para tu desayuno con mates (o al freezer para la próxima crisis nocturna).</p>
+
+      <p>Si estás harta de correr con la vianda, la cena y la falta de ideas, en el <strong>Club del Domingo</strong> armamos estrategias exactas para que tu freezer trabaje por vos.</p>
+    `,
+  },
   {
     slug: "frio-cambio-clima-3-trucos",
     title: "El frío te agarró en pampa y la vía: 3 trucos para que el cambio de clima no te vuelva loca",

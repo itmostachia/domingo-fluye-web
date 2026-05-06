@@ -71,7 +71,7 @@ const FlorSale = () => {
   if (!active) {
     return (
       <Layout>
-        <SEOHead title="Flor Sale — Cocina en Flor" path="/flor-sale" />
+        <SEOHead title="Flor Sale — Cocina en Flor" description="Flor Sale terminó. Volvé pronto para nuevas promos." path="/flor-sale" />
         <section className="section-padding pt-24 md:pt-32">
           <div className="container-tight text-center">
             <h1 className="font-display text-4xl md:text-5xl text-foreground mb-4">
