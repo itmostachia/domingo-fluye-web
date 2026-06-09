@@ -4,7 +4,6 @@ import { useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import StickyCTA from "./StickyCTA";
-import FlorSaleGlobalSticky from "./flor-sale/FlorSaleGlobalSticky";
 
 interface LayoutProps {
   children: ReactNode;
@@ -18,12 +17,6 @@ const pageVariants = {
 
 const Layout = ({ children }: LayoutProps) => {
   const location = useLocation();
-  // Rutas con CTA sticky propio — evita doble sticky
-  const skipStickyCTA =
-    location.pathname === "/taller" ||
-    location.pathname === "/gracias-taller" ||
-    location.pathname === "/flor-sale" ||
-    location.pathname === "/gracias-flor-sale";
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -41,8 +34,7 @@ const Layout = ({ children }: LayoutProps) => {
         </motion.main>
       </AnimatePresence>
       <Footer />
-      <FlorSaleGlobalSticky />
-      {!skipStickyCTA && <StickyCTA />}
+      <StickyCTA />
       <div className="h-16 md:hidden" />
     </div>
   );

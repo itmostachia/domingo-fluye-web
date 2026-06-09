@@ -33,6 +33,8 @@ export const FLOR_SALE = {
   /** Cuándo empieza */
   startDate: "2026-05-03T00:00:00-03:00",
   currency: "ARS" as const,
+  /** Master switch: si es false, isSaleActive() siempre retorna false */
+  enabled: false,
 } as const;
 
 export const FLOR_SALE_END_MS = new Date(FLOR_SALE.endDate).getTime();
@@ -112,6 +114,7 @@ export function isPromoLaunched(p: PromoConfig, now: number = Date.now()): boole
 }
 
 export function isSaleActive(now: number = Date.now()): boolean {
+  if (!FLOR_SALE.enabled) return false;
   return now >= FLOR_SALE_START_MS && now < FLOR_SALE_END_MS;
 }
 

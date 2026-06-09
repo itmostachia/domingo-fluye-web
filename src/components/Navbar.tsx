@@ -7,10 +7,8 @@ import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabaseReal";
 
 const navItems: { label: string; href: string; live?: boolean; hot?: boolean }[] = [
-  { label: "🔥 Flor Sale", href: "/flor-sale", hot: true },
   { label: "Cómo funciona", href: "/como-funciona" },
   { label: "Planes", href: "/planes" },
-  { label: "Taller", href: "/taller", live: true },
   { label: "Recetarios", href: "/recetarios" },
   { label: "Recetas", href: "/recetas" },
   { label: "Mi Club ✨", href: "/mi-club" },
@@ -50,20 +48,14 @@ const Navbar = () => {
 
         {/* Desktop nav (lg+ to fit 10 items + auth + CTA) */}
         <div className="hidden lg:flex items-center gap-0.5">
-          {navItems
-            .filter((item) => !(item.hot && location.pathname === "/flor-sale"))
-            .map((item) => (
+          {navItems.map((item) => (
             <Link
               key={item.href}
               to={item.href}
               className={`relative text-[13px] font-medium px-2.5 py-2 rounded-lg transition-all duration-200 whitespace-nowrap ${
-                item.hot
-                  ? location.pathname === item.href
-                    ? "text-coral bg-coral/10 font-bold"
-                    : "text-coral hover:bg-coral/10 font-bold"
-                  : location.pathname === item.href
-                    ? "text-primary bg-primary/5"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                location.pathname === item.href
+                  ? "text-primary bg-primary/5"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
               }`}
             >
               <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
@@ -72,12 +64,6 @@ const Navbar = () => {
                   <span className="relative flex h-1.5 w-1.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
                     <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary" />
-                  </span>
-                )}
-                {item.hot && (
-                  <span className="relative flex h-1.5 w-1.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-coral opacity-75" />
-                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-coral" />
                   </span>
                 )}
               </span>
@@ -149,9 +135,7 @@ const Navbar = () => {
             className="lg:hidden bg-card/95 backdrop-blur-xl border-t border-border/50 overflow-hidden"
           >
             <div className="container-wide py-4 flex flex-col gap-1">
-              {navItems
-                .filter((item) => !(item.hot && location.pathname === "/flor-sale"))
-                .map((item, i) => (
+              {navItems.map((item, i) => (
                 <motion.div
                   key={item.href}
                   initial={{ opacity: 0, x: -10 }}
@@ -161,11 +145,9 @@ const Navbar = () => {
                   <Link
                     to={item.href}
                     className={`block py-2.5 px-3 rounded-lg text-base font-medium transition-colors ${
-                      item.hot
-                        ? "text-coral bg-coral/10 font-bold"
-                        : location.pathname === item.href
-                          ? "text-primary bg-primary/5"
-                          : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                      location.pathname === item.href
+                        ? "text-primary bg-primary/5"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                     }`}
                   >
                     <span className="inline-flex items-center gap-1.5">
@@ -174,12 +156,6 @@ const Navbar = () => {
                         <span className="relative flex h-1.5 w-1.5">
                           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
                           <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary" />
-                        </span>
-                      )}
-                      {item.hot && (
-                        <span className="relative flex h-1.5 w-1.5">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-coral opacity-75" />
-                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-coral" />
                         </span>
                       )}
                     </span>

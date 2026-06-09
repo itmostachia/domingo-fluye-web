@@ -64,24 +64,13 @@ const Recetarios = () => {
       trackLead(selected.title);
 
       if (selected.type === "free") {
-        // Non-blocking webhook call
-        try {
-          await fetch('https://n8n.srv945661.hstgr.cloud/webhook/recetario-gratis', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              email: email.trim(),
-              name: name.trim() || 'Amiga',
-              source: selected.sourceId,
-              recetario_id: selected.sourceId.replace('recetario_gratis_', ''),
-              ...utmData
-            })
-          });
-        } catch (webhookErr) {
-          console.error('Webhook notificación no bloqueante:', webhookErr);
+        // Webhook n8n desactivado — entrega directa por Drive
+        if (selected.downloadUrl) {
+          window.open(selected.downloadUrl, "_blank", "noopener,noreferrer");
+          toast({ title: "¡Listo!", description: "Tu recetario se está descargando. También te lo enviamos por correo." });
+        } else {
+          toast({ title: "¡Enviado!", description: "Revisá tu correo para descargar tu recetario." });
         }
-
-        toast({ title: "¡Enviado!", description: "Revisá tu correo para descargar tu recetario." });
         setSelected(null);
         resetForm();
       } else if (selected.mpLink) {

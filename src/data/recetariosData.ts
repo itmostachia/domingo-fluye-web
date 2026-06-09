@@ -1,3 +1,5 @@
+import recetario7Dias from "@/assets/recetario-7-dias.jpg";
+
 export interface RecetarioItem {
   id: string;
   title: string;
@@ -6,6 +8,7 @@ export interface RecetarioItem {
   type: "free" | "paid";
   price?: string;
   mpLink?: string;
+  downloadUrl?: string;
   category: RecetarioCategory;
   downloads: number;
   rating: number;
@@ -18,6 +21,19 @@ export const recetariosCategories = ["Todos", "Congelados", "Estacional"] as con
 export type RecetarioCategory = (typeof recetariosCategories)[number] | "Todos";
 
 export const recetariosData: RecetarioItem[] = [
+  {
+    id: "recetario7dias",
+    title: "7 Días Sin Pensar",
+    description: "Planificador semanal con 7 recetas simples, nutritivas y rápidas para sacarte el «¿qué hago de comer?» de encima.",
+    image: recetario7Dias,
+    type: "free",
+    downloadUrl: "https://drive.google.com/uc?export=download&id=1JQ69haUbwRujkQErwQFHj-wZ4H8XT6Xg",
+    category: "Estacional",
+    downloads: 320,
+    rating: 5.0,
+    reviews: 48,
+    sourceId: "recetario_gratis_7dias",
+  },
   {
     id: "recetariootonio",
     title: "Recetario Otoño Invierno",

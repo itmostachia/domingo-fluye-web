@@ -64,10 +64,12 @@ const RecetariosCarousel = () => {
       }
 
       if (selected.type === "free") {
-        toast({
-          title: "¡Listo!",
-          description: "Te enviamos el recetario a tu correo.",
-        });
+        if (selected.downloadUrl) {
+          window.open(selected.downloadUrl, "_blank", "noopener,noreferrer");
+          toast({ title: "¡Listo!", description: "Tu recetario se está descargando. También te lo enviamos por correo." });
+        } else {
+          toast({ title: "¡Listo!", description: "Te enviamos el recetario a tu correo." });
+        }
         setSelected(null);
         resetForm();
       } else if (selected.mpLink) {

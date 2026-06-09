@@ -19,7 +19,6 @@ interface CheckoutDialogProps {
 
 const PAYPAL_CLIENT_ID = "Aeqs0puS0M6b2Y3PUDMZ5O9Zacdn1vaxhKkJwVjgLA48uiX-1GyASC2ty1ieJEhK_npsACSzq_gfqluC";
 const PAYPAL_PLAN_ID = "P-2BM83687D51615206NGO6R2A";
-const N8N_WEBHOOK_URL = "https://n8n.srv945661.hstgr.cloud/webhook/crear-suscripcion";
 
 const CheckoutDialog = ({ open, onOpenChange, method }: CheckoutDialogProps) => {
   const [name, setName] = useState("");
@@ -78,27 +77,10 @@ const CheckoutDialog = ({ open, onOpenChange, method }: CheckoutDialogProps) => 
     // Evento Lead para Meta Pixel
     trackLead('Club Suscripcion');
 
-    // 2. Flujo de Mercado Pago
+    // 2. Flujo de Mercado Pago (temporalmente desactivado)
     if (method === "mp") {
-      try {
-        const response = await fetch(N8N_WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: trimmedEmail, name: trimmedName, ...utmData }),
-        });
-
-        const data = await response.json();
-
-        if (data.success && data.init_point) {
-          window.location.href = data.init_point;
-        } else {
-          toast.error("No pudimos generar tu link de pago. Intentá de nuevo.");
-          setLoading(false);
-        }
-      } catch {
-        toast.error("Error de conexión. Intentá de nuevo en unos segundos.");
-        setLoading(false);
-      }
+      toast.error("El pago con Mercado Pago no está disponible momentáneamente. Intentá con PayPal o volvé en unos minutos.");
+      setLoading(false);
       return;
     }
 

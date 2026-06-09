@@ -27,7 +27,7 @@ const manuales = [
   { id: 1, title: "Manual Marzo 2026", status: "available" as const, image: manualMarzo, link: "https://drive.google.com/file/d/1Jvh8O024qaDagJkQGUZ0FjEp6J1I1tzP/view?usp=sharing" },
   { id: 2, title: "Manual Abril 2026", status: "available" as const, image: manualAbril, link: "https://drive.google.com/file/d/1K5sy5apRM1MHB-KeYpKoIQZR7qv5EHRj/view?usp=drive_link" },
   { id: 3, title: "Manual Mayo 2026", status: "available" as const, image: manualMayo, link: "https://drive.google.com/file/d/1Meb1XEK86dHk34iZKtm8Aw5EmeSWPR-_/view?usp=sharing" },
-  { id: 4, title: "Manual Junio 2026", status: "upcoming" as const, image: manualJunio },
+  { id: 4, title: "Manual Junio 2026", status: "available" as const, image: manualJunio, link: "https://drive.google.com/file/d/1uKkppCgZYL8IWs-0tsIQbtePGPfyG8Zh/view?usp=drive_link" },
   { id: 5, title: "Manual Julio 2026", status: "upcoming" as const, image: manualJulio },
   { id: 6, title: "Manual Agosto 2026", status: "upcoming" as const, image: manualMarzo },
   { id: 7, title: "Manual Septiembre 2026", status: "upcoming" as const, image: manualAbril },

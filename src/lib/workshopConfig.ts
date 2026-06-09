@@ -44,11 +44,7 @@ export function getCuposDisponibles(now: number = Date.now()): number {
   return Math.max(WORKSHOP.cuposMinimo, Math.min(WORKSHOP.cuposInicial, cupos));
 }
 
-export function getTimeUntilWorkshop(now: number = Date.now()) {
-  const total = Math.max(0, WORKSHOP_DATE_MS - now);
-  const days = Math.floor(total / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((total / (1000 * 60)) % 60);
-  const seconds = Math.floor((total / 1000) % 60);
-  return { total, days, hours, minutes, seconds, hasEnded: total === 0 };
+export function getTimeUntilWorkshop(_now: number = Date.now()) {
+  // Taller desactivado en toda la web — siempre retorna hasEnded:true
+  return { total: 0, days: 0, hours: 0, minutes: 0, seconds: 0, hasEnded: true };
 }
