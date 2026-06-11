@@ -68,7 +68,12 @@ const RecetariosCarousel = () => {
           window.open(selected.downloadUrl, "_blank", "noopener,noreferrer");
           toast({ title: "¡Listo!", description: "Tu recetario se está descargando. También te lo enviamos por correo." });
         } else {
-          toast({ title: "¡Listo!", description: "Te enviamos el recetario a tu correo." });
+          await fetch("https://n8n.srv945661.hstgr.cloud/webhook/recetario-gratis", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: name.trim(), email: email.trim(), recetario: selected.title, sourceId: selected.sourceId }),
+          });
+          toast({ title: "¡Enviado!", description: "Revisá tu correo para descargar tu recetario." });
         }
         setSelected(null);
         resetForm();
